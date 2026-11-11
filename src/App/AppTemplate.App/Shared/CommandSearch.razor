@@ -1,0 +1,250 @@
+@using BlazorBlueprint.Icons.Lucide
+@using BlazorBlueprint.Icons.Lucide.Data
+@using BlazorBlueprint.Icons.Heroicons.Components
+@using BlazorBlueprint.Icons.Heroicons.Data
+@using BlazorBlueprint.Icons.Feather.Components
+@using BlazorBlueprint.Icons.Feather.Data
+@using BlazorBlueprint.Icons.FontAwesome.Components
+@using BlazorBlueprint.Icons.FontAwesome.Data
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.JSInterop
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JS
+@implements IAsyncDisposable
+
+<button type="button"
+        class="inline-flex items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground border rounded-md hover:bg-accent"
+        @onclick="OpenModal">
+    <LucideIcon Name="search" Size="16" />
+    <span class="hidden sm:inline">Search...</span>
+    <span class="hidden md:flex items-center gap-1 text-xs">
+        <BbKbd>Ctrl</BbKbd>
+        <BbKbd>K</BbKbd>
+    </span>
+</button>
+
+@if (_isOpen)
+{
+    <div class="fixed inset-0 z-50 flex items-start justify-center pt-[10vh]" @onkeydown="HandleKeyDown">
+        <div class="fixed inset-0 bg-black/50 backdrop-blur-sm" @onclick="CloseModal"></div>
+
+        <div class="relative w-full max-w-2xl mx-4 z-10">
+            <BlazorBlueprint.Components.BbCommand Class="border rounded-lg shadow-2xl bg-background" OnValueChange="HandleCommandSelect">
+                <BbCommandInput Placeholder="Search primitives, components, and icons..." AutoFocus="true" />
+                <BbCommandList Class="max-h-[400px]">
+                    <BbCommandEmpty>
+                        <div class="flex flex-col items-center gap-2 py-6">
+                            <LucideIcon Name="search-x" Size="32" Class="text-muted-foreground" />
+                            <p class="text-sm text-muted-foreground">No items found.</p>
+                        </div>
+                    </BbCommandEmpty>
+
+                    <BbCommandVirtualizedGroup TItem="LibraryItem"
+                        Heading="Primitives"
+                        Items="Primitives"
+                        ItemValue="@(item => item.Url)"
+                        ItemSearchText="@(item => item.Name)"
+                        MaxDisplayCount="0">
+                        <ItemTemplate Context="item">
+                            <LucideIcon Name="@item.Icon" Size="16" Class="mr-2 text-muted-foreground" />
+                            @item.Name
+                            <span class="ml-auto text-xs text-muted-foreground">Headless</span>
+                        </ItemTemplate>
+                    </BbCommandVirtualizedGroup>
+
+                    <BbCommandSeparator />
+
+                    <BbCommandVirtualizedGroup TItem="ComponentCatalog.Entry"
+                        Heading="Components"
+                        Items="ComponentCatalog.DemoPages"
+                        ItemValue="@(item => item.Url)"
+                        ItemSearchText="@(item => item.Name)"
+                        MaxDisplayCount="0">
+                        <ItemTemplate Context="item">
+                            <LucideIcon Name="@item.Icon" Size="16" Class="mr-2 text-primary" />
+                            @item.Name
+                            @if (item.IsNew)
+                            {
+                                <span class="shrink-0 rounded border border-primary/20 bg-primary/10 px-1.5 py-0.5 text-[10px] font-semibold leading-none text-primary" title="Added in v4">v4</span>
+                            }
+                            <span class="ml-auto text-xs text-muted-foreground">Styled</span>
+                        </ItemTemplate>
+                    </BbCommandVirtualizedGroup>
+
+                    <BbCommandSeparator />
+
+                    <BbCommandGroup Heading="Recipes">
+                        <BbCommandItem Value="/recipes/filterable-datagrid">Filterable Data Grid</BbCommandItem>
+                        <BbCommandItem Value="/recipes/mobile-shop">Mobile Shop</BbCommandItem>
+                    </BbCommandGroup>
+                    <BbCommandSeparator />
+
+                    <BbCommandVirtualizedGroup TItem="string"
+                        Heading="Lucide Icons"
+                        Items="AllLucideIcons"
+                        ItemValue="@(name => $"/icons/lucide?search={name}")"
+                        ItemSearchText="@(name => name)"
+                        MaxDisplayCount="0"
+                        EnableLazyLoading="true">
+                        <ItemTemplate Context="iconName">
+                            <LucideIcon Name="@iconName" Size="16" Class="mr-2 text-blue-500" />
+                            @FormatIconName(iconName)
+                            <span class="ml-auto text-xs text-muted-foreground">Lucide</span>
+                        </ItemTemplate>
+                    </BbCommandVirtualizedGroup>
+
+                    <BbCommandSeparator />
+
+                    <BbCommandVirtualizedGroup TItem="string"
+                        Heading="Heroicons"
+                        Items="AllHeroIcons"
+                        ItemValue="@(name => $"/icons/heroicons?search={name}")"
+                        ItemSearchText="@(name => name)"
+                        MaxDisplayCount="0"
+                        EnableLazyLoading="true">
+                        <ItemTemplate Context="iconName">
+                            <HeroIcon Name="@iconName" Size="16" Class="mr-2 text-indigo-500" />
+                            @FormatIconName(iconName)
+                            <span class="ml-auto text-xs text-muted-foreground">Heroicons</span>
+                        </ItemTemplate>
+                    </BbCommandVirtualizedGroup>
+
+                    <BbCommandSeparator />
+
+                    <BbCommandVirtualizedGroup TItem="string"
+                        Heading="Feather Icons"
+                        Items="AllFeatherIcons"
+                        ItemValue="@(name => $"/icons/feather?search={name}")"
+                        ItemSearchText="@(name => name)"
+                        MaxDisplayCount="0"
+                        EnableLazyLoading="true">
+                        <ItemTemplate Context="iconName">
+                            <FeatherIcon Name="@iconName" Size="16" Class="mr-2 text-cyan-500" />
+                            @FormatIconName(iconName)
+                            <span class="ml-auto text-xs text-muted-foreground">Feather</span>
+                        </ItemTemplate>
+                    </BbCommandVirtualizedGroup>
+
+                    <BbCommandSeparator />
+
+                    <BbCommandVirtualizedGroup TItem="string"
+                        Heading="Font Awesome Icons"
+                        Items="AllFontAwesomeIcons"
+                        ItemValue="@(name => $"/icons/fontawesome?search={name}")"
+                        ItemSearchText="@(name => name)"
+                        MaxDisplayCount="0"
+                        EnableLazyLoading="true">
+                        <ItemTemplate Context="iconName">
+                            <FontAwesomeIcon Name="@iconName" Size="16" Class="mr-2 text-teal-500" />
+                            @FormatIconName(iconName)
+                            <span class="ml-auto text-xs text-muted-foreground">Font Awesome</span>
+                        </ItemTemplate>
+                    </BbCommandVirtualizedGroup>
+                </BbCommandList>
+            </BlazorBlueprint.Components.BbCommand>
+        </div>
+    </div>
+}
+
+@code {
+    private bool _isOpen;
+    private DotNetObjectReference<CommandSearch>? _dotNetRef;
+    private IJSObjectReference? _utilsModule;
+
+    // Primitives list
+    private static readonly LibraryItem[] Primitives = new[]
+    {
+        new LibraryItem("Accordion", "/primitives/accordion", "layers"),
+        new LibraryItem("Checkbox", "/primitives/checkbox", "square-check"),
+        new LibraryItem("Collapsible", "/primitives/collapsible", "chevrons-up-down"),
+        new LibraryItem("Combobox", "/primitives/combobox", "text-cursor-input"),
+        new LibraryItem("DataGrid", "/primitives/datagrid", "table-2"),
+        new LibraryItem("Dialog", "/primitives/dialog", "app-window"),
+        new LibraryItem("Dropdown Menu", "/primitives/dropdown-menu", "chevron-down"),
+        new LibraryItem("Hover Card", "/primitives/hovercard", "square-mouse-pointer"),
+        new LibraryItem("Label", "/primitives/label", "tag"),
+        new LibraryItem("Popover", "/primitives/popover", "message-square"),
+        new LibraryItem("Radio Group", "/primitives/radio-group", "circle-dot"),
+        new LibraryItem("Select", "/primitives/select", "list"),
+        new LibraryItem("Sheet", "/primitives/sheet", "panel-right"),
+        new LibraryItem("Switch", "/primitives/switch", "toggle-left"),
+        new LibraryItem("Table", "/primitives/table", "table"),
+        new LibraryItem("Tabs", "/primitives/tabs", "folder"),
+        new LibraryItem("Tooltip", "/primitives/tooltip", "info"),
+    };
+
+    private static readonly string[] AllLucideIcons = LucideIconData.GetAvailableIcons().OrderBy(x => x).ToArray();
+    private static readonly string[] AllHeroIcons = HeroIconData.GetAvailableIcons(HeroIconVariant.Outline).OrderBy(x => x).ToArray();
+    private static readonly string[] AllFeatherIcons = FeatherIconData.GetAvailableIcons().OrderBy(x => x).ToArray();
+    private static readonly string[] AllFontAwesomeIcons = FontAwesomeIconData.GetAvailableIcons(FontAwesomeIconVariant.Solid).OrderBy(x => x).ToArray();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _dotNetRef = DotNetObjectReference.Create(this);
+            _utilsModule = await JS.InvokeAsync<IJSObjectReference>(
+                "import", "./_content/AppTemplate.App/js/demo-utils.js");
+            await _utilsModule.InvokeVoidAsync("registerGlobalSearch", _dotNetRef);
+        }
+    }
+
+    [JSInvokable]
+    public void OpenSearch()
+    {
+        _isOpen = true;
+        StateHasChanged();
+    }
+
+    private void OpenModal()
+    {
+        _isOpen = true;
+    }
+
+    private void CloseModal()
+    {
+        _isOpen = false;
+    }
+
+    private void HandleKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key == "Escape")
+        {
+            _isOpen = false;
+        }
+    }
+
+    private void HandleCommandSelect(string value)
+    {
+        if (!string.IsNullOrEmpty(value))
+        {
+            _isOpen = false;
+            NavigationManager.NavigateTo(value);
+        }
+    }
+
+    private static string FormatIconName(string iconName)
+    {
+        return string.Join(" ", iconName.Split('-').Select(word =>
+            char.ToUpper(word[0]) + word.Substring(1)));
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_utilsModule != null)
+        {
+            try
+            {
+                await _utilsModule.InvokeVoidAsync("disposeGlobalSearch");
+                await _utilsModule.DisposeAsync();
+            }
+            catch (Exception ex) when (ex is JSDisconnectedException or TaskCanceledException or ObjectDisposedException)
+            {
+                // Circuit disconnected, ignore
+            }
+        }
+        _dotNetRef?.Dispose();
+    }
+
+    private record LibraryItem(string Name, string Url, string Icon);
+}

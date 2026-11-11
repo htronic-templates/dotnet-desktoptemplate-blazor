@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net11.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
+  </PropertyGroup>
+
+  <!-- WASM publish optimizations: trim unused code to reduce download size -->
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+	<PublishTrimmed>true</PublishTrimmed>
+	<TrimMode>partial</TrimMode>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="11.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="11.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\App\AppTemplate.App\AppTemplate.App.csproj" />
+  </ItemGroup>
+  
+</Project>

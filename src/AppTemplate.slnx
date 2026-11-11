@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/App/">
+    <Project Path="App/AppTemplate.App/AppTemplate.App.csproj" />
+  </Folder>
+  <Folder Name="/FrontEnd.Desktop/">
+    <Project Path="Frontend.Desktop/AppTemplate.Frontend.PhotinoX/AppTemplate.Frontend.PhotinoX.csproj" />
+  </Folder>
+  <Folder Name="/Frontend.Web/">
+    <Project Path="Frontend.Web/AppTemplate.Frontend.Wasm/AppTemplate.Frontend.Wasm.csproj" />
+  </Folder>
+</Solution>

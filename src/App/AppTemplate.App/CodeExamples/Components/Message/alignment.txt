@@ -1,0 +1,23 @@
+<BbMessage Align="MessageAlign.Start">
+    <BbMessageAvatar>
+        <BbAvatar><BbAvatarFallback>CN</BbAvatarFallback></BbAvatar>
+    </BbMessageAvatar>
+    <BbMessageContent>
+        <BbBubble Variant="BubbleVariant.Secondary">
+            <BbBubbleContent>This message is aligned to the start.</BbBubbleContent>
+        </BbBubble>
+    </BbMessageContent>
+</BbMessage>
+
+@* Align.End reverses the row, so the avatar is written first to appear on the right. *@
+<BbMessage Align="MessageAlign.End">
+    <BbMessageAvatar>
+        <BbAvatar><BbAvatarFallback>ME</BbAvatarFallback></BbAvatar>
+    </BbMessageAvatar>
+    <BbMessageContent>
+        <BbBubble Align="BubbleAlign.End" Variant="BubbleVariant.Default">
+            <BbBubbleContent>This message is aligned to the end.</BbBubbleContent>
+        </BbBubble>
+        <BbMessageFooter>Delivered</BbMessageFooter>
+    </BbMessageContent>
+</BbMessage>

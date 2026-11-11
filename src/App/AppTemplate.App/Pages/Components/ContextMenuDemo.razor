@@ -1,0 +1,274 @@
+@page "/components/context-menu"
+@using BlazorBlueprint.Icons.Lucide.Components
+<PageTitle>Context Menu Component - Blazor Blueprint</PageTitle>
+
+<div class="space-y-8 max-w-4xl">
+    <div>
+        <div class="space-y-3">
+            <h1 class="text-4xl font-bold tracking-tight">Context Menu Component</h1>
+            <p class="text-xl text-muted-foreground">
+                Displays a menu triggered by right-click.
+            </p>
+        </div>
+    </div>
+
+    <!-- Basic Example -->
+    <div class="space-y-4">
+        <div class="space-y-2">
+            <h2 class="text-2xl font-semibold">Basic Example</h2>
+            <p class="text-sm text-muted-foreground">
+                Right-click the area below to open the context menu.
+            </p>
+        </div>
+        <BbContextMenu>
+            <BbContextMenuTrigger>
+                <div class="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">
+                    Right click here
+                </div>
+            </BbContextMenuTrigger>
+            <BbContextMenuContent>
+                <BbContextMenuItem OnClick="@(() => HandleAction("Back"))">
+                    Back
+                    <BbContextMenuShortcut>Ctrl+[</BbContextMenuShortcut>
+                </BbContextMenuItem>
+                <BbContextMenuItem OnClick="@(() => HandleAction("Forward"))" Disabled="true">
+                    Forward
+                    <BbContextMenuShortcut>Ctrl+]</BbContextMenuShortcut>
+                </BbContextMenuItem>
+                <BbContextMenuItem OnClick="@(() => HandleAction("Reload"))">
+                    Reload
+                    <BbContextMenuShortcut>Ctrl+R</BbContextMenuShortcut>
+                </BbContextMenuItem>
+                <BbContextMenuSeparator />
+                <BbContextMenuItem OnClick="@(() => HandleAction("Save Page As..."))">
+                    Save Page As...
+                    <BbContextMenuShortcut>Ctrl+S</BbContextMenuShortcut>
+                </BbContextMenuItem>
+                <BbContextMenuItem OnClick="@(() => HandleAction("Print"))">
+                    Print...
+                    <BbContextMenuShortcut>Ctrl+P</BbContextMenuShortcut>
+                </BbContextMenuItem>
+            </BbContextMenuContent>
+        </BbContextMenu>
+        @if (!string.IsNullOrEmpty(_lastAction))
+        {
+            <p class="text-sm text-muted-foreground">Last action: @_lastAction</p>
+        }
+
+        <CodeBlock Source="Components/ContextMenu/basic.txt" />
+    </div>
+
+    <!-- With Labels -->
+    <div class="space-y-4">
+        <div class="space-y-2">
+            <h2 class="text-2xl font-semibold">With Labels and Groups</h2>
+            <p class="text-sm text-muted-foreground">
+                Context menu with labeled sections.
+            </p>
+        </div>
+        <BbContextMenu>
+            <BbContextMenuTrigger>
+                <div class="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">
+                    Right click here
+                </div>
+            </BbContextMenuTrigger>
+            <BbContextMenuContent>
+                <BbContextMenuLabel>Edit</BbContextMenuLabel>
+                <BbContextMenuItem>Cut</BbContextMenuItem>
+                <BbContextMenuItem>Copy</BbContextMenuItem>
+                <BbContextMenuItem>Paste</BbContextMenuItem>
+                <BbContextMenuSeparator />
+                <BbContextMenuLabel>View</BbContextMenuLabel>
+                <BbContextMenuItem>Zoom In</BbContextMenuItem>
+                <BbContextMenuItem>Zoom Out</BbContextMenuItem>
+                <BbContextMenuItem>Reset Zoom</BbContextMenuItem>
+            </BbContextMenuContent>
+        </BbContextMenu>
+
+        <CodeBlock Source="Components/ContextMenu/labels-and-groups.txt" />
+    </div>
+
+    <!-- Icon Shorthand -->
+    <div class="space-y-4">
+        <div class="space-y-2">
+            <h2 class="text-2xl font-semibold">Icon Shorthand</h2>
+            <p class="text-sm text-muted-foreground">
+                Use the <code class="bg-muted px-1 py-0.5 rounded">Icon</code> parameter to add icons to menu items cleanly.
+            </p>
+        </div>
+        <BbContextMenu>
+            <BbContextMenuTrigger>
+                <div class="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">
+                    Right click here
+                </div>
+            </BbContextMenuTrigger>
+            <BbContextMenuContent>
+                <BbContextMenuItem>
+                    <Icon><LucideIcon Name="scissors" Size="16" /></Icon>
+                    <ChildContent>Cut</ChildContent>
+                </BbContextMenuItem>
+                <BbContextMenuItem>
+                    <Icon><LucideIcon Name="copy" Size="16" /></Icon>
+                    <ChildContent>Copy</ChildContent>
+                </BbContextMenuItem>
+                <BbContextMenuItem>
+                    <Icon><LucideIcon Name="clipboard" Size="16" /></Icon>
+                    <ChildContent>Paste</ChildContent>
+                </BbContextMenuItem>
+            </BbContextMenuContent>
+        </BbContextMenu>
+
+        <CodeBlock Source="Components/ContextMenu/icon-shorthand.txt" />
+    </div>
+
+    <!-- Accessibility Notes -->
+
+    <!-- API Reference -->
+
+    <section class="space-y-4">
+        <h2 class="text-2xl font-semibold">Radio choices and nested submenus</h2>
+        <p class="text-sm text-muted-foreground">Use arrows to move through items, the forward arrow to enter a submenu, and Escape or the back arrow to return to its trigger. Forward and back follow text direction. Radio choices here keep the menu open.</p>
+<BbContextMenu>
+    <BbContextMenuTrigger><div class="rounded-md border border-dashed p-8">Right-click for display and sharing options</div></BbContextMenuTrigger>
+    <BbContextMenuContent>
+<BbContextMenuCheckboxItem @bind-Checked="menuShowDetails">Show details</BbContextMenuCheckboxItem>
+<BbContextMenuRadioGroup TValue="string" @bind-Value="menuDensity" aria-label="Density">
+    <BbContextMenuRadioItem Value='@("Comfortable")' CloseOnSelect="false">Comfortable</BbContextMenuRadioItem>
+    <BbContextMenuRadioItem Value='@("Compact")' CloseOnSelect="false">Compact</BbContextMenuRadioItem>
+    <BbContextMenuRadioItem Value='@("Unavailable")' Disabled="true">Unavailable</BbContextMenuRadioItem>
+</BbContextMenuRadioGroup>
+<BbContextMenuSeparator />
+<BbContextMenuSub>
+    <BbContextMenuSubTrigger>Share</BbContextMenuSubTrigger>
+    <BbContextMenuSubContent>
+        <BbContextMenuItem OnClick='@(() => menuResult = "Link copied")'>Copy link</BbContextMenuItem>
+        <BbContextMenuSub>
+            <BbContextMenuSubTrigger>Export</BbContextMenuSubTrigger>
+            <BbContextMenuSubContent>
+                <BbContextMenuItem OnClick='@(() => menuResult = "Exported CSV")'>CSV</BbContextMenuItem>
+                <BbContextMenuItem OnClick='@(() => menuResult = "Exported JSON")'>JSON</BbContextMenuItem>
+            </BbContextMenuSubContent>
+        </BbContextMenuSub>
+    </BbContextMenuSubContent>
+</BbContextMenuSub>
+    </BbContextMenuContent>
+</BbContextMenu>
+        <p class="text-sm">Density: @menuDensity. @menuResult</p>
+        <CodeBlock Source="Components/ContextMenu/composition.txt" />
+    </section>
+
+    <AccessibilityList>
+        <AriaAttributes>
+            <AccessibilityItem>
+                Menu content uses <code class="text-xs bg-muted px-1 py-0.5 rounded">role="menu"</code> with <code class="text-xs bg-muted px-1 py-0.5 rounded">tabindex="-1"</code>
+            </AccessibilityItem>
+            <AccessibilityItem>
+                Each menu item has <code class="text-xs bg-muted px-1 py-0.5 rounded">role="menuitem"</code>
+            </AccessibilityItem>
+            <AccessibilityItem>
+                Separators use <code class="text-xs bg-muted px-1 py-0.5 rounded">role="separator"</code>
+            </AccessibilityItem>
+            <AccessibilityItem>
+                Disabled items are excluded from keyboard navigation via <code class="text-xs bg-muted px-1 py-0.5 rounded">aria-disabled</code>
+            </AccessibilityItem>
+                    <AccessibilityItem>Radio items use role="menuitemradio" and aria-checked; checkbox items use role="menuitemcheckbox". Submenu triggers announce their expanded state.</AccessibilityItem>
+        </AriaAttributes>
+        <KeyboardNavigation>
+            <KeyboardShortcutItem Description="Navigate menu items">
+                <BbKbd>ArrowUp</BbKbd> / <BbKbd>ArrowDown</BbKbd>
+            </KeyboardShortcutItem>
+            <KeyboardShortcutItem Description="Jump to first/last item">
+                <BbKbd>Home</BbKbd> / <BbKbd>End</BbKbd>
+            </KeyboardShortcutItem>
+            <KeyboardShortcutItem Description="Activate the focused item">
+                <BbKbd>Enter</BbKbd> / <BbKbd>Space</BbKbd>
+            </KeyboardShortcutItem>
+            <KeyboardShortcutItem Description="Close the context menu">
+                <BbKbd>Escape</BbKbd>
+            </KeyboardShortcutItem>
+            <KeyboardShortcutItem Description="Open a submenu or return to its parent (directions reverse in RTL)"><BbKbd>ArrowRight</BbKbd> / <BbKbd>ArrowLeft</BbKbd></KeyboardShortcutItem>
+        </KeyboardNavigation>
+    </AccessibilityList>
+
+    <section class="space-y-4">
+        <div class="space-y-2">
+            <h2 class="text-2xl font-semibold">API Reference</h2>
+            <p class="text-muted-foreground">Component properties and parameters.</p>
+        </div>
+
+        <div class="space-y-4">
+            <ApiReference ComponentName="ContextMenuItem">
+                <ApiParameter Name="OnClick" Type="EventCallback">
+                    Click handler.
+                </ApiParameter>
+                <ApiParameter Name="Disabled" Type="bool">
+                    Disables the item.
+                </ApiParameter>
+                <ApiParameter Name="Inset" Type="bool">
+                    Adds left padding.
+                </ApiParameter>
+                <ApiParameter Name="AdditionalAttributes" Type="Dictionary&lt;string, object&gt;?">
+                    Additional HTML attributes applied to the component's root element (e.g. <code>data-testid</code>, <code>aria-label</code>).
+                </ApiParameter>
+            </ApiReference>
+        </div>
+
+        <span id="context-menu-radio-group" class="block scroll-mt-20" aria-hidden="true"></span>
+        <ApiReference Since="v4" ComponentName="ContextMenuRadioGroup&lt;TValue&gt;">
+            <ApiParameter Name="Value / ValueChanged" Type="TValue / EventCallback&lt;TValue&gt;">Selected value; supports @@bind-Value.</ApiParameter>
+            <ApiParameter Name="Disabled" Type="bool" Default="false">Disables every radio item in the group.</ApiParameter>
+            <ApiParameter Name="ChildContent / AdditionalAttributes" Type="RenderFragment / Dictionary&lt;string, object&gt;">Radio items and group HTML attributes; use aria-label or aria-labelledby to label the group.</ApiParameter>
+        </ApiReference>
+
+        <span id="context-menu-radio-item" class="block scroll-mt-20" aria-hidden="true"></span>
+        <ApiReference Since="v4" ComponentName="ContextMenuRadioItem&lt;TValue&gt;">
+            <ApiParameter Name="Value" Type="TValue">Required value represented by this item.</ApiParameter>
+            <ApiParameter Name="Disabled" Type="bool" Default="false">Disables selection.</ApiParameter>
+            <ApiParameter Name="CloseOnSelect" Type="bool" Default="true">Closes the entire menu after selection.</ApiParameter>
+            <ApiParameter Name="ChildContent / Class / AdditionalAttributes" Type="RenderFragment / string / Dictionary&lt;string, object&gt;">Label, CSS classes and HTML attributes.</ApiParameter>
+        </ApiReference>
+
+        <span id="context-menu-submenu" class="block scroll-mt-20" aria-hidden="true"></span>
+        <ApiReference Since="v4" ComponentName="ContextMenuSub">
+            <ApiParameter Name="Disabled" Type="bool" Default="false">Disables opening this submenu.</ApiParameter>
+            <ApiParameter Name="ChildContent" Type="RenderFragment">A SubTrigger followed by SubContent. Submenus may be nested.</ApiParameter>
+        </ApiReference>
+
+        <span id="context-menu-submenu-trigger" class="block scroll-mt-20" aria-hidden="true"></span>
+        <ApiReference Since="v4" ComponentName="ContextMenuSubTrigger">
+            <ApiParameter Name="OpenOnHover" Type="bool" Default="true">Opens on hover without moving keyboard focus. Click or the forward arrow opens and focuses the first item.</ApiParameter>
+            <ApiParameter Name="Inset" Type="bool" Default="false">Aligns the label with items that contain icons.</ApiParameter>
+            <ApiParameter Name="ChildContent / Class / AdditionalAttributes" Type="RenderFragment / string / Dictionary&lt;string, object&gt;">Label, CSS classes and HTML attributes.</ApiParameter>
+        </ApiReference>
+
+        <span id="context-menu-submenu-content" class="block scroll-mt-20" aria-hidden="true"></span>
+        <ApiReference Since="v4" ComponentName="ContextMenuSubContent">
+            <ApiParameter Name="Side" Type="PopoverSide" Default="Right">Preferred placement; use Left in right-to-left layouts. Positioning flips near the viewport edge.</ApiParameter>
+            <ApiParameter Name="Offset / ZIndex" Type="int / int" Default="2 / 60">Trigger distance and stacking order.</ApiParameter>
+            <ApiParameter Name="Loop" Type="bool" Default="true">Wraps arrow navigation at the first and last item.</ApiParameter>
+            <ApiParameter Name="ChildContent / Class / AdditionalAttributes" Type="RenderFragment / string / Dictionary&lt;string, object&gt;">Items, CSS classes and HTML attributes.</ApiParameter>
+        </ApiReference>
+
+    <span id="context-menu-checkbox-item" class="block scroll-mt-20" aria-hidden="true"></span>
+        <ApiReference Since="v4" ComponentName="ContextMenuCheckboxItem">
+        <ApiParameter Name="Checked / CheckedChanged" Type="bool / EventCallback&lt;bool&gt;">Checked state; supports @@bind-Checked.</ApiParameter>
+        <ApiParameter Name="Disabled" Type="bool" Default="false">Disables toggling.</ApiParameter>
+        <ApiParameter Name="CloseOnSelect" Type="bool" Default="false">Closes the entire menu when toggled.</ApiParameter>
+        <ApiParameter Name="ChildContent / Class / AdditionalAttributes" Type="RenderFragment / string / Dictionary&lt;string, object&gt;">Label, CSS classes and HTML attributes.</ApiParameter>
+    </ApiReference>
+    </section>
+
+</div>
+
+@code {
+    private string menuDensity = "Comfortable";
+    private string menuResult = "";
+    private bool menuShowDetails = true;
+
+    private string? _lastAction;
+
+    private void HandleAction(string action)
+    {
+        _lastAction = action;
+    }
+}

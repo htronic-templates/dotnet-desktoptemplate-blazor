@@ -1,0 +1,7 @@
+<BbScatterChart Data="@data" Height="250px">
+    <BbXAxis Type="AxisType.Value" Scale="true" />
+    <BbYAxis Scale="true" />
+    <BbChartTooltip />
+    <BbScatter XDataKey="height" DataKey="weight" Name="Weight" Color="var(--chart-5)"
+               SymbolSizeKey="score" />
+</BbScatterChart>

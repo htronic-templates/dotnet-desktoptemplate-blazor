@@ -1,0 +1,290 @@
+@page "/guides/localization"
+
+<PageTitle>Localization - Blazor Blueprint</PageTitle>
+
+<div class="space-y-8 max-w-4xl">
+    <div class="space-y-3">
+        <h1 class="text-4xl font-bold tracking-tight">Localization</h1>
+        <p class="text-xl text-muted-foreground">
+            Customize all component labels, integrate with any localization framework, and leverage
+            automatic culture-aware formatting for dates and numbers.
+        </p>
+    </div>
+
+    <div class="space-y-6">
+
+        <!-- Overview -->
+        <section class="space-y-4">
+            <h2 class="text-2xl font-semibold">Overview</h2>
+            <p class="text-muted-foreground leading-relaxed">
+                BlazorBlueprint ships with English defaults for all component chrome &mdash; placeholders, button labels,
+                aria attributes, pagination text, and empty states. Every string is configurable through
+                <code class="text-xs bg-muted px-1 py-0.5 rounded">IBbLocalizer</code>, an interface
+                registered via DI.
+            </p>
+            <p class="text-muted-foreground leading-relaxed">
+                The library does <strong>not</strong> take a dependency on <code class="text-xs bg-muted px-1 py-0.5 rounded">IStringLocalizer</code>
+                or any specific localization framework. Instead, it provides the abstraction &mdash; you bring your own
+                localization strategy (resource files, JSON, database, or anything else).
+            </p>
+        </section>
+
+        <!-- What Gets Localized -->
+        <section class="space-y-4">
+            <h2 class="text-2xl font-semibold">What Gets Localized</h2>
+            <p class="text-muted-foreground leading-relaxed">
+                There are two categories of localization in BlazorBlueprint:
+            </p>
+
+            <div class="grid gap-4 md:grid-cols-2">
+                <div class="p-4 border rounded-lg space-y-2">
+                    <h3 class="font-semibold">Library Chrome (via IBbLocalizer)</h3>
+                    <p class="text-sm text-muted-foreground">
+                        Strings owned by the library: placeholders, button labels, empty states,
+                        pagination text, aria-labels, and screen-reader text.
+                    </p>
+                    <div class="text-sm text-muted-foreground">
+                        <span class="font-medium">Examples:</span> "Search...", "No results found",
+                        "Rows per page", "Next", "Select all rows"
+                    </div>
+                </div>
+                <div class="p-4 border rounded-lg space-y-2">
+                    <h3 class="font-semibold">Culture-Aware Formatting (automatic)</h3>
+                    <p class="text-sm text-muted-foreground">
+                        Calendar month/day names, date formats, numeric decimal/thousand separators,
+                        and week start day all follow
+                        <code class="text-xs bg-muted px-1 py-0.5 rounded">CultureInfo.CurrentCulture</code>.
+                    </p>
+                    <div class="text-sm text-muted-foreground">
+                        <span class="font-medium">Examples:</span> "March" vs "Mars", "1,234.56" vs "1.234,56"
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 border-l-4 border-primary bg-primary/5 rounded-r-lg">
+                <p class="text-sm text-muted-foreground">
+                    <strong>Application data</strong> (column headers, option labels, content text) is your responsibility.
+                    The library only localizes its own UI chrome.
+                </p>
+            </div>
+        </section>
+
+        <!-- Quick Start -->
+        <section class="space-y-4">
+            <h2 class="text-2xl font-semibold">Quick Start</h2>
+            <p class="text-muted-foreground leading-relaxed">
+                Use English defaults with no configuration, or override specific keys at startup:
+            </p>
+            <div class="rounded-lg border bg-muted/50 p-4">
+                <pre class="text-sm overflow-x-auto"><code>builder.Services.AddBlazorBlueprintComponents(localizer =>
+{
+    localizer.Set("DataGrid.NoResultsFound", "Keine Ergebnisse gefunden");
+    localizer.Set("DataGrid.Loading", "Laden...");
+    localizer.Set("Calendar.GoToPreviousMonth", "Zum vorherigen Monat");
+    localizer.Set("DatePicker.Placeholder", "Datum auswählen");
+    localizer.Set("Pagination.RowsPerPage", "Zeilen pro Seite");
+    localizer.Set("Pagination.PageFormat", "Seite {0} von {1}");
+    localizer.Set("FormWizard.Next", "Weiter");
+    localizer.Set("FormWizard.Back", "Zurück");
+});</code></pre>
+            </div>
+            <p class="text-muted-foreground leading-relaxed">
+                Keys use dot notation: <code class="text-xs bg-muted px-1 py-0.5 rounded">ComponentName.PropertyName</code>.
+                Format strings use standard <code class="text-xs bg-muted px-1 py-0.5 rounded">string.Format</code>
+                placeholders (e.g., <code class="text-xs bg-muted px-1 py-0.5 rounded">"Showing {0}–{1} of {2}"</code>).
+            </p>
+        </section>
+
+        <!-- Integration with IStringLocalizer -->
+        <section class="space-y-4">
+            <h2 class="text-2xl font-semibold">Integration with IStringLocalizer</h2>
+            <p class="text-muted-foreground leading-relaxed">
+                Create a custom <code class="text-xs bg-muted px-1 py-0.5 rounded">IBbLocalizer</code> implementation
+                that delegates to <code class="text-xs bg-muted px-1 py-0.5 rounded">IStringLocalizer&lt;T&gt;</code>:
+            </p>
+            <div class="rounded-lg border bg-muted/50 p-4">
+                <pre class="text-sm overflow-x-auto"><code>public class AppBbLocalizer(IStringLocalizer&lt;SharedResources&gt; localizer)
+    : DefaultBbLocalizer
+{
+    public override string this[string key] =>
+        localizer[key] is { ResourceNotFound: false } found
+            ? found.Value : base[key];
+
+    public override string this[string key, params object[] arguments] =>
+        localizer[key, arguments] is { ResourceNotFound: false } found
+            ? found.Value : base[key, arguments];
+}</code></pre>
+            </div>
+            <div class="rounded-lg border bg-muted/50 p-4">
+                <pre class="text-sm overflow-x-auto"><code>// Register as scoped for per-circuit culture switching
+builder.Services.AddBlazorBlueprintComponents();
+builder.Services.AddScoped&lt;IBbLocalizer, AppBbLocalizer&gt;();</code></pre>
+            </div>
+            <p class="text-muted-foreground leading-relaxed">
+                Keys that don't exist in your resource files automatically fall back to English defaults
+                in <code class="text-xs bg-muted px-1 py-0.5 rounded">DefaultBbLocalizer</code>.
+            </p>
+        </section>
+
+        <!-- Per-Component Overrides -->
+        <section class="space-y-4">
+            <h2 class="text-2xl font-semibold">Per-Component Overrides</h2>
+            <p class="text-muted-foreground leading-relaxed">
+                Component parameters always take priority over the localizer. This lets you override a single
+                instance without changing the global configuration:
+            </p>
+            <div class="rounded-lg border bg-muted/50 p-4">
+                <pre class="text-sm overflow-x-auto"><code>&lt;!-- This Combobox uses a custom message regardless of IBbLocalizer --&gt;
+&lt;BbCombobox TValue="string"
+            Options="options"
+            EmptyMessage="No matching frameworks found"
+            @@bind-Value="selected" /&gt;
+
+&lt;!-- This one uses whatever Localizer["Combobox.EmptyMessage"] returns --&gt;
+&lt;BbCombobox TValue="string"
+            Options="options"
+            @@bind-Value="selected" /&gt;</code></pre>
+            </div>
+            <p class="text-muted-foreground leading-relaxed">
+                The resolution order is: <strong>Parameter value</strong> &rarr; <strong>IBbLocalizer</strong> &rarr; <strong>English default</strong>.
+            </p>
+        </section>
+
+        <!-- Culture-Aware Formatting -->
+        <section class="space-y-4">
+            <h2 class="text-2xl font-semibold">Culture-Aware Formatting</h2>
+            <p class="text-muted-foreground leading-relaxed">
+                Several components automatically adapt to <code class="text-xs bg-muted px-1 py-0.5 rounded">CultureInfo.CurrentCulture</code>
+                without any configuration:
+            </p>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm border-collapse">
+                    <thead>
+                        <tr class="border-b">
+                            <th class="text-left py-2 px-3 font-medium">Component</th>
+                            <th class="text-left py-2 px-3 font-medium">What Adapts</th>
+                            <th class="text-left py-2 px-3 font-medium">Override Parameter</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-muted-foreground">
+                        <tr class="border-b">
+                            <td class="py-2 px-3">BbCalendar</td>
+                            <td class="py-2 px-3">Month names, day names, first day of week</td>
+                            <td class="py-2 px-3"><code class="text-xs bg-muted px-1 py-0.5 rounded">MonthNames</code>, <code class="text-xs bg-muted px-1 py-0.5 rounded">CustomDayNames</code>, <code class="text-xs bg-muted px-1 py-0.5 rounded">FirstDayOfWeek</code></td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="py-2 px-3">BbDatePicker</td>
+                            <td class="py-2 px-3">Date display format (defaults to short date "d")</td>
+                            <td class="py-2 px-3"><code class="text-xs bg-muted px-1 py-0.5 rounded">DateFormat</code></td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="py-2 px-3">BbDateRangePicker</td>
+                            <td class="py-2 px-3">Month/day names, date format, first day of week</td>
+                            <td class="py-2 px-3"><code class="text-xs bg-muted px-1 py-0.5 rounded">MonthNames</code>, <code class="text-xs bg-muted px-1 py-0.5 rounded">CustomDayNames</code>, <code class="text-xs bg-muted px-1 py-0.5 rounded">DateFormat</code></td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="py-2 px-3">BbNumericInput</td>
+                            <td class="py-2 px-3">Decimal separator, thousand separator</td>
+                            <td class="py-2 px-3"><code class="text-xs bg-muted px-1 py-0.5 rounded">InputConverter.Culture</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="p-4 border-l-4 border-primary bg-primary/5 rounded-r-lg">
+                <p class="text-sm text-muted-foreground">
+                    <strong>Tip:</strong> To revert to invariant formatting globally (e.g., for internal tools),
+                    set <code class="text-xs bg-muted px-1 py-0.5 rounded">InputConverter.GlobalCulture = CultureInfo.InvariantCulture</code>
+                    at startup.
+                </p>
+            </div>
+        </section>
+
+        <!-- Available Keys -->
+        <section class="space-y-4">
+            <h2 class="text-2xl font-semibold">Available Keys</h2>
+            <p class="text-muted-foreground leading-relaxed">
+                All keys use dot notation: <code class="text-xs bg-muted px-1 py-0.5 rounded">ComponentName.PropertyName</code>.
+                This table is generated from <code class="text-xs bg-muted px-1 py-0.5 rounded">DefaultBbLocalizer.EnglishDefaults</code>,
+                so it always matches the installed version. Keys with placeholders take
+                <code class="text-xs bg-muted px-1 py-0.5 rounded">string.Format</code> arguments: keep every
+                <code class="text-xs bg-muted px-1 py-0.5 rounded">{0}</code>-style placeholder in your translation, in any order.
+            </p>
+            <p class="text-muted-foreground leading-relaxed">
+                To start a translation file, export the same list:
+            </p>
+            <div class="rounded-lg border bg-muted/50 p-4">
+                <pre class="text-sm overflow-x-auto"><code>var json = JsonSerializer.Serialize(DefaultBbLocalizer.EnglishDefaults,
+    new JsonSerializerOptions { WriteIndented = true });</code></pre>
+            </div>
+            <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                <BbInput @bind-Value="keyFilter" UpdateTiming="UpdateTiming.Immediate"
+                         Placeholder="Filter by key or text..." aria-label="Filter localization keys" Class="sm:max-w-xs" />
+                <p class="text-sm text-muted-foreground">
+                    @FilteredKeys.Count() of @DefaultBbLocalizer.EnglishDefaults.Count keys
+                </p>
+            </div>
+            <div class="overflow-x-auto max-h-[36rem] overflow-y-auto rounded-md border">
+                <table class="w-full text-sm border-collapse">
+                    <thead class="sticky top-0 bg-background">
+                        <tr class="border-b">
+                            <th class="text-left py-2 px-3 font-medium">Key</th>
+                            <th class="text-left py-2 px-3 font-medium">English default</th>
+                            <th class="text-left py-2 px-3 font-medium">Placeholders</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-muted-foreground">
+                        @foreach (var entry in FilteredKeys)
+                        {
+                            <tr class="border-b last:border-b-0" @key="entry.Key">
+                                <td class="py-2 px-3 align-top"><code class="text-xs bg-muted px-1 py-0.5 rounded">@entry.Key</code></td>
+                                <td class="py-2 px-3 align-top">@entry.Value</td>
+                                <td class="py-2 px-3 align-top whitespace-nowrap">@string.Join(" ", Placeholders(entry.Value))</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Dynamic Culture Switching -->
+        <section class="space-y-4">
+            <h2 class="text-2xl font-semibold">Dynamic Culture Switching</h2>
+            <p class="text-muted-foreground leading-relaxed">
+                For multi-language apps, subclass <code class="text-xs bg-muted px-1 py-0.5 rounded">DefaultBbLocalizer</code>
+                and register as scoped. Each Blazor Server circuit gets its own localizer resolved from
+                <code class="text-xs bg-muted px-1 py-0.5 rounded">IStringLocalizer</code>:
+            </p>
+            <div class="rounded-lg border bg-muted/50 p-4">
+                <pre class="text-sm overflow-x-auto"><code>builder.Services.AddBlazorBlueprintComponents();
+builder.Services.AddScoped&lt;IBbLocalizer, AppBbLocalizer&gt;();</code></pre>
+            </div>
+            <div class="p-4 border-l-4 border-primary bg-primary/5 rounded-r-lg">
+                <p class="text-sm text-muted-foreground">
+                    <strong>Tip:</strong> Missing keys automatically fall back to the English defaults in
+                    <code class="text-xs bg-muted px-1 py-0.5 rounded">DefaultBbLocalizer</code>, so you only
+                    need to translate the keys your users will actually see.
+                </p>
+            </div>
+        </section>
+
+    </div>
+</div>
+
+@code {
+    private static readonly System.Text.RegularExpressions.Regex PlaceholderPattern =
+        new(@"\{\d+(?:[,:][^}]*)?\}", System.Text.RegularExpressions.RegexOptions.Compiled);
+
+    private string? keyFilter;
+
+    private IEnumerable<KeyValuePair<string, string>> FilteredKeys =>
+        DefaultBbLocalizer.EnglishDefaults
+            .Where(entry => string.IsNullOrWhiteSpace(keyFilter)
+                || entry.Key.Contains(keyFilter, StringComparison.OrdinalIgnoreCase)
+                || entry.Value.Contains(keyFilter, StringComparison.OrdinalIgnoreCase))
+            .OrderBy(entry => entry.Key, StringComparer.Ordinal);
+
+    private static IEnumerable<string> Placeholders(string value) =>
+        PlaceholderPattern.Matches(value).Select(match => match.Value).Distinct();
+}

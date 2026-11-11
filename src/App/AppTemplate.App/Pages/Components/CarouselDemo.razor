@@ -1,0 +1,238 @@
+@page "/components/carousel"
+<PageTitle>Carousel Component - Blazor Blueprint</PageTitle>
+
+<div class="space-y-8 max-w-4xl">
+    <div>
+        <div class="space-y-3">
+            <h1 class="text-4xl font-bold tracking-tight">Carousel Component</h1>
+            <p class="text-xl text-muted-foreground">
+                A carousel with slide navigation and controls.
+            </p>
+        </div>
+    </div>
+
+    <!-- Basic Example -->
+    <div class="space-y-4">
+        <div class="space-y-2">
+            <h2 class="text-2xl font-semibold">Basic Example</h2>
+            <p class="text-sm text-muted-foreground">
+                A simple carousel with navigation controls.
+            </p>
+        </div>
+        <div class="w-full max-w-xs mx-auto">
+            <BbCarousel Class="w-full">
+                <BbCarouselContent>
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        <BbCarouselItem>
+                            <div class="p-1">
+                                <BbCard>
+                                    <BbCardContent Class="flex aspect-square items-center justify-center p-6">
+                                        <span class="text-4xl font-semibold">@i</span>
+                                    </BbCardContent>
+                                </BbCard>
+                            </div>
+                        </BbCarouselItem>
+                    }
+                </BbCarouselContent>
+                <BbCarouselPrevious />
+                <BbCarouselNext />
+            </BbCarousel>
+        </div>
+        <CodeBlock Source="Components/Carousel/basic.txt" />
+    </div>
+
+    <!-- With Loop -->
+    <div class="space-y-4">
+        <div class="space-y-2">
+            <h2 class="text-2xl font-semibold">With Loop</h2>
+            <p class="text-sm text-muted-foreground">
+                Enable infinite looping through slides.
+            </p>
+        </div>
+        <div class="w-full max-w-xs mx-auto">
+            <BbCarousel Class="w-full" Loop="true">
+                <BbCarouselContent>
+                    @for (int i = 1; i <= 3; i++)
+                    {
+                        <BbCarouselItem>
+                            <div class="p-1">
+                                <BbCard>
+                                    <BbCardContent Class="flex aspect-square items-center justify-center p-6 bg-primary/10">
+                                        <span class="text-4xl font-semibold">@i</span>
+                                    </BbCardContent>
+                                </BbCard>
+                            </div>
+                        </BbCarouselItem>
+                    }
+                </BbCarouselContent>
+                <BbCarouselPrevious />
+                <BbCarouselNext />
+            </BbCarousel>
+        </div>
+        <CodeBlock Source="Components/Carousel/loop.txt" />
+    </div>
+
+    <!-- Image Gallery -->
+    <div class="space-y-4">
+        <div class="space-y-2">
+            <h2 class="text-2xl font-semibold">Image Gallery</h2>
+            <p class="text-sm text-muted-foreground">
+                A carousel showcasing images with consistent aspect ratios using the AspectRatio component.
+            </p>
+        </div>
+        <div class="w-full max-w-lg mx-auto">
+            <BbCarousel Class="w-full" Loop="true">
+                <BbCarouselContent>
+                    <BbCarouselItem>
+                        <div class="p-1">
+                            <BbAspectRatio Ratio="16 / 9">
+                                <img src="https://images.unsplash.com/photo-1767536472182-6e7142d5fb7a?w=800&auto=format&fit=crop"
+                                     alt=""
+                                     class="rounded-lg object-cover w-full h-full" />
+                            </BbAspectRatio>
+                        </div>
+                    </BbCarouselItem>
+                    <BbCarouselItem>
+                        <div class="p-1">
+                            <BbAspectRatio Ratio="16 / 9">
+                                <img src="https://images.unsplash.com/photo-1766488735864-44c313801587?w=800&auto=format&fit=crop"
+                                     alt=""
+                                     class="rounded-lg object-cover w-full h-full" />
+                            </BbAspectRatio>
+                        </div>
+                    </BbCarouselItem>
+                    <BbCarouselItem>
+                        <div class="p-1">
+                            <BbAspectRatio Ratio="16 / 9">
+                                <img src="https://images.unsplash.com/photo-1766596534244-104ac1d954f1?w=800&auto=format&fit=crop"
+                                     alt=""
+                                     class="rounded-lg object-cover w-full h-full" />
+                            </BbAspectRatio>
+                        </div>
+                    </BbCarouselItem>
+                    <BbCarouselItem>
+                        <div class="p-1">
+                            <BbAspectRatio Ratio="16 / 9">
+                                <img src="https://images.unsplash.com/photo-1766512433912-ba04869c2fbc?w=800&auto=format&fit=crop"
+                                     alt=""
+                                     class="rounded-lg object-cover w-full h-full" />
+                            </BbAspectRatio>
+                        </div>
+                    </BbCarouselItem>
+                    <BbCarouselItem>
+                        <div class="p-1">
+                            <BbAspectRatio Ratio="16 / 9">
+                                <img src="https://images.unsplash.com/photo-1767305680237-daa42b9e9a98?w=800&auto=format&fit=crop"
+                                     alt=""
+                                     class="rounded-lg object-cover w-full h-full" />
+                            </BbAspectRatio>
+                        </div>
+                    </BbCarouselItem>
+                </BbCarouselContent>
+                <BbCarouselPrevious />
+                <BbCarouselNext />
+            </BbCarousel>
+        </div>
+        <CodeBlock Source="Components/Carousel/image-gallery.txt" />
+    </div>
+
+
+    <section class="space-y-4">
+        <h2 class="text-2xl font-semibold">Autoplay, dragging and slide indicators</h2>
+        <p class="text-sm text-muted-foreground">Swipe or drag the cards. Hover temporarily pauses rotation; keyboard focus pauses it until you explicitly restart. Reduced-motion preferences disable autoplay. The first visible index is bound below.</p>
+<BbCarousel SlidesPerView="2" Gap="12" Loop="true" Autoplay="true" AutoplayInterval="4000"
+            ShowIndicators="true" @bind-Paused="paused" @bind-ActiveIndex="activeSlide" AriaLabel="Featured collections"
+            Class="mx-12">
+    <BbCarouselContent>
+        @for (var i = 1; i <= 6; i++)
+        {
+            <BbCarouselItem><div class="flex h-36 items-center justify-center rounded-lg border bg-muted text-3xl font-semibold">@i</div></BbCarouselItem>
+        }
+    </BbCarouselContent>
+    <BbCarouselPrevious />
+    <BbCarouselNext />
+</BbCarousel>
+        <p class="text-sm">First slide: @(activeSlide + 1). Rotation @(paused ? "paused" : "enabled").</p>
+        <CodeBlock Source="Components/Carousel/controls.txt" />
+
+    </section>
+    <!-- Accessibility Notes -->
+
+    <!-- API Reference -->
+
+    <AccessibilityList>
+        <AriaAttributes>
+            <AccessibilityItem>
+                <code class="text-xs bg-muted px-1 py-0.5 rounded">role="region"</code> with <code class="text-xs bg-muted px-1 py-0.5 rounded">aria-roledescription="carousel"</code> on the root container
+            </AccessibilityItem>
+            <AccessibilityItem>
+                Each slide uses <code class="text-xs bg-muted px-1 py-0.5 rounded">role="group"</code> with <code class="text-xs bg-muted px-1 py-0.5 rounded">aria-roledescription="slide"</code>
+            </AccessibilityItem>
+            <AccessibilityItem>
+                Navigation buttons include <code class="text-xs bg-muted px-1 py-0.5 rounded">aria-label</code> ("Previous slide" / "Next slide") and <code class="text-xs bg-muted px-1 py-0.5 rounded">sr-only</code> text
+            </AccessibilityItem>
+            <AccessibilityItem>
+                Navigation buttons are disabled at carousel boundaries when not looping
+            </AccessibilityItem>
+                    <AccessibilityItem>Autoplay pauses for keyboard focus, pointer hover and hidden documents. Reduced-motion preferences stop automatic movement. Provide a pause/resume control when enabling autoplay.</AccessibilityItem>
+            <AccessibilityItem>Offscreen slides are inert so their interactive children do not remain in the keyboard tab sequence.</AccessibilityItem>
+        </AriaAttributes>
+        <KeyboardNavigation>
+            <KeyboardShortcutItem Description="Activate previous/next buttons">
+                <BbKbd>Enter</BbKbd> / <BbKbd>Space</BbKbd>
+            </KeyboardShortcutItem>
+            <KeyboardShortcutItem Description="Navigate between buttons">
+                <BbKbd>Tab</BbKbd>
+            </KeyboardShortcutItem>
+        </KeyboardNavigation>
+    </AccessibilityList>
+
+    <section class="space-y-4">
+        <div class="space-y-2">
+            <h2 class="text-2xl font-semibold">API Reference</h2>
+            <p class="text-muted-foreground">Component properties and parameters.</p>
+        </div>
+
+        <div class="space-y-4">
+            <ApiReference ComponentName="Carousel">
+                <ApiParameter Name="Orientation" Type="CarouselOrientation">
+                    Horizontal (default) or Vertical.
+                </ApiParameter>
+                <ApiParameter Name="Loop" Type="bool" Default="false">
+                    Enable infinite loop.
+                </ApiParameter>
+                <ApiParameter Name="AdditionalAttributes" Type="Dictionary&lt;string, object&gt;?">
+                    Additional HTML attributes applied to the root <code>&lt;div&gt;</code> element (e.g. <code>data-testid</code>, <code>aria-label</code>).
+                </ApiParameter>
+
+            <ApiParameter Since="v4" Name="SlidesPerView / Gap" Type="double / int" Default="1 / 16">Visible slides (at least 1, fractional peeks allowed) and content spacing in pixels. Per-item Class can override responsive basis; browser measurements determine navigation limits.</ApiParameter>
+            <ApiParameter Since="v4" Name="Draggable" Type="bool" Default="true">Pointer drag/swipe navigation. Links, buttons and form controls retain normal interaction. Arrow keys work when the carousel region is focused.</ApiParameter>
+            <ApiParameter Since="v4" Name="Autoplay / AutoplayInterval" Type="bool / int" Default="false / 5000">Timed rotation and visible pause control; interval at least 1000ms. Pauses on hover, hidden document, keyboard focus and reduced motion.</ApiParameter>
+            <ApiParameter Since="v4" Name="Paused / PausedChanged" Type="bool / EventCallback&lt;bool&gt;" Default="false">User-controlled rotation state; supports two-way binding. Focus pauses until explicitly restarted.</ApiParameter>
+            <ApiParameter Since="v4" Name="ActiveIndex / ActiveIndexChanged / OnSlideChanged" Type="int / EventCallback&lt;int&gt; / EventCallback&lt;int&gt;" Default="0">First visible slide, binding callback and change notification. Index is clamped after layout changes.</ApiParameter>
+            <ApiParameter Since="v4" Name="GoToAsync(index)" Type="Task">Programmatic navigation respecting Loop and measured limits.</ApiParameter>
+            <ApiParameter Since="v4" Name="ShowIndicators / IndicatorPosition" Type="bool / CarouselIndicatorPosition" Default="false / Bottom">Built-in slide buttons; Bottom, Top or Inside placement.</ApiParameter>
+            <ApiParameter Since="v4" Name="AriaLabel" Type="string?">Name for the carousel region. Offscreen slides are excluded from keyboard navigation.</ApiParameter>
+
+        </ApiReference>
+        </div>
+
+
+    </section>
+
+<LocalizationSection
+        Description="Carousel navigation button aria labels are configurable."
+        Labels="@(new LocalizationSection.LabelInfo[]
+        {
+            new("NextSlide", "Next slide", "Aria label for the next slide button"),
+            new("PreviousSlide", "Previous slide", "Aria label for the previous slide button"),
+        })"
+        CodeExample="@(@"builder.Services.AddBlazorBlueprintComponents(localizer =>
+{
+    localizer.Set(""Carousel.NextSlide"", ""Nächste Folie"");
+    localizer.Set(""Carousel.PreviousSlide"", ""Vorherige Folie"");
+});")" />
+</div>
+
+@code { private bool paused; private int activeSlide; }

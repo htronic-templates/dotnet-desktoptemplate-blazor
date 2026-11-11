@@ -1,0 +1,506 @@
+@page "/components/datagrid-styling"
+@using AppTemplate.App.Services
+@inject MockDataService MockDataService
+
+<PageTitle>DataGrid Styling - Blazor Blueprint</PageTitle>
+
+<div class="space-y-8 max-w-7xl">
+    <div class="space-y-4">
+        <h1 class="text-4xl font-bold tracking-tight">DataGrid Styling</h1>
+        <p class="text-xl text-muted-foreground">
+            Customize cell content, headers, row appearance, and grid styling with Tailwind CSS utilities.
+        </p>
+    </div>
+
+    <!-- ── Custom Cell Templates ───────────────────────────────────── -->
+    <div class="space-y-4">
+        <div class="space-y-2">
+            <h2 class="text-2xl font-semibold">Custom Cell Templates</h2>
+            <p class="text-sm text-muted-foreground">
+                Use <code class="bg-muted px-1 py-0.5 rounded">BbDataGridTemplateColumn</code> for fully custom cell content,
+                or add <code class="bg-muted px-1 py-0.5 rounded">CellTemplate</code> to a PropertyColumn.
+            </p>
+        </div>
+        <BbDataGrid TData="Person" Items="@people" InitialPageSize="5">
+            <Columns>
+                <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Name)" Sortable>
+                    <CellTemplate Context="person">
+                        <div class="flex items-center gap-2">
+                            <BbAvatar Class="h-8 w-8">
+                                <BbAvatarFallback Class="text-xs">@GetInitials(person.Name)</BbAvatarFallback>
+                            </BbAvatar>
+                            <span class="font-medium">@person.Name</span>
+                        </div>
+                    </CellTemplate>
+                </BbDataGridPropertyColumn>
+                <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Email)" Sortable />
+                <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Status)" Sortable>
+                    <CellTemplate Context="person">
+                        <BbBadge Variant="@(person.Status == "Active" ? BadgeVariant.Default : person.Status == "Pending" ? BadgeVariant.Secondary : BadgeVariant.Outline)">
+                            @person.Status
+                        </BbBadge>
+                    </CellTemplate>
+                </BbDataGridPropertyColumn>
+                <BbDataGridTemplateColumn TData="Person" Title="Actions">
+                    <ChildContent Context="person">
+                        <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Small">Edit</BbButton>
+                    </ChildContent>
+                </BbDataGridTemplateColumn>
+            </Columns>
+        </BbDataGrid>
+        <CodeBlock Source="Components/DataGrid/custom-cell-templates.txt" />
+    </div>
+
+    <!-- ── Custom Header Template ──────────────────────────────────── -->
+    <div class="space-y-4">
+        <div class="space-y-2">
+            <h2 class="text-2xl font-semibold">Custom Header Template</h2>
+            <p class="text-sm text-muted-foreground">
+                Use <code class="bg-muted px-1 py-0.5 rounded">HeaderTemplate</code> on a
+                <code class="bg-muted px-1 py-0.5 rounded">BbDataGridTemplateColumn</code> to replace
+                the default header text with custom content. Sort icons and resize handles are preserved.
+                While a template is supplied the grid labels the header cell with the column's
+                <code class="bg-muted px-1 py-0.5 rounded">Title</code>, so the icon-only Actions header below
+                is still announced as "Actions" to a screen reader.
+            </p>
+        </div>
+        <BbDataGrid TData="Person" Items="@people" InitialPageSize="5">
+            <Columns>
+                <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Name)" Sortable />
+                <BbDataGridTemplateColumn TData="Person" Title="Contact" Sortable
+                    SortBy="@(p => (object)p.Email)">
+                    <HeaderTemplate>
+                        <div class="flex items-center gap-1.5">
+                            <LucideIcon Name="mail" Class="h-4 w-4" />
+                            <span>Contact</span>
+                        </div>
+                    </HeaderTemplate>
+                    <ChildContent Context="person">
+                        @person.Email
+                    </ChildContent>
+                </BbDataGridTemplateColumn>
+                <BbDataGridTemplateColumn TData="Person" Title="Status" Sortable
+                    SortBy="@(p => (object)p.Status)">
+                    <HeaderTemplate>
+                        <div class="flex items-center gap-1.5">
+                            <LucideIcon Name="activity" Class="h-4 w-4" />
+                            <span>Status</span>
+                        </div>
+                    </HeaderTemplate>
+                    <ChildContent Context="person">
+                        <BbBadge Variant="@(person.Status == "Active" ? BadgeVariant.Default : BadgeVariant.Secondary)">
+                            @person.Status
+                        </BbBadge>
+                    </ChildContent>
+                </BbDataGridTemplateColumn>
+                <BbDataGridPropertyColumn TData="Person" TProp="int" Property="@(p => p.Salary)" Format="C0" Sortable />
+                <BbDataGridTemplateColumn TData="Person" Title="Actions" Width="90px">
+                    <HeaderTemplate>
+                        <LucideIcon Name="settings-2" Class="h-4 w-4" />
+                    </HeaderTemplate>
+                    <ChildContent Context="person">
+                        <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Small">Edit</BbButton>
+                    </ChildContent>
+                </BbDataGridTemplateColumn>
+            </Columns>
+        </BbDataGrid>
+        <CodeBlock Source="Components/DataGrid/header-template.txt" />
+    </div>
+
+    <!-- ── Property Column Header Template ─────────────────────────── -->
+    <div class="space-y-4">
+        <div class="space-y-2">
+            <h2 class="text-2xl font-semibold">Property Column Header Template</h2>
+            <p class="text-sm text-muted-foreground">
+                <code class="bg-muted px-1 py-0.5 rounded">BbDataGridPropertyColumn</code> also accepts a
+                <code class="bg-muted px-1 py-0.5 rounded">HeaderTemplate</code>, so you can put an icon or richer
+                markup in the header without giving up type-safe binding. The template replaces the title
+                <em>text only</em> — the grid keeps rendering its own sort indicator, filter icon and column menu
+                around it, so the Department column below still sorts and still offers "Group by". Keep
+                <code class="bg-muted px-1 py-0.5 rounded">Title</code> meaningful for icon-only headers — as well as
+                feeding the column chooser and the column menu, it is what the grid uses to label the header cell
+                itself. While a <code class="bg-muted px-1 py-0.5 rounded">HeaderTemplate</code> is supplied the grid
+                sets <code class="bg-muted px-1 py-0.5 rounded">aria-label</code> on the header from the title, so the
+                icon-only Email column below is announced as "Email" without any
+                <code class="bg-muted px-1 py-0.5 rounded">sr-only</code> markup of your own.
+            </p>
+        </div>
+        <BbDataGrid TData="Person" Items="@people" InitialPageSize="5">
+            <Columns>
+                <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Name)" Sortable>
+                    <HeaderTemplate>
+                        <div class="flex items-center gap-1.5">
+                            <LucideIcon Name="user" Class="h-4 w-4 text-muted-foreground" />
+                            <span>Name</span>
+                        </div>
+                    </HeaderTemplate>
+                </BbDataGridPropertyColumn>
+                <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Department)" Sortable Groupable>
+                    <HeaderTemplate>
+                        <div class="flex items-center gap-1.5">
+                            <LucideIcon Name="building-2" Class="h-4 w-4 text-muted-foreground" />
+                            <span>Department</span>
+                        </div>
+                    </HeaderTemplate>
+                </BbDataGridPropertyColumn>
+                <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Email)" Title="Email" Width="220px">
+                    <HeaderTemplate>
+                        <LucideIcon Name="mail" Class="h-4 w-4 text-muted-foreground" />
+                    </HeaderTemplate>
+                </BbDataGridPropertyColumn>
+                <BbDataGridPropertyColumn TData="Person" TProp="int" Property="@(p => p.Salary)" Format="C0" Sortable
+                    CellClass="font-mono tabular-nums">
+                    <HeaderTemplate>
+                        <div class="flex items-center gap-1.5">
+                            <LucideIcon Name="banknote" Class="h-4 w-4 text-muted-foreground" />
+                            <span>Salary</span>
+                        </div>
+                    </HeaderTemplate>
+                </BbDataGridPropertyColumn>
+            </Columns>
+        </BbDataGrid>
+        <CodeBlock Source="Components/DataGrid/property-column-header-template.txt" />
+    </div>
+
+    <!-- ── Row & Column Styling ──────────────────────────────────── -->
+    <div class="space-y-4">
+        <div class="space-y-2">
+            <h2 class="text-2xl font-semibold">Row & Column Styling</h2>
+            <p class="text-sm text-muted-foreground">
+                Use <code class="bg-muted px-1 py-0.5 rounded">RowClass</code> to apply CSS classes
+                per row based on data, <code class="bg-muted px-1 py-0.5 rounded">CellClass</code> for
+                column cell styling, and <code class="bg-muted px-1 py-0.5 rounded">HeaderClass</code> for
+                column header styling.
+            </p>
+        </div>
+        <BbDataGrid TData="Person" Items="@people" InitialPageSize="5"
+                   RowClass="@(p => p.Status == "Inactive" ? "opacity-50" : null)">
+            <Columns>
+                <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Name)" Sortable
+                    HeaderClass="text-primary" />
+                <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Department)" Sortable />
+                <BbDataGridPropertyColumn TData="Person" TProp="int" Property="@(p => p.Salary)" Format="C0" Sortable
+                    CellClass="font-mono tabular-nums" HeaderClass="text-right"  />
+                <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Status)" />
+            </Columns>
+        </BbDataGrid>
+        <CodeBlock Source="Components/DataGrid/row-column-styling.txt" />
+    </div>
+
+    <!-- ── Conditional Cell Formatting ─────────────────────────────── -->
+    <div class="space-y-4">
+        <div class="space-y-2">
+            <h2 class="text-2xl font-semibold">Conditional Cell Formatting</h2>
+            <p class="text-sm text-muted-foreground">
+                Use <code class="bg-muted px-1 py-0.5 rounded">CellClassFunc</code> to compute
+                cell classes from the row's data item — style individual cells without replacing
+                their content via <code class="bg-muted px-1 py-0.5 rounded">CellTemplate</code>.
+                Combines with the static <code class="bg-muted px-1 py-0.5 rounded">CellClass</code>.
+            </p>
+        </div>
+        <BbDataGrid TData="Person" Items="@people" InitialPageSize="5">
+            <Columns>
+                <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Name)" Sortable />
+                <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Department)" Sortable />
+                <BbDataGridPropertyColumn TData="Person" TProp="int" Property="@(p => p.Salary)" Format="C0" Sortable
+                    CellClass="font-mono tabular-nums"
+                    CellClassFunc="@(p => p.Salary >= 100000 ? "text-emerald-600 dark:text-emerald-400 font-semibold" : p.Salary < 60000 ? "text-destructive" : null)" />
+                <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Status)"
+                    CellClassFunc="@(p => p.Status == "Inactive" ? "text-muted-foreground line-through" : null)" />
+            </Columns>
+        </BbDataGrid>
+        <CodeBlock Source="Components/DataGrid/conditional-cell-formatting.txt" />
+    </div>
+
+    <!-- ── Custom Styling Showcase ────────────────────────────────── -->
+    <div class="space-y-8">
+        <div class="space-y-2">
+            <h2 class="text-2xl font-semibold">Custom Styling Showcase</h2>
+            <p class="text-sm text-muted-foreground">
+                Combine <code class="bg-muted px-1 py-0.5 rounded">Class</code>,
+                <code class="bg-muted px-1 py-0.5 rounded">RowClass</code>,
+                <code class="bg-muted px-1 py-0.5 rounded">CellClass</code>, and
+                <code class="bg-muted px-1 py-0.5 rounded">HeaderClass</code> with Tailwind CSS
+                utilities for full visual customization of the grid.
+            </p>
+        </div>
+
+        <!-- Grid Lines -->
+        <div class="space-y-4">
+            <div class="space-y-1">
+                <h3 class="text-lg font-medium">Grid Lines</h3>
+                <p class="text-sm text-muted-foreground">
+                    Add visible row and column borders. Apply <code class="bg-muted px-1 py-0.5 rounded">border-r</code>
+                    via <code class="bg-muted px-1 py-0.5 rounded">CellClass</code> and
+                    <code class="bg-muted px-1 py-0.5 rounded">HeaderClass</code> on each column,
+                    and wrap the grid in an outer border with <code class="bg-muted px-1 py-0.5 rounded">Class</code>.
+                </p>
+            </div>
+            <BbDataGrid TData="Person" Items="@people" InitialPageSize="5"
+                       Class="border border-border rounded-lg overflow-hidden">
+                <Columns>
+                    <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Name)" Sortable
+                        CellClass="border-r border-border/40" HeaderClass="border-r border-border/40" />
+                    <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Department)" Sortable
+                        CellClass="border-r border-border/40" HeaderClass="border-r border-border/40" />
+                    <BbDataGridPropertyColumn TData="Person" TProp="int" Property="@(p => p.Salary)" Format="C0" Sortable
+                        CellClass="border-r border-border/40" HeaderClass="border-r border-border/40" />
+                    <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Status)" />
+                </Columns>
+            </BbDataGrid>
+            <CodeBlock Source="Components/DataGrid/custom-grid-lines.txt" />
+        </div>
+
+        <!-- Striped Rows (Built-in) -->
+        <div class="space-y-4">
+            <div class="space-y-1">
+                <h3 class="text-lg font-medium">Striped Rows</h3>
+                <p class="text-sm text-muted-foreground">
+                    Use the built-in <code class="bg-muted px-1 py-0.5 rounded">Striped</code> parameter
+                    for alternating row backgrounds. Customize the stripe appearance with
+                    <code class="bg-muted px-1 py-0.5 rounded">StripeClass</code> (defaults to
+                    <code class="bg-muted px-1 py-0.5 rounded">even:bg-muted/30 even:hover:bg-muted/70</code>).
+                    Composes with <code class="bg-muted px-1 py-0.5 rounded">RowClass</code>.
+                </p>
+            </div>
+            <BbDataGrid TData="Person" Items="@people" InitialPageSize="5" Striped>
+                <Columns>
+                    <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Name)" Sortable />
+                    <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Department)" Sortable />
+                    <BbDataGridPropertyColumn TData="Person" TProp="int" Property="@(p => p.Salary)" Format="C0" Sortable />
+                    <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Status)" />
+                </Columns>
+            </BbDataGrid>
+            <CodeBlock Source="Components/DataGrid/custom-striped-rows.txt" />
+        </div>
+
+        <!-- Table Container Styling -->
+        <div class="space-y-4">
+            <div class="space-y-1">
+                <h3 class="text-lg font-medium">Table Container Styling</h3>
+                <p class="text-sm text-muted-foreground">
+                    Use <code class="bg-muted px-1 py-0.5 rounded">TableContainerClass</code> to style
+                    the inner scrollable container that wraps the table. Useful for adding borders,
+                    rounded corners, or constraining height.
+                </p>
+            </div>
+            <BbDataGrid TData="Person" Items="@people" InitialPageSize="5"
+                       TableContainerClass="rounded-xl border-2 border-primary/20">
+                <Columns>
+                    <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Name)" Sortable />
+                    <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Department)" Sortable />
+                    <BbDataGridPropertyColumn TData="Person" TProp="int" Property="@(p => p.Salary)" Format="C0" Sortable />
+                    <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Status)" />
+                </Columns>
+            </BbDataGrid>
+            <CodeBlock Source="Components/DataGrid/custom-table-container.txt" />
+        </div>
+
+        <!-- Striped Columns -->
+        <div class="space-y-4">
+            <div class="space-y-1">
+                <h3 class="text-lg font-medium">Striped Columns</h3>
+                <p class="text-sm text-muted-foreground">
+                    Apply <code class="bg-muted px-1 py-0.5 rounded">CellClass</code> and
+                    <code class="bg-muted px-1 py-0.5 rounded">HeaderClass</code> to alternating
+                    columns for a vertical stripe effect.
+                </p>
+            </div>
+            <BbDataGrid TData="Person" Items="@people" InitialPageSize="5">
+                <Columns>
+                    <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Name)" Sortable
+                        CellClass="bg-muted" HeaderClass="bg-muted" />
+                    <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Department)" Sortable />
+                    <BbDataGridPropertyColumn TData="Person" TProp="int" Property="@(p => p.Salary)" Format="C0" Sortable
+                        CellClass="bg-muted" HeaderClass="bg-muted" />
+                    <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Status)" />
+                </Columns>
+            </BbDataGrid>
+            <CodeBlock Source="Components/DataGrid/custom-striped-columns.txt" />
+        </div>
+
+        <!-- Colored Header -->
+        <div class="space-y-4">
+            <div class="space-y-1">
+                <h3 class="text-lg font-medium">Colored Header</h3>
+                <p class="text-sm text-muted-foreground">
+                    Apply a distinct background colour to the header row using
+                    <code class="bg-muted px-1 py-0.5 rounded">HeaderClass</code> on each column.
+                    TailwindMerge automatically resolves conflicting classes with the base header styles.
+                </p>
+            </div>
+            <BbDataGrid TData="Person" Items="@people" InitialPageSize="5">
+                <Columns>
+                    <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Name)" Sortable
+                        HeaderClass="bg-primary text-primary-foreground" />
+                    <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Department)" Sortable
+                        HeaderClass="bg-primary text-primary-foreground" />
+                    <BbDataGridPropertyColumn TData="Person" TProp="int" Property="@(p => p.Salary)" Format="C0" Sortable
+                        HeaderClass="bg-primary text-primary-foreground" />
+                    <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Status)"
+                        HeaderClass="bg-primary text-primary-foreground" />
+                </Columns>
+            </BbDataGrid>
+            <CodeBlock Source="Components/DataGrid/custom-colored-header.txt" />
+        </div>
+    </div>
+
+    <!-- ── Empty & Loading States ──────────────────────────────────── -->
+    <div class="space-y-4">
+        <div class="space-y-2">
+            <h2 class="text-2xl font-semibold">Empty & Loading States</h2>
+            <p class="text-sm text-muted-foreground">
+                The grid shows an empty state when there is no data, and a loading state when
+                <code class="bg-muted px-1 py-0.5 rounded">IsLoading</code> is true.
+            </p>
+        </div>
+        <div class="flex gap-4">
+            <BbButton OnClick="ToggleLoading" Variant="ButtonVariant.Outline" Size="ButtonSize.Small">
+                Toggle Loading
+            </BbButton>
+        </div>
+        <BbDataGrid TData="Person" Items="@(Array.Empty<Person>())" IsLoading="@_isLoading">
+            <Columns>
+                <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Name)" />
+                <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Email)" />
+            </Columns>
+        </BbDataGrid>
+        <CodeBlock Source="Components/DataGrid/empty-loading.txt" />
+    </div>
+
+    <!-- Inside a Card -->
+    <div class="space-y-4">
+        <div class="space-y-2">
+            <h2 class="text-2xl font-semibold">Inside a Card</h2>
+            <p class="text-sm text-muted-foreground">
+                Sticky headers and pinned columns need an opaque fill, so the grid paints them with the colour of the
+                surface it sits on: the page, or the card it is in. <code class="bg-muted px-1 py-0.5 rounded">BbCard</code>, popovers and dashboard
+                widgets declare that colour in the <code class="bg-muted px-1 py-0.5 rounded">--bb-surface</code> CSS variable. A container of your own
+                that paints its own background can do the same, for example
+                <code class="bg-muted px-1 py-0.5 rounded">style="--bb-surface: var(--muted)"</code>. Switch to dark mode, where cards and the page
+                differ, to see it.
+            </p>
+        </div>
+        <BbCard>
+            <BbCardHeader>
+                <BbCardTitle>Team</BbCardTitle>
+                <BbCardDescription>Scroll down and across: the header and the pinned name column keep the card's colour.</BbCardDescription>
+            </BbCardHeader>
+            <BbCardContent>
+                <BbDataGrid TData="Person" Items="@people" InitialPageSize="20" StickyHeader="true"
+                            TableContainerClass="max-h-72 overflow-auto">
+                    <Columns>
+                        <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Name)"
+                            Width="180px" Pinned="BlazorBlueprint.Primitives.DataGrid.ColumnPinning.Left" />
+                        <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Email)" Width="260px" />
+                        <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Department)" Width="180px" />
+                        <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Role)" Width="180px" />
+                        <BbDataGridPropertyColumn TData="Person" TProp="int" Property="@(p => p.Salary)" Format="C0" Width="140px" />
+                    </Columns>
+                </BbDataGrid>
+            </BbCardContent>
+        </BbCard>
+        <CodeBlock Source="Components/DataGrid/inside-card.txt" />
+    </div>
+
+    <!-- ── Stacked Layout on Mobile ────────────────────────────────── -->
+    <div class="space-y-4">
+        <div class="space-y-2">
+            <h2 class="text-2xl font-semibold">Stacked Layout on Mobile</h2>
+            <p class="text-sm text-muted-foreground">
+                Set <code class="bg-muted px-1 py-0.5 rounded">MobileLayout="DataGridMobileLayout.Stacked"</code> and below
+                <code class="bg-muted px-1 py-0.5 rounded">MobileBreakpoint</code> each row becomes a card, with each cell's label
+                beside its value. The label is the column title, or <code class="bg-muted px-1 py-0.5 rounded">MobileLabel</code>
+                when set; an empty <code class="bg-muted px-1 py-0.5 rounded">MobileLabel</code> shows no label, and
+                <code class="bg-muted px-1 py-0.5 rounded">HideOnMobile</code> drops a column. This grid stacks below 768px:
+                narrow the window to see it.
+            </p>
+        </div>
+        <BbDataGrid TData="Person" Items="@people" InitialPageSize="5"
+                    SelectionMode="DataTableSelectionMode.Multiple"
+                    MobileLayout="DataGridMobileLayout.Stacked"
+                    MobileBreakpoint="DataGridBreakpoint.Md">
+            <Columns>
+                <BbDataGridSelectColumn TData="Person" Pinned="BlazorBlueprint.Primitives.DataGrid.ColumnPinning.Left" />
+                <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Name)"
+                    Width="180px" Pinned="BlazorBlueprint.Primitives.DataGrid.ColumnPinning.Left" Sortable />
+                <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Email)" HideOnMobile />
+                <BbDataGridPropertyColumn TData="Person" TProp="string" Property="@(p => p.Department)" MobileLabel="Dept." />
+                <BbDataGridPropertyColumn TData="Person" TProp="int" Property="@(p => p.Salary)" Format="C0" />
+                <BbDataGridTemplateColumn TData="Person" Title="Actions" MobileLabel="">
+                    <ChildContent Context="person">
+                        <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Small">Edit</BbButton>
+                    </ChildContent>
+                </BbDataGridTemplateColumn>
+            </Columns>
+        </BbDataGrid>
+        <CodeBlock Source="Components/DataGrid/stacked-mobile-layout.txt" />
+    </div>
+
+        <AccessibilityList>
+        <AriaAttributes>
+            <AccessibilityItem>Custom row and cell templates should preserve meaningful text, labels and the grid keyboard controls.</AccessibilityItem>
+            <AccessibilityItem>Keep adequate text contrast and provide text or icons alongside color-only status cues. Interactive elements in templates need their own accessible names.</AccessibilityItem>
+        </AriaAttributes>
+        <KeyboardNavigation>
+            <KeyboardShortcutItem Description="Move between interactive grid controls"><BbKbd>Tab</BbKbd> / <BbKbd>Shift + Tab</BbKbd></KeyboardShortcutItem>
+            <KeyboardShortcutItem Description="Navigate focused grid rows when EnableKeyboardNavigation is enabled"><BbKbd>ArrowUp</BbKbd> / <BbKbd>ArrowDown</BbKbd></KeyboardShortcutItem>
+            <KeyboardShortcutItem Description="Activate a focused button or link"><BbKbd>Enter</BbKbd></KeyboardShortcutItem>
+        </KeyboardNavigation>
+    </AccessibilityList>
+
+    <section class="space-y-4">
+        <div class="space-y-2">
+            <h2 class="text-2xl font-semibold">API Reference</h2>
+            <p class="text-muted-foreground">Component properties and parameters.</p>
+        </div>
+
+        <ApiReference ComponentName="BbDataGrid">
+            <ApiParameter Name="Class" Type="string?">Additional CSS classes applied to the root container.</ApiParameter>
+            <ApiParameter Name="RowClass" Type="Func&lt;TData, string?&gt;?">Optional callback for applying custom CSS classes to data rows. Receives the row&#x27;s data item and returns additional CSS classes, or null.</ApiParameter>
+            <ApiParameter Name="Striped" Type="bool">When true, applies alternating row background colors using StripeClass. Composes with RowClass — user-provided classes take precedence for conflicts.</ApiParameter>
+            <ApiParameter Name="StripeClass" Type="string" Default="&quot;bb:even:bg-muted/30 bb:even:hover:bg-muted/70&quot;">CSS classes applied to even rows when Striped is true. Defaults to &quot;even:bg-muted/30 even:hover:bg-muted/70&quot;.</ApiParameter>
+            <ApiParameter Name="TableContainerClass" Type="string?">Additional CSS classes applied to the inner scrollable container that wraps the &lt;table&gt; element. Use this to control border radius, borders, max-height, etc.</ApiParameter>
+            <ApiParameter Name="FilterBarClass" Type="string?">Additional CSS classes applied to the active-filter indicator bar.</ApiParameter>
+            <ApiParameter Name="EmptyTemplate" Type="RenderFragment?">Custom empty state template.</ApiParameter>
+            <ApiParameter Name="LoadingTemplate" Type="RenderFragment?">Custom loading template.</ApiParameter>
+            <ApiParameter Name="EnableKeyboardNavigation" Type="bool" Default="true">Enable keyboard navigation for rows. Default is true.</ApiParameter>
+            <ApiParameter Name="AriaLabel" Type="string?">ARIA label for the grid.</ApiParameter>
+            <ApiParameter Name="MobileLayout" Type="DataGridMobileLayout" Default="None">How rows are laid out below MobileBreakpoint. Stacked turns each row into a card, with each cell's label beside its value. The header row is hidden in the stacked layout.</ApiParameter>
+            <ApiParameter Name="MobileBreakpoint" Type="DataGridBreakpoint" Default="Sm">The screen width below which MobileLayout applies: Sm (640px), Md (768px) or Lg (1024px).</ApiParameter>
+        </ApiReference>
+
+        <ApiReference ComponentName="BbDataGridPropertyColumn">
+            <ApiParameter Name="CellClass" Type="string?">Additional CSS classes for cells in this column.</ApiParameter>
+            <ApiParameter Name="HeaderClass" Type="string?">Additional CSS classes for the header cell.</ApiParameter>
+            <ApiParameter Name="CellClassFunc" Type="Func&lt;TData, string?&gt;?">Computes additional cell classes from the row's data, in addition to CellClass. Use it for conditional formatting such as highlighting negative totals.</ApiParameter>
+            <ApiParameter Name="CellTemplate" Type="RenderFragment&lt;TData&gt;?">Custom cell template. If provided, overrides the default value rendering.</ApiParameter>
+            <ApiParameter Name="HeaderTemplate" Type="RenderFragment?">Custom header content. If provided, replaces the header title text only — the grid still renders its own sort indicator, filter icon, pin icon, column menu and resize handle around it, so a Sortable or Groupable column keeps every affordance. Use it to show an icon or richer markup instead of Title.</ApiParameter>
+            <ApiParameter Name="Format" Type="string?">Format string for displaying the property value (e.g., &quot;C2&quot;, &quot;N0&quot;, &quot;d&quot;).</ApiParameter>
+            <ApiParameter Name="NoWrap" Type="bool">Whether text in this column should not wrap. When true, cell content uses white-space: nowrap and truncates with an ellipsis on overflow. Default is false.</ApiParameter>
+            <ApiParameter Name="MobileLabel" Type="string?">The label shown beside this column's value when the grid's MobileLayout stacks its rows. Null uses the column title; an empty string shows no label.</ApiParameter>
+            <ApiParameter Name="HideOnMobile" Type="bool" Default="false">Hides this column when the grid's MobileLayout stacks its rows.</ApiParameter>
+        </ApiReference>
+    </section>
+
+</div>
+
+@code {
+    private List<Person> people = new();
+    private bool _isLoading;
+
+    protected override void OnInitialized()
+    {
+        people = MockDataService.GeneratePersons(50);
+    }
+
+    private void ToggleLoading() => _isLoading = !_isLoading;
+
+    private static string GetInitials(string name)
+    {
+        var parts = name.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        return parts.Length >= 2
+            ? $"{parts[0][0]}{parts[1][0]}"
+            : parts.Length == 1 ? $"{parts[0][0]}" : "?";
+    }
+}

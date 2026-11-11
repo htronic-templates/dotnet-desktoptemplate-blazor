@@ -1,0 +1,596 @@
+@page "/components/tabs"
+<PageTitle>Tabs Component - Blazor Blueprint</PageTitle>
+
+<div class="space-y-8 max-w-4xl">
+    <div>
+        <div class="space-y-3">
+        <h1 class="text-4xl font-bold tracking-tight">Tabs Component</h1>
+        <p class="text-xl text-muted-foreground">
+            A set of layered sections of content—known as tab panels—that are displayed one at a time.
+        </p>
+        </div>
+    </div>
+
+    <div class="space-y-6">
+    </div>
+
+    <div class="space-y-4">
+        <h2 class="text-2xl font-semibold">Default</h2>
+        <p class="text-sm text-muted-foreground">
+            Basic tabs with shadcn styling.
+        </p>
+
+        <div class="w-[400px]">
+            <BbTabs DefaultValue="account">
+                <BbTabsList Class="grid w-full grid-cols-2">
+                    <BbTabsTrigger Value="account">Account</BbTabsTrigger>
+                    <BbTabsTrigger Value="password">Password</BbTabsTrigger>
+                </BbTabsList>
+
+            <BbTabsContent Value="account">
+                <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
+                    <div class="space-y-2">
+                        <h3 class="text-2xl font-semibold leading-none tracking-tight">Account</h3>
+                        <p class="text-sm text-muted-foreground">
+                            Make changes to your account here. Click save when you're done.
+                        </p>
+                    </div>
+                    <div class="space-y-4 pt-4">
+                        <div class="space-y-1">
+                            <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                                Name
+                            </label>
+                            <input class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                   placeholder="Pedro Duarte" />
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                                Username
+                            </label>
+                            <input class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                   placeholder="@@peduarte" />
+                        </div>
+                        <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
+                            Save changes
+                        </button>
+                    </div>
+                </div>
+            </BbTabsContent>
+
+            <BbTabsContent Value="password">
+                <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
+                    <div class="space-y-2">
+                        <h3 class="text-2xl font-semibold leading-none tracking-tight">Password</h3>
+                        <p class="text-sm text-muted-foreground">
+                            Change your password here. After saving, you'll be logged out.
+                        </p>
+                    </div>
+                    <div class="space-y-4 pt-4">
+                        <div class="space-y-1">
+                            <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                                Current password
+                            </label>
+                            <input type="password"
+                                   class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" />
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                                New password
+                            </label>
+                            <input type="password"
+                                   class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" />
+                        </div>
+                        <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
+                            Save password
+                        </button>
+                    </div>
+                </div>
+            </BbTabsContent>
+            </BbTabs>
+        </div>
+
+        <CodeBlock Source="Components/Tabs/default.txt" />
+    </div>
+
+    <div class="space-y-4">
+        <h2 class="text-2xl font-semibold">With Multiple Tabs</h2>
+        <p class="text-sm text-muted-foreground">
+            Tabs can have more than two options.
+        </p>
+
+        <BbTabs DefaultValue="overview">
+            <BbTabsList>
+                <BbTabsTrigger Value="overview">Overview</BbTabsTrigger>
+                <BbTabsTrigger Value="analytics">Analytics</BbTabsTrigger>
+                <BbTabsTrigger Value="reports">Reports</BbTabsTrigger>
+                <BbTabsTrigger Value="notifications">Notifications</BbTabsTrigger>
+            </BbTabsList>
+
+            <BbTabsContent Value="overview">
+                <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
+                    <h3 class="text-lg font-semibold mb-2">Overview</h3>
+                    <p class="text-sm text-muted-foreground">
+                        View a summary of your account activity and statistics.
+                    </p>
+                </div>
+            </BbTabsContent>
+
+            <BbTabsContent Value="analytics">
+                <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
+                    <h3 class="text-lg font-semibold mb-2">Analytics</h3>
+                    <p class="text-sm text-muted-foreground">
+                        Detailed analytics and metrics about your usage.
+                    </p>
+                </div>
+            </BbTabsContent>
+
+            <BbTabsContent Value="reports">
+                <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
+                    <h3 class="text-lg font-semibold mb-2">Reports</h3>
+                    <p class="text-sm text-muted-foreground">
+                        Generate and download detailed reports.
+                    </p>
+                </div>
+            </BbTabsContent>
+
+            <BbTabsContent Value="notifications">
+                <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
+                    <h3 class="text-lg font-semibold mb-2">Notifications</h3>
+                    <p class="text-sm text-muted-foreground">
+                        Manage your notification preferences.
+                    </p>
+                </div>
+            </BbTabsContent>
+        </BbTabs>
+
+        <CodeBlock Source="Components/Tabs/multiple.txt" />
+    </div>
+
+    <div class="space-y-4">
+        <h2 class="text-2xl font-semibold">Controlled</h2>
+        <p class="text-sm text-muted-foreground">
+            Control which tab is active programmatically.
+        </p>
+
+        <div class="flex gap-2 mb-4">
+            <button @onclick='() => activeTab = "morning"'
+                    class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3">
+                Show Morning
+            </button>
+            <button @onclick='() => activeTab = "afternoon"'
+                    class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3">
+                Show Afternoon
+            </button>
+            <button @onclick='() => activeTab = "evening"'
+                    class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3">
+                Show Evening
+            </button>
+        </div>
+
+        <p class="text-xs text-muted-foreground mb-2">Current: <strong>@activeTab</strong></p>
+
+        <div class="w-[400px]">
+            <BbTabs @bind-Value="activeTab">
+                <BbTabsList Class="grid w-full grid-cols-3">
+                    <BbTabsTrigger Value="morning">Morning</BbTabsTrigger>
+                    <BbTabsTrigger Value="afternoon">Afternoon</BbTabsTrigger>
+                    <BbTabsTrigger Value="evening">Evening</BbTabsTrigger>
+                </BbTabsList>
+
+            <BbTabsContent Value="morning">
+                <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
+                    <h3 class="text-lg font-semibold mb-2">🌅 Morning</h3>
+                    <p class="text-sm text-muted-foreground">
+                        Good morning! Start your day with a fresh perspective.
+                    </p>
+                </div>
+            </BbTabsContent>
+
+            <BbTabsContent Value="afternoon">
+                <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
+                    <h3 class="text-lg font-semibold mb-2">☀️ Afternoon</h3>
+                    <p class="text-sm text-muted-foreground">
+                        Afternoon productivity at its peak!
+                    </p>
+                </div>
+            </BbTabsContent>
+
+            <BbTabsContent Value="evening">
+                <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
+                    <h3 class="text-lg font-semibold mb-2">🌙 Evening</h3>
+                    <p class="text-sm text-muted-foreground">
+                        Wind down and reflect on your day.
+                    </p>
+                </div>
+            </BbTabsContent>
+            </BbTabs>
+        </div>
+
+        <CodeBlock Source="Components/Tabs/controlled.txt" />
+    </div>
+
+    <div class="space-y-4">
+        <h2 class="text-2xl font-semibold">Responsive</h2>
+        <p class="text-sm text-muted-foreground">
+            When <code>Responsive</code> is enabled, the tabs list automatically collapses into a Select dropdown
+            when the tabs overflow their container. Resize the browser to see it in action.
+        </p>
+
+        <BbTabs DefaultValue="overview">
+            <BbTabsList Responsive>
+                <BbTabsTrigger Value="overview" Label="Overview">Overview</BbTabsTrigger>
+                <BbTabsTrigger Value="analytics" Label="Analytics">Analytics</BbTabsTrigger>
+                <BbTabsTrigger Value="reports" Label="Reports">Reports</BbTabsTrigger>
+                <BbTabsTrigger Value="notifications" Label="Notifications">Notifications</BbTabsTrigger>
+                <BbTabsTrigger Value="settings" Label="Settings">Settings</BbTabsTrigger>
+                <BbTabsTrigger Value="billing" Label="Billing">Billing</BbTabsTrigger>
+                <BbTabsTrigger Value="integrations" Label="Integrations">Integrations</BbTabsTrigger>
+                <BbTabsTrigger Value="security" Label="Security">Security</BbTabsTrigger>
+            </BbTabsList>
+
+            <BbTabsContent Value="overview">
+                <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
+                    <h3 class="text-lg font-semibold mb-2">Overview</h3>
+                    <p class="text-sm text-muted-foreground">
+                        View a summary of your account activity and statistics.
+                    </p>
+                </div>
+            </BbTabsContent>
+
+            <BbTabsContent Value="analytics">
+                <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
+                    <h3 class="text-lg font-semibold mb-2">Analytics</h3>
+                    <p class="text-sm text-muted-foreground">
+                        Detailed analytics and metrics about your usage patterns.
+                    </p>
+                </div>
+            </BbTabsContent>
+
+            <BbTabsContent Value="reports">
+                <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
+                    <h3 class="text-lg font-semibold mb-2">Reports</h3>
+                    <p class="text-sm text-muted-foreground">
+                        Generate and download detailed reports for your team.
+                    </p>
+                </div>
+            </BbTabsContent>
+
+            <BbTabsContent Value="notifications">
+                <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
+                    <h3 class="text-lg font-semibold mb-2">Notifications</h3>
+                    <p class="text-sm text-muted-foreground">
+                        Manage your notification preferences and channels.
+                    </p>
+                </div>
+            </BbTabsContent>
+
+            <BbTabsContent Value="settings">
+                <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
+                    <h3 class="text-lg font-semibold mb-2">Settings</h3>
+                    <p class="text-sm text-muted-foreground">
+                        Configure your account settings and preferences.
+                    </p>
+                </div>
+            </BbTabsContent>
+
+            <BbTabsContent Value="billing">
+                <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
+                    <h3 class="text-lg font-semibold mb-2">Billing</h3>
+                    <p class="text-sm text-muted-foreground">
+                        Manage your subscription, payment methods, and invoices.
+                    </p>
+                </div>
+            </BbTabsContent>
+
+            <BbTabsContent Value="integrations">
+                <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
+                    <h3 class="text-lg font-semibold mb-2">Integrations</h3>
+                    <p class="text-sm text-muted-foreground">
+                        Connect third-party services and manage API keys.
+                    </p>
+                </div>
+            </BbTabsContent>
+
+            <BbTabsContent Value="security">
+                <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
+                    <h3 class="text-lg font-semibold mb-2">Security</h3>
+                    <p class="text-sm text-muted-foreground">
+                        Two-factor authentication, sessions, and audit log.
+                    </p>
+                </div>
+            </BbTabsContent>
+        </BbTabs>
+
+        <CodeBlock Source="Components/Tabs/responsive.txt" />
+    </div>
+
+    <div class="space-y-4">
+        <h2 class="text-2xl font-semibold">Editable</h2>
+        <p class="text-sm text-muted-foreground">
+            Tabs that can be added, closed, renamed and reordered. The list never changes itself —
+            every gesture raises a callback and this page changes its own collection, so the order
+            and the names stay wherever you already keep them.
+        </p>
+        <p class="text-sm text-muted-foreground">
+            Drag a tab, or press <BbKbd>Ctrl</BbKbd> with an arrow key, to move it. Double-click a
+            tab, or press <BbKbd>F2</BbKbd>, to rename it. Click the <BbKbd>×</BbKbd>, or press
+            <BbKbd>Delete</BbKbd>, to close it. The last remaining tab cannot be closed.
+        </p>
+
+        <BbTabs @bind-Value="activeSheet">
+            <BbTabsList Responsive Closable Renamable Reorderable Addable
+                        AddLabel="New sheet"
+                        OnAdd="AddSheet"
+                        OnClose="CloseSheet"
+                        OnRename="RenameSheet"
+                        OnMove="MoveSheet">
+                @foreach (var sheet in sheets)
+                {
+                    <BbTabsTrigger @key="sheet.Id"
+                                   Value="@sheet.Id"
+                                   Label="@sheet.Name"
+                                   Closable="@(sheets.Count > 1)" />
+                }
+            </BbTabsList>
+
+            @foreach (var sheet in sheets)
+            {
+                <BbTabsContent @key="sheet.Id" Value="@sheet.Id">
+                    <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
+                        <h3 class="text-lg font-semibold mb-2">@sheet.Name</h3>
+                        <p class="text-sm text-muted-foreground">
+                            The panel for @sheet.Name. Its content follows the tab wherever the tab goes.
+                        </p>
+                    </div>
+                </BbTabsContent>
+            }
+        </BbTabs>
+
+        <div class="rounded-md border bg-muted/40 p-4 space-y-2">
+            <p class="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                The collection behind the tabs
+            </p>
+            <ol class="text-sm font-mono space-y-0.5">
+                @for (var i = 0; i < sheets.Count; i++)
+                {
+                    <li>@i — <span class="text-muted-foreground">@sheets[i].Id</span> "@sheets[i].Name"</li>
+                }
+            </ol>
+            <p class="text-xs text-muted-foreground">
+                Last change: @lastChange
+            </p>
+        </div>
+
+        <CodeBlock Source="Components/Tabs/editable.txt" />
+    </div>
+
+    <AccessibilityList>
+        <AriaAttributes>
+            <AccessibilityItem>Uses <code>role="tablist"</code>, <code>role="tab"</code>, and <code>role="tabpanel"</code> for proper semantics</AccessibilityItem>
+            <AccessibilityItem><code>aria-selected</code> indicates the active tab</AccessibilityItem>
+            <AccessibilityItem><code>aria-controls</code> links each tab trigger to its content panel</AccessibilityItem>
+            <AccessibilityItem><code>aria-orientation</code> reflects horizontal or vertical layout</AccessibilityItem>
+            <AccessibilityItem>Disabled tabs are excluded from the tab sequence</AccessibilityItem>
+            <AccessibilityItem>The close affordance is an <code>aria-hidden</code> span, not a nested button — a <code>role="tab"</code> element must not contain another interactive element, so <BbKbd>Delete</BbKbd> is the keyboard route</AccessibilityItem>
+            <AccessibilityItem>The add button sits beside the tablist rather than inside it, so it is its own tab stop and never reports itself as a tab</AccessibilityItem>
+        </AriaAttributes>
+        <KeyboardNavigation>
+            <KeyboardShortcutItem Description="Move focus between tabs">
+                <BbKbd>Arrow Keys</BbKbd>
+            </KeyboardShortcutItem>
+            <KeyboardShortcutItem Description="Activate focused tab (manual mode)">
+                <BbKbd>Enter</BbKbd> / <BbKbd>Space</BbKbd>
+            </KeyboardShortcutItem>
+            <KeyboardShortcutItem Description="Move focus to first tab">
+                <BbKbd>Home</BbKbd>
+            </KeyboardShortcutItem>
+            <KeyboardShortcutItem Description="Move focus to last tab">
+                <BbKbd>End</BbKbd>
+            </KeyboardShortcutItem>
+            <KeyboardShortcutItem Description="Close the focused tab (when Closable)">
+                <BbKbd>Delete</BbKbd> / <BbKbd>Backspace</BbKbd>
+            </KeyboardShortcutItem>
+            <KeyboardShortcutItem Description="Rename the focused tab (when Renamable)">
+                <BbKbd>F2</BbKbd>
+            </KeyboardShortcutItem>
+            <KeyboardShortcutItem Description="Move the focused tab one place (when Reorderable)">
+                <BbKbd>Ctrl</BbKbd> + <BbKbd>Arrow Keys</BbKbd>
+            </KeyboardShortcutItem>
+            <KeyboardShortcutItem Description="Commit or cancel a rename">
+                <BbKbd>Enter</BbKbd> / <BbKbd>Esc</BbKbd>
+            </KeyboardShortcutItem>
+        </KeyboardNavigation>
+    </AccessibilityList>
+
+    <!-- API Reference -->
+    <section class="space-y-4">
+        <div class="space-y-2">
+            <h2 class="text-2xl font-semibold">API Reference</h2>
+            <p class="text-muted-foreground">Component properties and parameters.</p>
+        </div>
+
+        <div class="space-y-4">
+            <ApiReference ComponentName="Tabs">
+                <ApiParameter Name="Value" Type="string?" Default="null">
+                    Controls which tab is active (controlled mode). Supports two-way binding with <code>@@bind-Value</code>.
+                </ApiParameter>
+                <ApiParameter Name="DefaultValue" Type="string?" Default="null">
+                    Default active tab value when in uncontrolled mode.
+                </ApiParameter>
+                <ApiParameter Name="Orientation" Type="TabsOrientation" Default="Horizontal">
+                    Orientation of the tabs. Options: Horizontal, Vertical.
+                </ApiParameter>
+                <ApiParameter Name="ActivationMode" Type="TabsActivationMode" Default="Automatic">
+                    Activation mode. Automatic activates on focus, Manual requires Enter/Space.
+                </ApiParameter>
+                <ApiParameter Name="Class" Type="string?" Default="null">
+                    Additional CSS classes for the tabs container.
+                </ApiParameter>
+                <ApiParameter Name="AdditionalAttributes" Type="Dictionary&lt;string, object&gt;?">
+                    Additional HTML attributes applied to the component's root element (e.g. <code>data-testid</code>, <code>aria-label</code>).
+                </ApiParameter>
+            </ApiReference>
+
+            <ApiReference ComponentName="TabsList">
+                <ApiParameter Name="Class" Type="string?" Default="null">
+                    Additional CSS classes for the tabs list container.
+                </ApiParameter>
+                <ApiParameter Name="Responsive" Type="bool" Default="false">
+                    When true, collapses tabs into a Select dropdown when they overflow their container.
+                </ApiParameter>
+                <ApiParameter Name="Closable" Type="bool" Default="false">
+                    Whether every tab carries a close affordance. Needs <code>OnClose</code>. A tab can override this for itself.
+                </ApiParameter>
+                <ApiParameter Name="Renamable" Type="bool" Default="false">
+                    Whether every tab can be renamed in place. Needs <code>OnRename</code>. Double-click or <code>F2</code>.
+                </ApiParameter>
+                <ApiParameter Name="Reorderable" Type="bool" Default="false">
+                    Whether every tab can be dragged to a new position. Needs <code>OnMove</code>. Drag, or <code>Ctrl</code> with an arrow key.
+                </ApiParameter>
+                <ApiParameter Name="Addable" Type="bool" Default="false">
+                    Whether a button for adding a tab is drawn after the last one. Needs <code>OnAdd</code>.
+                </ApiParameter>
+                <ApiParameter Name="AddLabel" Type="string?" Default="null">
+                    Accessible name and tooltip for the add button. Defaults to "New tab".
+                </ApiParameter>
+                <ApiParameter Name="OnClose" Type="EventCallback&lt;string&gt;">
+                    Invoked when a tab asks to be closed, carrying the tab's value.
+                </ApiParameter>
+                <ApiParameter Name="OnAdd" Type="EventCallback">
+                    Invoked when the add button is pressed.
+                </ApiParameter>
+                <ApiParameter Name="OnRename" Type="EventCallback&lt;TabRenameContext&gt;">
+                    Invoked when a tab has been renamed. Carries <code>Value</code>, <code>OldLabel</code> and <code>NewLabel</code>; set <code>Cancel</code> to refuse it and reopen the editor.
+                </ApiParameter>
+                <ApiParameter Name="OnMove" Type="EventCallback&lt;TabMoveContext&gt;">
+                    Invoked when a tab is moved. Carries <code>Value</code>, <code>OldIndex</code> and <code>NewIndex</code>. Apply it to your own collection, or do nothing to refuse it.
+                </ApiParameter>
+                <ApiParameter Name="SelectClass" Type="string?" Default="null">
+                    Additional CSS classes for the responsive Select fallback.
+                </ApiParameter>
+                <ApiParameter Name="AdditionalAttributes" Type="Dictionary&lt;string, object&gt;?">
+                    Additional HTML attributes applied to the root <code>&lt;div&gt;</code> element (e.g. <code>data-testid</code>, <code>aria-label</code>).
+                </ApiParameter>
+            </ApiReference>
+
+            <ApiReference ComponentName="TabsTrigger">
+                <ApiParameter Name="Value" Type="string">
+                    The value that identifies this tab. Must match a TabsContent Value.
+                </ApiParameter>
+                <ApiParameter Name="Label" Type="string?" Default="null">
+                    Display text for this tab. Used for the responsive Select, as the starting text for a rename, and as the tab's own content where no child content is given. Falls back to Value.
+                </ApiParameter>
+                <ApiParameter Name="Disabled" Type="bool" Default="false">
+                    Whether this tab trigger is disabled.
+                </ApiParameter>
+                <ApiParameter Name="Closable" Type="bool?" Default="null">
+                    Whether this tab can be closed. Null follows the list — set it to pin one tab open.
+                </ApiParameter>
+                <ApiParameter Name="Renamable" Type="bool?" Default="null">
+                    Whether this tab can be renamed in place. Null follows the list.
+                </ApiParameter>
+                <ApiParameter Name="Reorderable" Type="bool?" Default="null">
+                    Whether this tab can be dragged to a new position. Null follows the list.
+                </ApiParameter>
+                <ApiParameter Name="Class" Type="string?" Default="null">
+                    Additional CSS classes for the tab trigger.
+                </ApiParameter>
+                <ApiParameter Name="AdditionalAttributes" Type="Dictionary&lt;string, object&gt;?">
+                    Additional HTML attributes applied to the component's root element (e.g. <code>data-testid</code>, <code>aria-label</code>).
+                </ApiParameter>
+            </ApiReference>
+
+            <ApiReference ComponentName="TabsContent">
+                <ApiParameter Name="Value" Type="string">
+                    The value that identifies this content panel. Must match a TabsTrigger Value.
+                </ApiParameter>
+                <ApiParameter Name="ForceMount" Type="bool" Default="false">
+                    When true, content remains mounted but hidden when inactive instead of being unmounted.
+                </ApiParameter>
+                <ApiParameter Name="Class" Type="string?" Default="null">
+                    Additional CSS classes for the tab content panel.
+                </ApiParameter>
+                <ApiParameter Name="AdditionalAttributes" Type="Dictionary&lt;string, object&gt;?">
+                    Additional HTML attributes applied to the component's root element (e.g. <code>data-testid</code>, <code>aria-label</code>).
+                </ApiParameter>
+            </ApiReference>
+        </div>
+    </section>
+</div>
+
+@code {
+    private string? activeTab = "morning";
+
+    private sealed record Sheet(string Id, string Name);
+
+    private readonly List<Sheet> sheets =
+    [
+        new("summary", "Summary"),
+        new("q1", "Q1"),
+        new("q2", "Q2"),
+    ];
+
+    private string? activeSheet = "summary";
+    private int nextSheet = 3;
+    private string lastChange = "nothing yet";
+
+    private void AddSheet()
+    {
+        nextSheet++;
+        var id = $"sheet-{nextSheet}";
+        sheets.Add(new Sheet(id, $"Sheet {nextSheet}"));
+        activeSheet = id;
+        lastChange = $"added {id}";
+    }
+
+    private void CloseSheet(string value)
+    {
+        var index = sheets.FindIndex(s => s.Id == value);
+        if (index < 0 || sheets.Count == 1)
+        {
+            return;
+        }
+
+        sheets.RemoveAt(index);
+        lastChange = $"closed {value}";
+
+        // The neighbour takes over, and the last tab in the list takes over from itself.
+        if (activeSheet == value)
+        {
+            activeSheet = sheets[Math.Min(index, sheets.Count - 1)].Id;
+        }
+    }
+
+    private void RenameSheet(TabRenameContext context)
+    {
+        var index = sheets.FindIndex(s => s.Id == context.Value);
+        if (index < 0)
+        {
+            return;
+        }
+
+        // A name already in use is refused, which is what Cancel is for.
+        if (sheets.Any(s => s.Id != context.Value && s.Name == context.NewLabel))
+        {
+            context.Cancel = true;
+            lastChange = $"refused \"{context.NewLabel}\" — that name is taken";
+            return;
+        }
+
+        sheets[index] = sheets[index] with { Name = context.NewLabel };
+        lastChange = $"renamed {context.OldLabel} to {context.NewLabel}";
+    }
+
+    private void MoveSheet(TabMoveContext context)
+    {
+        if (context.OldIndex < 0 || context.OldIndex >= sheets.Count)
+        {
+            return;
+        }
+
+        var moved = sheets[context.OldIndex];
+        sheets.RemoveAt(context.OldIndex);
+        sheets.Insert(Math.Clamp(context.NewIndex, 0, sheets.Count), moved);
+        lastChange = $"moved {moved.Name} from {context.OldIndex} to {context.NewIndex}";
+    }
+}

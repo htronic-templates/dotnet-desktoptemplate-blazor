@@ -1,0 +1,151 @@
+@page "/components"
+
+<PageTitle>Components - Blazor Blueprint</PageTitle>
+
+<div class="space-y-8 max-w-6xl">
+    <div class="space-y-3">
+        <h1 class="text-4xl font-bold tracking-tight">Components</h1>
+        <p class="text-xl text-muted-foreground">
+            Beautiful, accessible components built with Tailwind CSS. Ready to drop into your Blazor application
+            with pre-styled defaults inspired by shadcn/ui.
+        </p>
+    </div>
+
+    <div class="space-y-6">
+        <section class="space-y-4">
+            <div class="space-y-2">
+                <h2 class="text-2xl font-semibold">What are Components?</h2>
+                <p class="text-muted-foreground">
+                    Components are pre-styled, production-ready UI elements built on top of our primitives.
+                    They provide beautiful defaults while remaining fully customizable through Tailwind CSS classes.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="p-4 border rounded-lg">
+                    <div class="flex items-start gap-2 mb-2">
+                        <span class="text-green-600 dark:text-green-400 text-lg">✓</span>
+                        <div>
+                            <h3 class="font-semibold">Pre-Styled Defaults</h3>
+                            <p class="text-sm text-muted-foreground mt-1">
+                                Beautiful shadcn/ui-inspired design out of the box with dark mode support
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 border rounded-lg">
+                    <div class="flex items-start gap-2 mb-2">
+                        <span class="text-green-600 dark:text-green-400 text-lg">✓</span>
+                        <div>
+                            <h3 class="font-semibold">Fully Customizable</h3>
+                            <p class="text-sm text-muted-foreground mt-1">
+                                Override styles with Tailwind classes or build your own variants
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 border rounded-lg">
+                    <div class="flex items-start gap-2 mb-2">
+                        <span class="text-green-600 dark:text-green-400 text-lg">✓</span>
+                        <div>
+                            <h3 class="font-semibold">Production Ready</h3>
+                            <p class="text-sm text-muted-foreground mt-1">
+                                Tested and ready to use in real applications
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="space-y-4">
+            <div class="space-y-2">
+                <h2 class="text-2xl font-semibold">Available Components</h2>
+                <p class="text-muted-foreground">
+                    Browse the same component pages and related groups as the sidebar. New components are marked with a v4 badge.
+                    Click an entry to view its demos, examples, API documentation, and usage guides.
+                </p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                @foreach (var group in ComponentCatalog.NavigationGroups)
+                {
+                    var entry = group.Entry;
+                    <div @key="entry.Url" class="rounded-lg border overflow-hidden">
+                        <a href="@entry.Url" class="group block p-5 hover:bg-accent transition-colors no-underline">
+                            <h3 class="flex flex-wrap items-center gap-2 font-semibold text-lg mb-2 group-hover:text-primary">
+                                <span>@entry.Name</span>
+                                @if (entry.IsNew)
+                                {
+                                    <ApiVersionBadge />
+                                }
+                            </h3>
+                            <p class="text-sm text-muted-foreground">@entry.Description</p>
+                        </a>
+                        @if (group.Children.Count > 0)
+                        {
+                            <ul class="border-t px-5 py-3 space-y-2">
+                                @foreach (var child in group.Children)
+                                {
+                                    <li>
+                                        <a href="@child.Url" class="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary hover:underline">
+                                            <span>@ComponentCatalog.NavigationLabel(entry, child)</span>
+                                            @if (child.IsNew)
+                                            {
+                                                <ApiVersionBadge />
+                                            }
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                    </div>
+                }
+            </div>
+        </section>
+
+        <section class="space-y-4">
+            <div class="space-y-2">
+                <h2 class="text-2xl font-semibold">Why Use These Components?</h2>
+            </div>
+
+            <div class="rounded-lg border p-6 space-y-4 bg-muted/30">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="space-y-3">
+                        <h3 class="font-semibold">Perfect For:</h3>
+                        <ul class="space-y-2 text-sm text-muted-foreground">
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600 dark:text-green-400">✓</span>
+                                <span>Rapid application development with beautiful defaults</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600 dark:text-green-400">✓</span>
+                                <span>Projects that want shadcn/ui design in Blazor</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600 dark:text-green-400">✓</span>
+                                <span>Teams that prefer pre-styled, ready-to-use components</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600 dark:text-green-400">✓</span>
+                                <span>Applications with Tailwind CSS already integrated</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h3 class="font-semibold">Need Full Control?</h3>
+                        <p class="text-sm text-muted-foreground">
+                            If you want completely unstyled components with full control over styling,
+                            check out our <a href="/primitives" class="text-primary hover:underline">headless primitives</a>.
+                            These components are built on top of those same primitives.
+                        </p>
+                        <a href="/primitives" class="inline-flex items-center px-4 py-2 border rounded text-sm hover:bg-accent transition-colors no-underline">
+                            View Headless Primitives →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
