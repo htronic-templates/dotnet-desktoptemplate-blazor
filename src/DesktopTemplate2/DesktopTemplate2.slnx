@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/App/" />
+  <Folder Name="/FrontEnd/">
+    <Project Path="DesktopTemplate2.GUI.PhotinoX/DesktopTemplate2.GUI.PhotinoX.csproj" />
+  </Folder>
+</Solution>
