@@ -7,7 +7,7 @@ namespace DesktopTemplate2.GUI.PhotinoX;
 internal static class Program {
     [STAThread]
     private static void Main(string[] args) {
-        var appBuilder = PhotinoBlazorAppBuilder.CreateDefault(args);
+        var appBuilder = PhotinoBlazorApp.CreateBuilder(args);
         appBuilder.Services
             .AddLogging();
 
