@@ -2,24 +2,12 @@
 
 ## Projects
 
-change AppTemplate to DesktopTemplate
+Set the desktop app DesktopTemplate1.UI.PhotinoX
+to reference the razor class library DesktopTemplate1.App
 
-DesktopTemplate1.App
-DesktopTemplate1.UI.Desktop
-DesktopTemplate1.UI.WebWasm
-DesktopTemplate1.UI.WebServer
-DesktopTemplate1.UI.WebAuto
+update nugets for DesktopTemplate1.UI.PhotinoX
 
-
-
-Set the desktop app AppTemplate.Frontend.PhotinoX
-to reference the razor class library AppTemplate.App
-
-update nugets for AppTemplate.Frontend.PhotinoX
-
-for the web frontends
-copy over BlazorBlueprint.Demo.Server to AppTemplate.Frontend.Server
-copy over BlazorBlueprint.Demo.Auto to AppTemplate.Frontend.Auto
+create a second DesktopTemplate2 with a simpler ui / desktop orientated
 
 ## Templating
 
