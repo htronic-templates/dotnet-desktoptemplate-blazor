@@ -2,6 +2,16 @@
 
 ## Projects
 
+change AppTemplate to DesktopTemplate
+
+DesktopTemplate1.App
+DesktopTemplate1.UI.Desktop
+DesktopTemplate1.UI.WebWasm
+DesktopTemplate1.UI.WebServer
+DesktopTemplate1.UI.WebAuto
+
+
+
 Set the desktop app AppTemplate.Frontend.PhotinoX
 to reference the razor class library AppTemplate.App
 

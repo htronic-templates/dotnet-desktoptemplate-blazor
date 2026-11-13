@@ -1,0 +1,1848 @@
+@page "/components/sidebar"
+@using BlazorBlueprint.Primitives.Services
+@using BlazorBlueprint.Icons
+
+<PageTitle>Sidebar Component - Blazor Blueprint</PageTitle>
+
+<div class="space-y-8 max-w-4xl">
+    <div>
+        <div class="space-y-3">
+        <h1 class="text-4xl font-bold tracking-tight">Sidebar Component</h1>
+        <p class="text-xl text-muted-foreground">
+            A composable, themeable and customizable sidebar component.
+        </p>
+        </div>
+    </div>
+
+    <div class="space-y-6">
+    </div>
+
+    <!-- Features Section -->
+    <div class="space-y-4">
+        <h2 class="text-2xl font-semibold border-b pb-2">Features</h2>
+        <ul class="list-disc list-inside space-y-2 text-muted-foreground">
+            <li>Responsive design - Sheet overlay on mobile, persistent sidebar on desktop</li>
+            <li>Collapsible with icon-only mode or floating pill navigation</li>
+            <li>Animated selection indicators with reduced-motion support</li>
+            <li>Three variants: Sidebar (default), Floating, and Inset</li>
+            <li>State persistence via cookies</li>
+            <li>Keyboard shortcuts (Ctrl/Cmd + B to toggle, opt-out via EnableToggleShortcut)</li>
+            <li>Automatic tooltips in collapsed state</li>
+            <li>Flexible composition with menu groups, submenus, and actions</li>
+            <li>Full shadcn/ui compatibility</li>
+        </ul>
+    </div>
+
+    <!-- Installation Section -->
+    <div class="space-y-4">
+        <h2 class="text-2xl font-semibold border-b pb-2">Installation</h2>
+        <div class="bg-muted p-4 rounded-lg">
+            <p class="text-sm text-muted-foreground mb-2">The sidebar component requires the Sheet primitive for mobile functionality.</p>
+            <p class="text-sm text-muted-foreground">Add the SidebarProvider to your MainLayout.razor to enable sidebar functionality throughout your app.</p>
+        </div>
+    </div>
+
+    <!-- Collapse Mode Toggle -->
+    <div class="space-y-4">
+        <h2 class="text-2xl font-semibold border-b pb-2">Menu Collapse Mode</h2>
+        <div class="flex items-center gap-4 p-4 bg-muted/50 rounded-lg">
+            <span class="text-sm font-medium">Collapse Mode:</span>
+            <div class="flex items-center gap-2">
+                <button
+                    @onclick="() => isBasicCollapsible = true"
+                    class="@(isBasicCollapsible ? "bg-primary text-primary-foreground" : "bg-background text-foreground") px-3 py-1.5 rounded-md text-sm font-medium transition-colors hover:opacity-90">
+                    Shrink (Icon-only)
+                </button>
+                <button
+                    @onclick="() => isBasicCollapsible = false"
+                    class="@(!isBasicCollapsible ? "bg-primary text-primary-foreground" : "bg-background text-foreground") px-3 py-1.5 rounded-md text-sm font-medium transition-colors hover:opacity-90">
+                    Hide Completely
+                </button>
+            </div>
+            <span class="text-xs text-muted-foreground ml-auto">Click the trigger button to see the difference</span>
+        </div>
+    </div>
+
+    <!-- Basic Example -->
+    <div class="space-y-4">
+        <h2 class="text-2xl font-semibold border-b pb-2">Basic Sidebar</h2>
+        <p class="text-muted-foreground">A simple sidebar with menu items.</p>
+
+        <!-- Collapse Mode Toggle -->
+
+
+        <div class="border rounded-lg p-6 bg-background">
+            <div class="h-[600px] w-full border rounded-lg overflow-hidden bg-background">
+                <BbSidebarProvider CookieKey="sidebar:demo-basic" HeightClass="h-full">
+                    <div class="flex h-full w-full">
+                        <BbSidebar Collapsible="@isBasicCollapsible">
+                            <BbSidebarHeader>
+                                <BbSidebarHeaderContent>
+                                    <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                                        <LucideIcon Name="command" Size="16" />
+                                    </div>
+                                    <BbSidebarHeaderInfo>
+                                        <span class="truncate font-semibold">Acme Inc</span>
+                                        <span class="truncate text-xs text-muted-foreground">Enterprise</span>
+                                    </BbSidebarHeaderInfo>
+                                </BbSidebarHeaderContent>
+                            </BbSidebarHeader>
+
+                            <BbSidebarContent>
+                                <BbSidebarMenu>
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Tooltip="Home">
+                                            <LucideIcon Name="house" Size="16" />
+                                            <span>Home</span>
+                                        </BbSidebarMenuButton>
+                                    </BbSidebarMenuItem>
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Tooltip="Inbox" IsActive="true">
+                                            <LucideIcon Name="inbox" Size="16" />
+                                            <span>Inbox</span>
+                                        </BbSidebarMenuButton>
+                                    </BbSidebarMenuItem>
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Tooltip="Calendar">
+                                            <LucideIcon Name="calendar" Size="16" />
+                                            <span>Calendar</span>
+                                        </BbSidebarMenuButton>
+                                    </BbSidebarMenuItem>
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Tooltip="Search">
+                                            <LucideIcon Name="search" Size="16" />
+                                            <span>Search</span>
+                                        </BbSidebarMenuButton>
+                                    </BbSidebarMenuItem>
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Tooltip="Settings">
+                                            <LucideIcon Name="settings" Size="16" />
+                                            <span>Settings</span>
+                                        </BbSidebarMenuButton>
+                                    </BbSidebarMenuItem>
+                                </BbSidebarMenu>
+                            </BbSidebarContent>
+
+                            <BbSidebarFooter>
+                                <BbSidebarMenu>
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Tooltip="User Profile">
+                                            <LucideIcon Name="user" Size="16" />
+                                            <span>John Doe</span>
+                                        </BbSidebarMenuButton>
+                                    </BbSidebarMenuItem>
+                                </BbSidebarMenu>
+                            </BbSidebarFooter>
+                        </BbSidebar>
+
+                        <BbSidebarInset>
+                            <header class="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+                                <BbSidebarTrigger />
+                                <h1 class="text-lg font-semibold">Dashboard</h1>
+                            </header>
+                            <div class="flex flex-1 flex-col gap-4 p-4">
+                                <div class="grid auto-rows-min gap-4 md:grid-cols-3">
+                                    <div class="aspect-video rounded-xl bg-muted/50"></div>
+                                    <div class="aspect-video rounded-xl bg-muted/50"></div>
+                                    <div class="aspect-video rounded-xl bg-muted/50"></div>
+                                </div>
+                                <div class="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min"></div>
+                            </div>
+                        </BbSidebarInset>
+                    </div>
+                </BbSidebarProvider>
+            </div>
+        </div>
+
+        <CodeBlock Source="Components/Sidebar/basic.txt" />
+    </div>
+
+    <!-- With Navigation Example -->
+    <div class="space-y-4">
+        <h2 class="text-2xl font-semibold border-b pb-2">With Navigation</h2>
+        <p class="text-muted-foreground">Menu items that navigate to different pages using Href property.</p>
+
+        <div class="border rounded-lg p-6 bg-background">
+            <div class="h-[600px] w-full border rounded-lg overflow-hidden bg-background">
+                <BbSidebarProvider CookieKey="sidebar:demo-navigation" HeightClass="h-full">
+                    <div class="flex h-full w-full">
+                        <BbSidebar Collapsible="@isBasicCollapsible">
+                            <BbSidebarHeader>
+                                <BbSidebarHeaderContent>
+                                    <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                                        <LucideIcon Name="compass" Size="16" />
+                                    </div>
+                                    <BbSidebarHeaderInfo>
+                                        <span class="truncate font-semibold">BlazorBlueprint Demo</span>
+                                        <span class="truncate text-xs text-muted-foreground">Components</span>
+                                    </BbSidebarHeaderInfo>
+                                </BbSidebarHeaderContent>
+                            </BbSidebarHeader>
+
+                            <BbSidebarContent>
+                                <BbSidebarMenu>
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Href="/" Match="NavLinkMatch.All" Tooltip="Home">
+                                            <LucideIcon Name="house" Size="16" />
+                                            <span>Home</span>
+                                        </BbSidebarMenuButton>
+                                    </BbSidebarMenuItem>
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Href="/components/sidebar" Match="NavLinkMatch.All" Tooltip="Sidebar">
+                                            <LucideIcon Name="panel-left" Size="16" />
+                                            <span>Sidebar</span>
+                                        </BbSidebarMenuButton>
+                                    </BbSidebarMenuItem>
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Href="/primitives" Match="NavLinkMatch.Prefix" Tooltip="Primitives">
+                                            <LucideIcon Name="box" Size="16" />
+                                            <span>Primitives</span>
+                                        </BbSidebarMenuButton>
+                                    </BbSidebarMenuItem>
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Href="/components" Match="NavLinkMatch.Prefix" Tooltip="Components">
+                                            <LucideIcon Name="layers" Size="16" />
+                                            <span>Components</span>
+                                        </BbSidebarMenuButton>
+                                    </BbSidebarMenuItem>
+                                </BbSidebarMenu>
+                            </BbSidebarContent>
+
+                            <BbSidebarFooter>
+                                <BbSidebarMenu>
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Tooltip="GitHub">
+                                            <LucideIcon Name="github" Size="16" />
+                                            <span>View on GitHub</span>
+                                        </BbSidebarMenuButton>
+                                    </BbSidebarMenuItem>
+                                </BbSidebarMenu>
+                            </BbSidebarFooter>
+                        </BbSidebar>
+
+                        <BbSidebarInset>
+                            <header class="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+                                <BbSidebarTrigger />
+                                <h1 class="text-lg font-semibold">Navigation Demo</h1>
+                            </header>
+                            <div class="flex flex-1 flex-col gap-4 p-4">
+                                <div class="rounded-xl bg-muted/50 p-4 space-y-3">
+                                    <p class="text-sm text-muted-foreground">
+                                        This demo shows menu buttons that navigate using the <code class="bg-muted px-1.5 py-0.5 rounded">Href</code> property.
+                                    </p>
+                                    <div class="text-sm">
+                                        <p class="font-semibold mb-2">Key Features:</p>
+                                        <ul class="list-disc list-inside space-y-1 text-muted-foreground ml-2">
+                                            <li>Automatic NavLink rendering when Href is provided</li>
+                                            <li>Active state detection based on current route</li>
+                                            <li>Match parameter controls how URLs are matched (All or Prefix)</li>
+                                            <li>No need to set AsChild - it's automatic!</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </BbSidebarInset>
+                    </div>
+                </BbSidebarProvider>
+            </div>
+        </div>
+
+        <CodeBlock Source="Components/Sidebar/with-navigation.txt" />
+    </div>
+
+    <!-- With Groups Example -->
+    <div class="space-y-4">
+        <h2 class="text-2xl font-semibold border-b pb-2">With Menu Groups</h2>
+        <p class="text-muted-foreground">Organize menu items into logical groups.</p>
+
+        <div class="border rounded-lg p-6 bg-background">
+            <div class="h-[600px] w-full border rounded-lg overflow-hidden bg-background">
+                <BbSidebarProvider CookieKey="sidebar:demo-groups" HeightClass="h-full">
+                    <div class="flex h-full w-full">
+                        <BbSidebar Collapsible="@isBasicCollapsible">
+                            <BbSidebarHeader>
+                                <BbSidebarHeaderContent>
+                                    <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                                        <LucideIcon Name="layers" Size="16" />
+                                    </div>
+                                    <BbSidebarHeaderInfo>
+                                        <span class="truncate font-semibold">My Application</span>
+                                        <span class="truncate text-xs text-muted-foreground">v1.0.0</span>
+                                    </BbSidebarHeaderInfo>
+                                </BbSidebarHeaderContent>
+                            </BbSidebarHeader>
+
+                            <BbSidebarContent>
+                                <BbSidebarGroup>
+                                    <BbSidebarGroupLabel>Platform</BbSidebarGroupLabel>
+                                    <BbSidebarGroupContent>
+                                        <BbSidebarMenu>
+                                            <BbSidebarMenuItem>
+                                                <BbSidebarMenuButton Tooltip="Dashboard">
+                                                    <LucideIcon Name="layout-dashboard" Size="16" />
+                                                    <span>Dashboard</span>
+                                                </BbSidebarMenuButton>
+                                            </BbSidebarMenuItem>
+                                            <BbSidebarMenuItem>
+                                                <BbSidebarMenuButton Tooltip="Projects" IsActive="true">
+                                                    <LucideIcon Name="folder" Size="16" />
+                                                    <span>Projects</span>
+                                                </BbSidebarMenuButton>
+                                            </BbSidebarMenuItem>
+                                            <BbSidebarMenuItem>
+                                                <BbSidebarMenuButton Tooltip="Tasks">
+                                                    <LucideIcon Name="square-check" Size="16" />
+                                                    <span>Tasks</span>
+                                                </BbSidebarMenuButton>
+                                            </BbSidebarMenuItem>
+                                        </BbSidebarMenu>
+                                    </BbSidebarGroupContent>
+                                </BbSidebarGroup>
+
+                                <BbSidebarSeparator />
+
+                                <BbSidebarGroup>
+                                    <BbSidebarGroupLabel>Settings</BbSidebarGroupLabel>
+                                    <BbSidebarGroupContent>
+                                        <BbSidebarMenu>
+                                            <BbSidebarMenuItem>
+                                                <BbSidebarMenuButton Tooltip="Profile">
+                                                    <LucideIcon Name="user" Size="16" />
+                                                    <span>Profile</span>
+                                                </BbSidebarMenuButton>
+                                            </BbSidebarMenuItem>
+                                            <BbSidebarMenuItem>
+                                                <BbSidebarMenuButton Tooltip="Preferences">
+                                                    <LucideIcon Name="settings" Size="16" />
+                                                    <span>Preferences</span>
+                                                </BbSidebarMenuButton>
+                                            </BbSidebarMenuItem>
+                                        </BbSidebarMenu>
+                                    </BbSidebarGroupContent>
+                                </BbSidebarGroup>
+                            </BbSidebarContent>
+
+                            <BbSidebarFooter>
+                                <BbSidebarMenu>
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Tooltip="Help">
+                                            <LucideIcon Name="life-buoy" Size="16" />
+                                            <span>Help & Support</span>
+                                        </BbSidebarMenuButton>
+                                    </BbSidebarMenuItem>
+                                </BbSidebarMenu>
+                            </BbSidebarFooter>
+                        </BbSidebar>
+
+                        <BbSidebarInset>
+                            <header class="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+                                <BbSidebarTrigger />
+                                <h1 class="text-lg font-semibold">Projects</h1>
+                            </header>
+                            <div class="flex flex-1 flex-col gap-4 p-4">
+                                <div class="rounded-xl bg-muted/50 p-4">
+                                    <p class="text-sm text-muted-foreground">This example shows menu groups with separators.</p>
+                                </div>
+                            </div>
+                        </BbSidebarInset>
+                    </div>
+                </BbSidebarProvider>
+            </div>
+        </div>
+
+        <CodeBlock Source="Components/Sidebar/with-groups.txt" />
+    </div>
+
+    <!-- With Submenus Example -->
+    <div class="space-y-4">
+        <h2 class="text-2xl font-semibold border-b pb-2">With Submenus</h2>
+        <p class="text-muted-foreground">Nested navigation with submenu items.</p>
+
+        <div class="border rounded-lg p-6 bg-background">
+            <div class="h-[600px] w-full border rounded-lg overflow-hidden bg-background">
+                <BbSidebarProvider CookieKey="sidebar:demo-submenus" HeightClass="h-full">
+                    <div class="flex h-full w-full">
+                        <BbSidebar Collapsible="@isBasicCollapsible">
+                            <BbSidebarHeader>
+                                <BbSidebarHeaderContent>
+                                    <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                                        <LucideIcon Name="building" Size="16" />
+                                    </div>
+                                    <BbSidebarHeaderInfo>
+                                        <span class="truncate font-semibold">Company Portal</span>
+                                    </BbSidebarHeaderInfo>
+                                </BbSidebarHeaderContent>
+                            </BbSidebarHeader>
+
+                            <BbSidebarContent>
+                                <BbSidebarMenu>
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Tooltip="Home">
+                                            <LucideIcon Name="house" Size="16" />
+                                            <span>Home</span>
+                                        </BbSidebarMenuButton>
+                                    </BbSidebarMenuItem>
+
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Tooltip="Team">
+                                            <LucideIcon Name="users" Size="16" />
+                                            <span>Team</span>
+                                        </BbSidebarMenuButton>
+                                        <BbSidebarMenuSub>
+                                            <BbSidebarMenuSubItem>
+                                                <BbSidebarMenuSubButton>
+                                                    <span>Engineering</span>
+                                                </BbSidebarMenuSubButton>
+                                            </BbSidebarMenuSubItem>
+                                            <BbSidebarMenuSubItem>
+                                                <BbSidebarMenuSubButton>
+                                                    <span>Design</span>
+                                                </BbSidebarMenuSubButton>
+                                            </BbSidebarMenuSubItem>
+                                            <BbSidebarMenuSubItem>
+                                                <BbSidebarMenuSubButton>
+                                                    <span>Marketing</span>
+                                                </BbSidebarMenuSubButton>
+                                            </BbSidebarMenuSubItem>
+                                        </BbSidebarMenuSub>
+                                    </BbSidebarMenuItem>
+
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Tooltip="Projects">
+                                            <LucideIcon Name="folder" Size="16" />
+                                            <span>Projects</span>
+                                        </BbSidebarMenuButton>
+                                        <BbSidebarMenuSub>
+                                            <BbSidebarMenuSubItem>
+                                                <BbSidebarMenuSubButton>
+                                                    <span>Project Alpha</span>
+                                                </BbSidebarMenuSubButton>
+                                            </BbSidebarMenuSubItem>
+                                            <BbSidebarMenuSubItem>
+                                                <BbSidebarMenuSubButton>
+                                                    <span>Project Beta</span>
+                                                </BbSidebarMenuSubButton>
+                                            </BbSidebarMenuSubItem>
+                                        </BbSidebarMenuSub>
+                                    </BbSidebarMenuItem>
+                                </BbSidebarMenu>
+                            </BbSidebarContent>
+                        </BbSidebar>
+
+                        <BbSidebarInset>
+                            <header class="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+                                <BbSidebarTrigger />
+                                <h1 class="text-lg font-semibold">Team Portal</h1>
+                            </header>
+                            <div class="flex flex-1 flex-col gap-4 p-4">
+                                <div class="rounded-xl bg-muted/50 p-4">
+                                    <p class="text-sm text-muted-foreground">Click on Team or Projects to see submenu items.</p>
+                                </div>
+                            </div>
+                        </BbSidebarInset>
+                    </div>
+                </BbSidebarProvider>
+            </div>
+        </div>
+
+        <CodeBlock Source="Components/Sidebar/with-submenus.txt" />
+    </div>
+
+    <!-- Floating Variant Example -->
+    <div class="space-y-4">
+        <h2 class="text-2xl font-semibold border-b pb-2">Floating Variant</h2>
+        <p class="text-muted-foreground">Sidebar with floating appearance and rounded corners.</p>
+
+        <div class="border rounded-lg p-6 bg-background">
+            <div class="relative h-[600px] w-full border rounded-lg overflow-hidden bg-background">
+                <BbSidebarProvider Variant="SidebarVariant.Floating" CookieKey="sidebar:demo-floating" HeightClass="h-full">
+                    <div class="flex h-full w-full relative">
+                        <BbSidebar Collapsible="@isBasicCollapsible" Class="!absolute !top-2 !bottom-2 !left-2 !right-2 !z-50">
+                            <BbSidebarHeader>
+                                <BbSidebarHeaderContent>
+                                    <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                                        <LucideIcon Name="zap" Size="16" />
+                                    </div>
+                                    <BbSidebarHeaderInfo>
+                                        <span class="truncate font-semibold">Floating UI</span>
+                                    </BbSidebarHeaderInfo>
+                                </BbSidebarHeaderContent>
+                            </BbSidebarHeader>
+
+                            <BbSidebarContent>
+                                <BbSidebarMenu>
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Tooltip="Dashboard">
+                                            <LucideIcon Name="layout-dashboard" Size="16" />
+                                            <span>Dashboard</span>
+                                        </BbSidebarMenuButton>
+                                    </BbSidebarMenuItem>
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Tooltip="Analytics">
+                                            <LucideIcon Name="line-chart" Size="16" />
+                                            <span>Analytics</span>
+                                        </BbSidebarMenuButton>
+                                    </BbSidebarMenuItem>
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Tooltip="Reports">
+                                            <LucideIcon Name="file-text" Size="16" />
+                                            <span>Reports</span>
+                                        </BbSidebarMenuButton>
+                                    </BbSidebarMenuItem>
+                                </BbSidebarMenu>
+                            </BbSidebarContent>
+                        </BbSidebar>
+
+                        <BbSidebarInset>
+                            <header class="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+                                <BbSidebarTrigger />
+                                <h1 class="text-lg font-semibold">Floating Sidebar</h1>
+                            </header>
+                            <div class="flex flex-1 flex-col gap-4 p-4">
+                                <div class="rounded-xl bg-muted/50 p-4">
+                                    <p class="text-sm text-muted-foreground">The floating variant adds visual separation with rounded corners.</p>
+                                </div>
+                            </div>
+                        </BbSidebarInset>
+                    </div>
+                </BbSidebarProvider>
+            </div>
+        </div>
+
+        <CodeBlock Source="Components/Sidebar/floating.txt" />
+    </div>
+
+    <!-- Inset Variant Example -->
+    <div class="space-y-4">
+        <h2 class="text-2xl font-semibold border-b pb-2">Inset Variant</h2>
+        <p class="text-muted-foreground">Sidebar with inset content area.</p>
+
+        <div class="border rounded-lg p-6 bg-background">
+            <div class="h-[600px] w-full border rounded-lg overflow-hidden bg-sidebar">
+                <BbSidebarProvider Variant="SidebarVariant.Inset" CookieKey="sidebar:demo-inset" HeightClass="h-full">
+                    <div class="flex h-full w-full">
+                        <BbSidebar Collapsible="@isBasicCollapsible">
+                            <BbSidebarHeader>
+                                <BbSidebarHeaderContent>
+                                    <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                                        <LucideIcon Name="box" Size="16" />
+                                    </div>
+                                    <BbSidebarHeaderInfo>
+                                        <span class="truncate font-semibold">Inset Layout</span>
+                                    </BbSidebarHeaderInfo>
+                                </BbSidebarHeaderContent>
+                            </BbSidebarHeader>
+
+                            <BbSidebarContent>
+                                <BbSidebarMenu>
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Tooltip="Overview">
+                                            <LucideIcon Name="eye" Size="16" />
+                                            <span>Overview</span>
+                                        </BbSidebarMenuButton>
+                                    </BbSidebarMenuItem>
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Tooltip="Workspace">
+                                            <LucideIcon Name="briefcase" Size="16" />
+                                            <span>Workspace</span>
+                                        </BbSidebarMenuButton>
+                                    </BbSidebarMenuItem>
+                                </BbSidebarMenu>
+                            </BbSidebarContent>
+                        </BbSidebar>
+
+                        <BbSidebarInset>
+                            <header class="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+                                <BbSidebarTrigger />
+                                <h1 class="text-lg font-semibold">Inset Sidebar</h1>
+                            </header>
+                            <div class="flex flex-1 flex-col gap-4 p-4">
+                                <div class="rounded-xl bg-muted/50 p-4">
+                                    <p class="text-sm text-muted-foreground">The inset variant creates a contained layout with margins.</p>
+                                </div>
+                            </div>
+                        </BbSidebarInset>
+                    </div>
+                </BbSidebarProvider>
+            </div>
+        </div>
+
+        <CodeBlock Source="Components/Sidebar/inset.txt" />
+    </div>
+
+    <!-- Collapsible to Icons Example -->
+    <div class="space-y-4">
+        <h2 class="text-2xl font-semibold border-b pb-2">Collapsible to Icons</h2>
+        <p class="text-muted-foreground">Sidebar that collapses to show only icons with tooltips.</p>
+
+        <div class="border rounded-lg p-6 bg-background">
+            <div class="h-[600px] w-full border rounded-lg overflow-hidden bg-background">
+                <BbSidebarProvider DefaultOpen="false" HeightClass="h-full">
+                    <div class="flex h-full w-full">
+                        <BbSidebar Collapsible="@isBasicCollapsible">
+                            <BbSidebarHeader>
+                                <BbSidebarHeaderContent>
+                                    <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                                        <LucideIcon Name="command" Size="16" />
+                                    </div>
+                                    <BbSidebarHeaderInfo>
+                                        <span class="truncate font-semibold">Icon Mode</span>
+                                        <span class="truncate text-xs text-muted-foreground">Collapsed</span>
+                                    </BbSidebarHeaderInfo>
+                                </BbSidebarHeaderContent>
+                            </BbSidebarHeader>
+
+                            <BbSidebarContent>
+                                <BbSidebarMenu>
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Tooltip="Dashboard">
+                                            <LucideIcon Name="layout-dashboard" Size="16" />
+                                            <span>Dashboard</span>
+                                        </BbSidebarMenuButton>
+                                    </BbSidebarMenuItem>
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Tooltip="Projects" IsActive="true">
+                                            <LucideIcon Name="folder" Size="16" />
+                                            <span>Projects</span>
+                                        </BbSidebarMenuButton>
+                                    </BbSidebarMenuItem>
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Tooltip="Calendar">
+                                            <LucideIcon Name="calendar" Size="16" />
+                                            <span>Calendar</span>
+                                        </BbSidebarMenuButton>
+                                    </BbSidebarMenuItem>
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Tooltip="Messages">
+                                            <LucideIcon Name="mail" Size="16" />
+                                            <span>Messages</span>
+                                        </BbSidebarMenuButton>
+                                    </BbSidebarMenuItem>
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Tooltip="Settings">
+                                            <LucideIcon Name="settings" Size="16" />
+                                            <span>Settings</span>
+                                        </BbSidebarMenuButton>
+                                    </BbSidebarMenuItem>
+                                </BbSidebarMenu>
+                            </BbSidebarContent>
+                        </BbSidebar>
+
+                        <BbSidebarInset>
+                            <header class="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+                                <BbSidebarTrigger />
+                                <h1 class="text-lg font-semibold">Icon-Only Mode</h1>
+                            </header>
+                            <div class="flex flex-1 flex-col gap-4 p-4">
+                                <div class="rounded-xl bg-muted/50 p-4">
+                                    <p class="text-sm text-muted-foreground">Hover over icons to see tooltips. Click the trigger to expand.</p>
+                                </div>
+                            </div>
+                        </BbSidebarInset>
+                    </div>
+                </BbSidebarProvider>
+            </div>
+        </div>
+
+        <CodeBlock Source="Components/Sidebar/collapsible-icons.txt" />
+    </div>
+
+    <section class="space-y-4">
+        <span id="sidebar-pill-inset" class="block scroll-mt-20" aria-hidden="true"></span>
+        <span id="sidebar-pill-nav" class="block scroll-mt-20" aria-hidden="true"></span>
+        <span id="sidebar-pill-nav-item" class="block scroll-mt-20" aria-hidden="true"></span>
+        <h2 class="text-2xl font-semibold border-b pb-2">Floating Pill Navigation</h2>
+        <p class="text-muted-foreground">Use a floating navigation pill when the sidebar collapses. The inset adjusts content spacing, and the active indicator follows the selected page.</p>
+        <div class="relative overflow-hidden rounded-xl border">
+            <BbSidebarProvider CollapsedMode="SidebarCollapsedMode.Pill" Open="pillOpen" OpenChanged="@(value => pillOpen = value)" CookieKey="@((string?)null)" HeightClass="min-h-72" EnableToggleShortcut="false">
+                <BbSidebar Class="min-h-72">
+                    <BbSidebarHeader><strong class="p-2">Workspace</strong><BbSidebarTrigger /></BbSidebarHeader>
+                    <BbSidebarContent>
+                        <BbSidebarMenu>
+                            <BbSidebarMenuItem><BbSidebarMenuButton IsActive="@(pillPage == "Overview")" OnClick="@(() => pillPage = "Overview")"><LucideIcon Name="house" /><span>Overview</span></BbSidebarMenuButton></BbSidebarMenuItem>
+                            <BbSidebarMenuItem><BbSidebarMenuButton IsActive="@(pillPage == "Projects")" OnClick="@(() => pillPage = "Projects")"><LucideIcon Name="folder" /><span>Projects</span></BbSidebarMenuButton></BbSidebarMenuItem>
+                        </BbSidebarMenu>
+                    </BbSidebarContent>
+                </BbSidebar>
+                <BbSidebarPillNav Fixed="false">
+                    <BbSidebarPillNavItem Label="Overview" IsActive="@(pillPage == "Overview")" OnClick="@(() => pillPage = "Overview")"><LucideIcon Name="house" /></BbSidebarPillNavItem>
+                    <BbSidebarPillNavItem Label="Projects" IsActive="@(pillPage == "Projects")" OnClick="@(() => pillPage = "Projects")"><LucideIcon Name="folder" /></BbSidebarPillNavItem>
+                    <BbSidebarPillNavItem Label="Unavailable" Disabled="true"><LucideIcon Name="lock" /></BbSidebarPillNavItem>
+                </BbSidebarPillNav>
+                <div class="min-w-0 flex-1 p-4">
+                    <BbSidebarPillInset>
+                        <h3 class="font-semibold">@pillPage</h3>
+                        <p class="text-sm text-muted-foreground">Collapse the desktop sidebar to show compact navigation. On mobile, the pill opens the sidebar sheet.</p>
+                        <BbSidebarTrigger />
+                    </BbSidebarPillInset>
+                </div>
+            </BbSidebarProvider>
+
+        </div>
+        <CodeBlock Source="Components/Sidebar/pill.txt" />
+
+    </section>
+
+    <section class="space-y-4" id="sidebar-selection-indicator">
+        <h2 class="text-2xl font-semibold border-b pb-2">Animated Selection Indicator</h2>
+        <p class="text-muted-foreground">Animate the active item in a standard sidebar menu. Hover or focus an item to preview it, then select it to keep the indicator there. Reduced-motion preferences are respected.</p>
+        <div class="rounded-lg border bg-background p-6">
+            <BbSidebarProvider CookieKey="@((string?)null)" HeightClass="min-h-0" EnableToggleShortcut="false">
+                <div class="relative w-64 rounded-lg border bg-sidebar p-2">
+                    <BbSidebarSelectionIndicator FollowHover="true" />
+                    <BbSidebarMenu>
+                        @foreach (var itemLabel in new[] { "Overview", "Projects", "Settings" })
+                        {
+                            <BbSidebarMenuItem>
+                                <BbSidebarMenuButton IsActive="@(indicatorPage == itemLabel)" OnClick="@(() => indicatorPage = itemLabel)" Class="relative bg-transparent! hover:bg-transparent! data-[active=true]:bg-transparent!">
+                                    <span>@itemLabel</span>
+                                </BbSidebarMenuButton>
+                            </BbSidebarMenuItem>
+                        }
+                    </BbSidebarMenu>
+                </div>
+            </BbSidebarProvider>
+        </div>
+        <CodeBlock Source="Components/Sidebar/selection-indicator.txt" />
+    </section>
+
+    <!-- Tree View Example -->
+    <div class="space-y-4">
+        <h2 class="text-2xl font-semibold border-b pb-2">Tree View</h2>
+        <p class="text-muted-foreground">Hierarchical file/folder structure with nested items.</p>
+
+        <div class="border rounded-lg p-6 bg-background">
+            <div class="h-[600px] w-full border rounded-lg overflow-hidden bg-background">
+                <BbSidebarProvider HeightClass="h-full">
+                    <div class="flex h-full w-full">
+                        <BbSidebar Collapsible="@isBasicCollapsible">
+                            <BbSidebarHeader>
+                                <BbSidebarHeaderContent>
+                                    <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                                        <LucideIcon Name="folder-tree" Size="16" />
+                                    </div>
+                                    <BbSidebarHeaderInfo>
+                                        <span class="truncate font-semibold">File Explorer</span>
+                                    </BbSidebarHeaderInfo>
+                                </BbSidebarHeaderContent>
+                            </BbSidebarHeader>
+
+                            <BbSidebarContent>
+                                <BbSidebarMenu>
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Tooltip="src">
+                                            <LucideIcon Name="folder" Size="16" />
+                                            <span>src</span>
+                                        </BbSidebarMenuButton>
+                                        <BbSidebarMenuSub>
+                                            <BbSidebarMenuSubItem>
+                                                <BbSidebarMenuSubButton>
+                                                    <LucideIcon Name="folder" Size="16" />
+                                                    <span>components</span>
+                                                </BbSidebarMenuSubButton>
+                                            </BbSidebarMenuSubItem>
+                                            <BbSidebarMenuSubItem>
+                                                <BbSidebarMenuSubButton>
+                                                    <LucideIcon Name="folder" Size="16" />
+                                                    <span>pages</span>
+                                                </BbSidebarMenuSubButton>
+                                            </BbSidebarMenuSubItem>
+                                            <BbSidebarMenuSubItem>
+                                                <BbSidebarMenuSubButton>
+                                                    <LucideIcon Name="file-code" Size="16" />
+                                                    <span>index.tsx</span>
+                                                </BbSidebarMenuSubButton>
+                                            </BbSidebarMenuSubItem>
+                                        </BbSidebarMenuSub>
+                                    </BbSidebarMenuItem>
+
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Tooltip="public">
+                                            <LucideIcon Name="folder" Size="16" />
+                                            <span>public</span>
+                                        </BbSidebarMenuButton>
+                                        <BbSidebarMenuSub>
+                                            <BbSidebarMenuSubItem>
+                                                <BbSidebarMenuSubButton>
+                                                    <LucideIcon Name="image" Size="16" />
+                                                    <span>logo.png</span>
+                                                </BbSidebarMenuSubButton>
+                                            </BbSidebarMenuSubItem>
+                                        </BbSidebarMenuSub>
+                                    </BbSidebarMenuItem>
+
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Tooltip="package.json">
+                                            <LucideIcon Name="file-json" Size="16" />
+                                            <span>package.json</span>
+                                        </BbSidebarMenuButton>
+                                    </BbSidebarMenuItem>
+
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Tooltip="README.md">
+                                            <LucideIcon Name="file-text" Size="16" />
+                                            <span>README.md</span>
+                                        </BbSidebarMenuButton>
+                                    </BbSidebarMenuItem>
+                                </BbSidebarMenu>
+                            </BbSidebarContent>
+                        </BbSidebar>
+
+                        <BbSidebarInset>
+                            <header class="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+                                <BbSidebarTrigger />
+                                <h1 class="text-lg font-semibold">File Explorer</h1>
+                            </header>
+                            <div class="flex flex-1 flex-col gap-4 p-4">
+                                <div class="rounded-xl bg-muted/50 p-4">
+                                    <p class="text-sm text-muted-foreground">Tree view showing hierarchical file structure.</p>
+                                </div>
+                            </div>
+                        </BbSidebarInset>
+                    </div>
+                </BbSidebarProvider>
+            </div>
+        </div>
+
+        <CodeBlock Source="Components/Sidebar/tree-view.txt" />
+    </div>
+
+    <!-- With Sticky Header Example -->
+    <div class="space-y-4">
+        <h2 class="text-2xl font-semibold border-b pb-2">With Sticky Header</h2>
+        <p class="text-muted-foreground">Site header above sidebar with coordinated layout.</p>
+
+        <div class="border rounded-lg p-6 bg-background">
+            <div class="h-[600px] w-full border rounded-lg overflow-hidden bg-background">
+                <BbSidebarProvider HeightClass="h-full">
+                    <div class="flex h-full w-full flex-col">
+                        <!-- Site Header -->
+                        <header class="flex h-14 shrink-0 items-center gap-4 border-b bg-background px-6">
+                            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                                <LucideIcon Name="building" Size="16" />
+                            </div>
+                            <span class="font-semibold">Company Name</span>
+                            <div class="ml-auto flex items-center gap-2">
+                                <button class="flex h-8 w-8 items-center justify-center rounded-md hover:bg-accent">
+                                    <LucideIcon Name="bell" Size="16" />
+                                </button>
+                                <button class="flex h-8 w-8 items-center justify-center rounded-md hover:bg-accent">
+                                    <LucideIcon Name="user" Size="16" />
+                                </button>
+                            </div>
+                        </header>
+
+                        <!-- Sidebar and Content -->
+                        <div class="flex flex-1 overflow-hidden">
+                            <BbSidebar Collapsible="@isBasicCollapsible">
+                                <BbSidebarContent>
+                                    <BbSidebarMenu>
+                                        <BbSidebarMenuItem>
+                                            <BbSidebarMenuButton Tooltip="Overview">
+                                                <LucideIcon Name="layout-dashboard" Size="16" />
+                                                <span>Overview</span>
+                                            </BbSidebarMenuButton>
+                                        </BbSidebarMenuItem>
+                                        <BbSidebarMenuItem>
+                                            <BbSidebarMenuButton Tooltip="Analytics" IsActive="true">
+                                                <LucideIcon Name="chart-column-stacked" Size="16" />
+                                                <span>Analytics</span>
+                                            </BbSidebarMenuButton>
+                                        </BbSidebarMenuItem>
+                                        <BbSidebarMenuItem>
+                                            <BbSidebarMenuButton Tooltip="Reports">
+                                                <LucideIcon Name="file-text" Size="16" />
+                                                <span>Reports</span>
+                                            </BbSidebarMenuButton>
+                                        </BbSidebarMenuItem>
+                                    </BbSidebarMenu>
+                                </BbSidebarContent>
+
+                                <BbSidebarFooter>
+                                    <BbSidebarMenu>
+                                        <BbSidebarMenuItem>
+                                            <BbSidebarMenuButton Tooltip="Help">
+                                                <LucideIcon Name="hand-helping" Size="16" />
+                                                <span>Help</span>
+                                            </BbSidebarMenuButton>
+                                        </BbSidebarMenuItem>
+                                    </BbSidebarMenu>
+                                </BbSidebarFooter>
+                            </BbSidebar>
+
+                            <div class="flex flex-1 flex-col">
+                                <div class="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+                                    <BbSidebarTrigger />
+                                    <h1 class="text-lg font-semibold">Analytics Dashboard</h1>
+                                </div>
+                                <div class="flex-1 p-4">
+                                    <div class="rounded-xl bg-muted/50 p-4">
+                                        <p class="text-sm text-muted-foreground">Site header stays fixed above the sidebar.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </BbSidebarProvider>
+            </div>
+        </div>
+
+        <CodeBlock Source="Components/Sidebar/sticky-header.txt" />
+    </div>
+
+    <!-- With Header Dropdown Example -->
+    <div class="space-y-4">
+        <h2 class="text-2xl font-semibold border-b pb-2">With Header Dropdown</h2>
+        <p class="text-muted-foreground">Version selector dropdown in sidebar header.</p>
+
+        <div class="border rounded-lg p-6 bg-background">
+            <div class="h-[600px] w-full border rounded-lg overflow-hidden bg-background">
+                <BbSidebarProvider HeightClass="h-full">
+                    <div class="flex h-full w-full">
+                        <BbSidebar Collapsible="@isBasicCollapsible">
+                            <BbSidebarHeader>
+                                <ResponsiveHeaderDropdown @bind-SelectedVersion="selectedVersion" />
+                            </BbSidebarHeader>
+
+                            <BbSidebarContent>
+                                <BbSidebarGroup>
+                                    <BbSidebarGroupLabel>Getting Started</BbSidebarGroupLabel>
+                                    <BbSidebarGroupContent>
+                                        <BbSidebarMenu>
+                                            <BbSidebarMenuItem>
+                                                <BbSidebarMenuButton Tooltip="Installation">
+                                                    <LucideIcon Name="download" Size="16" />
+                                                    <span>Installation</span>
+                                                </BbSidebarMenuButton>
+                                            </BbSidebarMenuItem>
+                                            <BbSidebarMenuItem>
+                                                <BbSidebarMenuButton Tooltip="Quick Start" IsActive="true">
+                                                    <LucideIcon Name="zap" Size="16" />
+                                                    <span>Quick Start</span>
+                                                </BbSidebarMenuButton>
+                                            </BbSidebarMenuItem>
+                                        </BbSidebarMenu>
+                                    </BbSidebarGroupContent>
+                                </BbSidebarGroup>
+
+                                <BbSidebarSeparator />
+
+                                <BbSidebarGroup>
+                                    <BbSidebarGroupLabel>Components</BbSidebarGroupLabel>
+                                    <BbSidebarGroupContent>
+                                        <BbSidebarMenu>
+                                            <BbSidebarMenuItem>
+                                                <BbSidebarMenuButton Tooltip="Button">
+                                                    <LucideIcon Name="mouse-pointer-click" Size="16" />
+                                                    <span>Button</span>
+                                                </BbSidebarMenuButton>
+                                            </BbSidebarMenuItem>
+                                            <BbSidebarMenuItem>
+                                                <BbSidebarMenuButton Tooltip="Card">
+                                                    <LucideIcon Name="square" Size="16" />
+                                                    <span>Card</span>
+                                                </BbSidebarMenuButton>
+                                            </BbSidebarMenuItem>
+                                        </BbSidebarMenu>
+                                    </BbSidebarGroupContent>
+                                </BbSidebarGroup>
+                            </BbSidebarContent>
+                        </BbSidebar>
+
+                        <BbSidebarInset>
+                            <header class="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+                                <BbSidebarTrigger />
+                                <div class="flex items-center gap-2">
+                                    <LucideIcon Name="book-open" Size="16" />
+                                    <span class="text-muted-foreground">&gt;</span>
+                                    <span>Quick Start</span>
+                                </div>
+                            </header>
+                            <div class="flex flex-1 flex-col gap-4 p-4">
+                                <div class="rounded-xl bg-muted/50 p-4">
+                                    <p class="text-sm text-muted-foreground">Sidebar header includes a version dropdown selector.</p>
+                                </div>
+                            </div>
+                        </BbSidebarInset>
+                    </div>
+                </BbSidebarProvider>
+            </div>
+        </div>
+
+        <CodeBlock Source="Components/Sidebar/header-dropdown.txt" />
+    </div>
+
+    <!-- Collapsible Submenus Example -->
+    <div class="space-y-4">
+        <h2 class="text-2xl font-semibold border-b pb-2">Collapsible Submenus</h2>
+        <p class="text-muted-foreground">Expandable menu groups with chevron indicators.</p>
+
+        <div class="border rounded-lg p-6 bg-background">
+            <div class="h-[600px] w-full border rounded-lg overflow-hidden bg-background">
+                <BbSidebarProvider HeightClass="h-full">
+                    <div class="flex h-full w-full">
+                        <BbSidebar Collapsible="@isBasicCollapsible">
+                            <BbSidebarHeader>
+                                <BbSidebarHeaderContent>
+                                    <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                                        <LucideIcon Name="layout-grid" Size="16" />
+                                    </div>
+                                    <BbSidebarHeaderInfo>
+                                        <span class="truncate font-semibold">Dashboard</span>
+                                    </BbSidebarHeaderInfo>
+                                </BbSidebarHeaderContent>
+                            </BbSidebarHeader>
+
+                            <BbSidebarContent>
+                                <BbSidebarMenu>
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Tooltip="Overview">
+                                            <LucideIcon Name="house" Size="16" />
+                                            <span>Overview</span>
+                                        </BbSidebarMenuButton>
+                                    </BbSidebarMenuItem>
+
+                                    <BbSidebarMenuItem>
+                                        <BbCollapsible>
+                                            <BbSidebarMenuButton Tooltip="Models">
+                                                <LucideIcon Name="box" Size="16" />
+                                                <span>Models</span>
+                                                <BbSidebarMenuChevron>
+                                                    <LucideIcon Name="chevron-right" Size="16" />
+                                                </BbSidebarMenuChevron>
+                                            </BbSidebarMenuButton>
+                                            <BbCollapsibleContent>
+                                                <BbSidebarMenuSub>
+                                                    <BbSidebarMenuSubItem>
+                                                        <BbSidebarMenuSubButton>
+                                                            <span>Genesis</span>
+                                                        </BbSidebarMenuSubButton>
+                                                    </BbSidebarMenuSubItem>
+                                                    <BbSidebarMenuSubItem>
+                                                        <BbSidebarMenuSubButton>
+                                                            <span>Explorer</span>
+                                                        </BbSidebarMenuSubButton>
+                                                    </BbSidebarMenuSubItem>
+                                                    <BbSidebarMenuSubItem>
+                                                        <BbSidebarMenuSubButton>
+                                                            <span>Quantum</span>
+                                                        </BbSidebarMenuSubButton>
+                                                    </BbSidebarMenuSubItem>
+                                                </BbSidebarMenuSub>
+                                            </BbCollapsibleContent>
+                                        </BbCollapsible>
+                                    </BbSidebarMenuItem>
+
+                                    <BbSidebarMenuItem>
+                                        <BbCollapsible>
+                                            <BbSidebarMenuButton Tooltip="Documentation">
+                                                <LucideIcon Name="book-open" Size="16" />
+                                                <span>Documentation</span>
+                                                <BbSidebarMenuChevron>
+                                                    <LucideIcon Name="chevron-right" Size="16" />
+                                                </BbSidebarMenuChevron>
+                                            </BbSidebarMenuButton>
+                                            <BbCollapsibleContent>
+                                                <BbSidebarMenuSub>
+                                                    <BbSidebarMenuSubItem>
+                                                        <BbSidebarMenuSubButton>
+                                                            <span>Introduction</span>
+                                                        </BbSidebarMenuSubButton>
+                                                    </BbSidebarMenuSubItem>
+                                                    <BbSidebarMenuSubItem>
+                                                        <BbSidebarMenuSubButton>
+                                                            <span>Get Started</span>
+                                                        </BbSidebarMenuSubButton>
+                                                    </BbSidebarMenuSubItem>
+                                                    <BbSidebarMenuSubItem>
+                                                        <BbSidebarMenuSubButton>
+                                                            <span>Tutorials</span>
+                                                        </BbSidebarMenuSubButton>
+                                                    </BbSidebarMenuSubItem>
+                                                </BbSidebarMenuSub>
+                                            </BbCollapsibleContent>
+                                        </BbCollapsible>
+                                    </BbSidebarMenuItem>
+
+                                    <BbSidebarMenuItem>
+                                        <BbCollapsible>
+                                            <BbSidebarMenuButton Tooltip="Settings">
+                                                <LucideIcon Name="settings" Size="16" />
+                                                <span>Settings</span>
+                                                <BbSidebarMenuChevron>
+                                                    <LucideIcon Name="chevron-right" Size="16" />
+                                                </BbSidebarMenuChevron>
+                                            </BbSidebarMenuButton>
+                                            <BbCollapsibleContent>
+                                                <BbSidebarMenuSub>
+                                                    <BbSidebarMenuSubItem>
+                                                        <BbSidebarMenuSubButton>
+                                                            <span>General</span>
+                                                        </BbSidebarMenuSubButton>
+                                                    </BbSidebarMenuSubItem>
+                                                    <BbSidebarMenuSubItem>
+                                                        <BbSidebarMenuSubButton>
+                                                            <span>Team</span>
+                                                        </BbSidebarMenuSubButton>
+                                                    </BbSidebarMenuSubItem>
+                                                </BbSidebarMenuSub>
+                                            </BbCollapsibleContent>
+                                        </BbCollapsible>
+                                    </BbSidebarMenuItem>
+                                </BbSidebarMenu>
+                            </BbSidebarContent>
+
+                            <BbSidebarFooter>
+                                <BbSidebarMenu>
+                                    <BbSidebarMenuItem>
+                                        <BbDropdownMenu>
+                                            <BbDropdownMenuTrigger AsChild="false" ActiveClass="bg-sidebar-accent" Class="flex w-full items-center gap-2 px-2 py-1.5 group-data-[collapsible=icon]:px-2 group-data-[collapsible=icon]:py-1.5 group-data-[collapsible=icon]:justify-center cursor-pointer hover:bg-sidebar-accent rounded-md transition-colors text-sm outline-none ring-sidebar-ring focus-visible:ring-2">
+                                                <BbAvatar Class="h-8 w-8 rounded-lg">
+                                                    <BbAvatarImage Source="_content/DesktopTemplate1.App/images/mathew-icon.png" alt="Mathew" />
+                                                    <BbAvatarFallback Class="rounded-lg">M</BbAvatarFallback>
+                                                </BbAvatar>
+                                                <div class="grid flex-1 text-left text-sm leading-tight group-data-[collapsible=icon]:hidden">
+                                                    <span class="truncate font-semibold">Mathew</span>
+                                                    <span class="truncate text-xs text-muted-foreground">mathew@example.com</span>
+                                                </div>
+                                                <LucideIcon Name="chevrons-up-down" Size="16" Class="ml-auto group-data-[collapsible=icon]:hidden" />
+                                            </BbDropdownMenuTrigger>
+                                            <BbDropdownMenuContent Align="@PopoverAlign.End" Class="w-[240px]">
+                                                <BbDropdownMenuLabel Class="font-normal">
+                                                    <div class="flex items-center gap-2 px-1 py-1.5">
+                                                        <BbAvatar Class="h-8 w-8 rounded-lg">
+                                                            <BbAvatarImage Source="_content/DesktopTemplate1.App/images/mathew-icon.png" alt="Mathew" />
+                                                            <BbAvatarFallback Class="rounded-lg">M</BbAvatarFallback>
+                                                        </BbAvatar>
+                                                        <div class="grid flex-1 text-left text-sm leading-tight">
+                                                            <span class="truncate font-semibold">Mathew</span>
+                                                            <span class="truncate text-xs text-muted-foreground">mathew@example.com</span>
+                                                        </div>
+                                                    </div>
+                                                </BbDropdownMenuLabel>
+                                                <BbDropdownMenuSeparator />
+                                                <BbDropdownMenuItem>
+                                                    <LucideIcon Name="sparkles" Size="16" />
+                                                    <span class="ml-2">Upgrade to Pro</span>
+                                                </BbDropdownMenuItem>
+                                                <BbDropdownMenuSeparator />
+                                                <BbDropdownMenuItem>
+                                                    <LucideIcon Name="user" Size="16" />
+                                                    <span class="ml-2">Account</span>
+                                                </BbDropdownMenuItem>
+                                                <BbDropdownMenuItem>
+                                                    <LucideIcon Name="credit-card" Size="16" />
+                                                    <span class="ml-2">Billing</span>
+                                                </BbDropdownMenuItem>
+                                                <BbDropdownMenuItem>
+                                                    <LucideIcon Name="bell" Size="16" />
+                                                    <span class="ml-2">Notifications</span>
+                                                </BbDropdownMenuItem>
+                                                <BbDropdownMenuSeparator />
+                                                <BbDropdownMenuItem>
+                                                    <LucideIcon Name="log-out" Size="16" />
+                                                    <span class="ml-2">Log out</span>
+                                                </BbDropdownMenuItem>
+                                            </BbDropdownMenuContent>
+                                        </BbDropdownMenu>
+                                    </BbSidebarMenuItem>
+                                </BbSidebarMenu>
+                            </BbSidebarFooter>
+                        </BbSidebar>
+
+                        <BbSidebarInset>
+                            <header class="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+                                <BbSidebarTrigger />
+                                <h1 class="text-lg font-semibold">Overview</h1>
+                            </header>
+                            <div class="flex flex-1 flex-col gap-4 p-4">
+                                <div class="rounded-xl bg-muted/50 p-4">
+                                    <p class="text-sm text-muted-foreground">Menu items with chevron icons indicate collapsible submenus.</p>
+                                </div>
+                            </div>
+                        </BbSidebarInset>
+                    </div>
+                </BbSidebarProvider>
+            </div>
+        </div>
+
+        <CodeBlock Source="Components/Sidebar/collapsible-submenus.txt" />
+    </div>
+
+    <!-- 3-Level Nested Menu Example -->
+    <div class="space-y-4">
+        <h2 class="text-2xl font-semibold border-b pb-2">3-Level Nested Menu</h2>
+        <p class="text-muted-foreground">Deep nesting with collapsible submenus at level 2 and a right-side dropdown at level 3.</p>
+
+        <div class="border rounded-lg p-6 bg-background">
+            <div class="h-[600px] w-full border rounded-lg overflow-hidden bg-background">
+                <BbSidebarProvider HeightClass="h-full">
+                    <div class="flex h-full w-full">
+                        <BbSidebar Collapsible="@isBasicCollapsible">
+                            <BbSidebarHeader>
+                                <BbSidebarHeaderContent>
+                                    <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                                        <LucideIcon Name="folder-tree" Size="16" />
+                                    </div>
+                                    <BbSidebarHeaderInfo>
+                                        <span class="truncate font-semibold">Project Manager</span>
+                                    </BbSidebarHeaderInfo>
+                                </BbSidebarHeaderContent>
+                            </BbSidebarHeader>
+
+                            <BbSidebarContent>
+                                <BbSidebarMenu>
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Tooltip="Dashboard">
+                                            <LucideIcon Name="layout-dashboard" Size="16" />
+                                            <span>Dashboard</span>
+                                        </BbSidebarMenuButton>
+                                    </BbSidebarMenuItem>
+
+                                    <BbSidebarMenuItem>
+                                        <BbCollapsible>
+                                            <BbSidebarMenuButton Tooltip="Projects">
+                                                <LucideIcon Name="folder" Size="16" />
+                                                <span>Projects</span>
+                                                <BbSidebarMenuChevron>
+                                                    <LucideIcon Name="chevron-right" Size="16" />
+                                                </BbSidebarMenuChevron>
+                                            </BbSidebarMenuButton>
+
+                                            <BbCollapsibleContent>
+                                                <BbSidebarMenuSub>
+                                                    <BbSidebarMenuSubItem>
+                                                        <BbSidebarMenuSubButton>
+                                                            <span>Active Projects</span>
+                                                        </BbSidebarMenuSubButton>
+                                                    </BbSidebarMenuSubItem>
+
+                                                    <BbSidebarMenuSubItem>
+                                                        <BbSidebarMenuSubButton>
+                                                            <span>Archived Projects</span>
+                                                        </BbSidebarMenuSubButton>
+                                                    </BbSidebarMenuSubItem>
+
+                                                    <BbSidebarMenuSubItem class="-mr-6">
+                                                        <BbDropdownMenu>
+                                                            <BbDropdownMenuTrigger AsChild="false" ActiveClass="bg-sidebar-accent" Class="flex w-full h-7 min-w-0 items-center gap-2 overflow-hidden rounded-md px-2 text-sm text-sidebar-foreground outline-none ring-sidebar-ring transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 cursor-pointer">
+                                                                <span class="truncate">Project Settings</span>
+                                                                <LucideIcon Name="chevron-right" Size="16" Class="ml-auto shrink-0" />
+                                                            </BbDropdownMenuTrigger>
+                                                            <BbDropdownMenuContent Side="PopoverSide.Right" Align="PopoverAlign.Start" Class="min-w-[180px]">
+                                                                <BbDropdownMenuItem>General Settings</BbDropdownMenuItem>
+                                                                <BbDropdownMenuItem>Access Control</BbDropdownMenuItem>
+                                                                <BbDropdownMenuItem>Notifications</BbDropdownMenuItem>
+                                                                <BbDropdownMenuItem>Integrations</BbDropdownMenuItem>
+                                                            </BbDropdownMenuContent>
+                                                        </BbDropdownMenu>
+                                                    </BbSidebarMenuSubItem>
+                                                </BbSidebarMenuSub>
+                                            </BbCollapsibleContent>
+                                        </BbCollapsible>
+                                    </BbSidebarMenuItem>
+
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Tooltip="Reports">
+                                            <LucideIcon Name="file-text" Size="16" />
+                                            <span>Reports</span>
+                                        </BbSidebarMenuButton>
+                                    </BbSidebarMenuItem>
+                                </BbSidebarMenu>
+                            </BbSidebarContent>
+                        </BbSidebar>
+
+                        <BbSidebarInset>
+                            <header class="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+                                <BbSidebarTrigger />
+                                <h1 class="text-lg font-semibold">3-Level Nesting Demo</h1>
+                            </header>
+                            <div class="flex flex-1 flex-col gap-4 p-4">
+                                <div class="rounded-xl bg-muted/50 p-4">
+                                    <p class="text-sm text-muted-foreground mb-2">This example demonstrates 3-level menu nesting:</p>
+                                    <ul class="text-sm text-muted-foreground list-disc list-inside space-y-1">
+                                        <li>Level 1: Projects (top-level collapsible)</li>
+                                        <li>Level 2: Active Projects, Archived Projects, Project Settings</li>
+                                        <li>Level 3: Right-side dropdown with General Settings, Access Control, Notifications, Integrations</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </BbSidebarInset>
+                    </div>
+                </BbSidebarProvider>
+            </div>
+        </div>
+
+        <CodeBlock Source="Components/Sidebar/three-level-nested.txt" />
+    </div>
+
+    <!-- Toggle Shortcut Example -->
+    <div class="space-y-4">
+        <h2 class="text-2xl font-semibold border-b pb-2">Disabling the Keyboard Shortcut</h2>
+        <p class="text-muted-foreground">
+            <BbKbd>Ctrl+B</BbKbd> / <BbKbd>Cmd+B</BbKbd> toggles the sidebar by default. Set
+            <code class="text-sm">EnableToggleShortcut="false"</code> when those keys conflict with the page,
+            such as a rich-text editor where they mean bold. The parameter is reactive, so it can be bound to state.
+        </p>
+
+        <div class="flex items-center gap-4 p-4 bg-muted/50 rounded-lg">
+            <span class="text-sm font-medium">EnableToggleShortcut:</span>
+            <div class="flex items-center gap-2">
+                <button
+                    @onclick="() => shortcutEnabled = true"
+                    class="@(shortcutEnabled ? "bg-primary text-primary-foreground" : "bg-background text-foreground") px-3 py-1.5 rounded-md text-sm font-medium transition-colors hover:opacity-90">
+                    true
+                </button>
+                <button
+                    @onclick="() => shortcutEnabled = false"
+                    class="@(!shortcutEnabled ? "bg-primary text-primary-foreground" : "bg-background text-foreground") px-3 py-1.5 rounded-md text-sm font-medium transition-colors hover:opacity-90">
+                    false
+                </button>
+            </div>
+            <span class="text-xs text-muted-foreground ml-auto">Toggle, then press Ctrl/Cmd + B</span>
+        </div>
+
+        <div class="border rounded-lg p-6 bg-background">
+            <div class="h-[600px] w-full border rounded-lg overflow-hidden bg-background">
+                <BbSidebarProvider EnableToggleShortcut="@shortcutEnabled" HeightClass="h-full">
+                    <div class="flex h-full w-full">
+                        <BbSidebar Collapsible="@isBasicCollapsible">
+                            <BbSidebarHeader>
+                                <BbSidebarHeaderContent>
+                                    <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                                        <LucideIcon Name="keyboard" Size="16" />
+                                    </div>
+                                    <BbSidebarHeaderInfo>
+                                        <span class="truncate font-semibold">Editor</span>
+                                        <span class="truncate text-xs text-muted-foreground">
+                                            Shortcut @(shortcutEnabled ? "enabled" : "disabled")
+                                        </span>
+                                    </BbSidebarHeaderInfo>
+                                </BbSidebarHeaderContent>
+                            </BbSidebarHeader>
+
+                            <BbSidebarContent>
+                                <BbSidebarMenu>
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Tooltip="Documents" IsActive="true">
+                                            <LucideIcon Name="file" Size="16" />
+                                            <span>Documents</span>
+                                        </BbSidebarMenuButton>
+                                    </BbSidebarMenuItem>
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Tooltip="Drafts">
+                                            <LucideIcon Name="pencil" Size="16" />
+                                            <span>Drafts</span>
+                                        </BbSidebarMenuButton>
+                                    </BbSidebarMenuItem>
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Tooltip="Archive">
+                                            <LucideIcon Name="archive" Size="16" />
+                                            <span>Archive</span>
+                                        </BbSidebarMenuButton>
+                                    </BbSidebarMenuItem>
+                                </BbSidebarMenu>
+                            </BbSidebarContent>
+                        </BbSidebar>
+
+                        <BbSidebarInset>
+                            <header class="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+                                <BbSidebarTrigger />
+                                <h1 class="text-lg font-semibold">Shortcut Opt-Out</h1>
+                            </header>
+                            <div class="flex flex-1 flex-col gap-4 p-4">
+                                <div class="rounded-xl bg-muted/50 p-4">
+                                    <p class="text-sm text-muted-foreground mb-2">
+                                        With the shortcut <strong>enabled</strong>, Ctrl/Cmd + B toggles this sidebar.
+                                        With it <strong>disabled</strong>, this sidebar ignores the key entirely.
+                                    </p>
+                                    <p class="text-sm text-muted-foreground">
+                                        Each provider only claims the shortcut for itself. In an app with a single
+                                        provider, disabling it also lets Ctrl/Cmd + B through to the page, so a
+                                        rich-text editor receives it as bold. This page hosts many sidebar examples
+                                        that each still claim the key, so that fall-through is not visible here.
+                                    </p>
+                                </div>
+                            </div>
+                        </BbSidebarInset>
+                    </div>
+                </BbSidebarProvider>
+            </div>
+        </div>
+
+        <CodeBlock Source="Components/Sidebar/toggle-shortcut.txt" />
+    </div>
+
+
+
+
+
+    <!-- API Reference -->
+    <div class="space-y-4">
+        <h2 class="text-2xl font-semibold border-b pb-2">Controlling the Sidebar</h2>
+        <p class="text-sm text-muted-foreground">
+            Open state lives on <code class="text-xs bg-muted px-1 py-0.5 rounded">BbSidebarProvider</code>, not on
+            <code class="text-xs bg-muted px-1 py-0.5 rounded">BbSidebar</code>. Leave it alone and the provider owns it —
+            <code class="text-xs bg-muted px-1 py-0.5 rounded">DefaultOpen</code> seeds it,
+            <code class="text-xs bg-muted px-1 py-0.5 rounded">CookieKey</code> persists it, and
+            <code class="text-xs bg-muted px-1 py-0.5 rounded">BbSidebarTrigger</code> toggles it. Bind
+            <code class="text-xs bg-muted px-1 py-0.5 rounded">@@bind-Open</code> and your value becomes the source of truth
+            instead, the same controlled/uncontrolled pattern as Dialog, Sheet, Popover and the rest of the library.
+        </p>
+        <p class="text-sm text-muted-foreground">
+            <strong>Binding <code class="text-xs bg-muted px-1 py-0.5 rounded">Open</code> turns cookie persistence off</strong>
+            — both the read on startup and the write on change. With the state owned outside the component, a cookie would
+            compete with your bound value on reload rather than restore it, so persist it yourself if you need it to survive.
+        </p>
+        <p class="text-sm text-muted-foreground">
+            <code class="text-xs bg-muted px-1 py-0.5 rounded">Open</code> is the <em>desktop</em> state, matching
+            <code class="text-xs bg-muted px-1 py-0.5 rounded">DefaultOpen</code>. Below the mobile breakpoint the sidebar is a
+            drawer with its own state — bind <code class="text-xs bg-muted px-1 py-0.5 rounded">@@bind-OpenMobile</code> as well
+            if you need both, and when merely <em>reading</em> from the cascaded
+            <code class="text-xs bg-muted px-1 py-0.5 rounded">SidebarContext</code>, prefer
+            <code class="text-xs bg-muted px-1 py-0.5 rounded">IsOpen</code> over
+            <code class="text-xs bg-muted px-1 py-0.5 rounded">Open</code>: it resolves to whichever applies to the current
+            viewport, so it stays correct on both.
+        </p>
+
+        <div class="flex items-center gap-4 p-4 bg-muted/50 rounded-lg">
+            <span class="text-sm font-medium">@@bind-Open:</span>
+            <div class="flex items-center gap-2">
+                <button type="button"
+                        @onclick="() => _controlledOpen = true"
+                        class="@(_controlledOpen ? "bg-primary text-primary-foreground" : "bg-background text-foreground") px-3 py-1.5 rounded-md text-sm font-medium transition-colors hover:opacity-90">
+                    Open
+                </button>
+                <button type="button"
+                        @onclick="() => _controlledOpen = false"
+                        class="@(!_controlledOpen ? "bg-primary text-primary-foreground" : "bg-background text-foreground") px-3 py-1.5 rounded-md text-sm font-medium transition-colors hover:opacity-90">
+                    Closed
+                </button>
+            </div>
+            <span class="text-xs text-muted-foreground ml-auto">Bound value: <code class="text-xs">@_controlledOpen</code> — the sidebar's own trigger updates it too</span>
+        </div>
+
+        <div class="border rounded-lg overflow-hidden h-[300px]">
+            <BbSidebarProvider @bind-Open="_controlledOpen" HeightClass="h-full" CookieKey="@null">
+                <BbSidebar>
+                    <BbSidebarContent>
+                        <BbSidebarGroup>
+                            <BbSidebarGroupLabel>Controlled</BbSidebarGroupLabel>
+                            <BbSidebarGroupContent>
+                                <BbSidebarMenu>
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Tooltip="Home">
+                                            <LucideIcon Name="house" Size="16" />
+                                            <span>Home</span>
+                                        </BbSidebarMenuButton>
+                                    </BbSidebarMenuItem>
+                                    <BbSidebarMenuItem>
+                                        <BbSidebarMenuButton Tooltip="Settings">
+                                            <LucideIcon Name="settings" Size="16" />
+                                            <span>Settings</span>
+                                        </BbSidebarMenuButton>
+                                    </BbSidebarMenuItem>
+                                </BbSidebarMenu>
+                            </BbSidebarGroupContent>
+                        </BbSidebarGroup>
+                    </BbSidebarContent>
+                </BbSidebar>
+                <BbSidebarInset>
+                    <div class="p-4 space-y-2">
+                        <BbSidebarTrigger />
+                        <p class="text-sm text-muted-foreground">
+                            Toggle from either side — the buttons above set the bound value, the trigger raises
+                            <code class="text-xs">OpenChanged</code>, and both stay in sync.
+                        </p>
+                    </div>
+                </BbSidebarInset>
+            </BbSidebarProvider>
+        </div>
+
+        <CodeBlock Source="Components/Sidebar/programmatic-control.txt" />
+    </div>
+
+    <AccessibilityList>
+            <AriaAttributes>
+                <AccessibilityItem>
+                    Responsive design with Sheet overlay on mobile and persistent sidebar on desktop.
+                </AccessibilityItem>
+                <AccessibilityItem>
+                    Collapsible with icon-only mode and automatic tooltips in collapsed state.
+                </AccessibilityItem>
+                <AccessibilityItem>
+                    State persistence via cookies to remember user's sidebar preference.
+                </AccessibilityItem>
+                        <AccessibilityItem>Pill navigation uses labelled links or buttons and marks the active page with aria-current. Selection indicators are decorative and respect reduced motion.</AccessibilityItem>
+        </AriaAttributes>
+            <KeyboardNavigation>
+                <KeyboardShortcutItem Description="Toggle sidebar open/closed (disable with EnableToggleShortcut=&quot;false&quot;)">
+                    <BbKbd>Ctrl+B</BbKbd> / <BbKbd>Cmd+B</BbKbd>
+                </KeyboardShortcutItem>
+            </KeyboardNavigation>
+        </AccessibilityList>
+
+    <div class="space-y-4">
+        <h2 class="text-2xl font-semibold border-b pb-2">API Reference</h2>
+
+        <div class="space-y-6">
+            <div>
+                <h3 class="text-lg font-semibold mb-2">SidebarProvider</h3>
+                <p class="text-sm text-muted-foreground mb-3">The root provider component that manages sidebar state.</p>
+                <div class="rounded-lg border overflow-hidden">
+                    <table class="w-full">
+                        <thead class="border-b bg-muted/50">
+                            <tr>
+                                <th class="p-3 text-left font-medium">Prop</th>
+                                <th class="p-3 text-left font-medium">Type</th>
+                                <th class="p-3 text-left font-medium">Default</th>
+                                <th class="p-3 text-left font-medium">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b">
+                                <td class="p-3"><code class="text-sm">DefaultOpen</code></td>
+                                <td class="p-3 text-sm">bool</td>
+                                <td class="p-3 text-sm">true</td>
+                                <td class="p-3 text-sm">Initial desktop open state, for uncontrolled usage. Ignored when <code class="text-sm">Open</code> is bound.</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3"><code class="text-sm">Open</code></td>
+                                <td class="p-3 text-sm">bool?</td>
+                                <td class="p-3 text-sm">null</td>
+                                <td class="p-3 text-sm">Desktop open state, for controlled usage with <code class="text-sm">@@bind-Open</code>. Leave null and the provider owns the state. Binding it turns cookie persistence off — see below.</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3"><code class="text-sm">OpenChanged</code></td>
+                                <td class="p-3 text-sm">EventCallback&lt;bool&gt;</td>
+                                <td class="p-3 text-sm">—</td>
+                                <td class="p-3 text-sm">Raised when the desktop state changes, from the trigger, the rail, the keyboard shortcut or <code class="text-sm">SetOpen</code></td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3"><code class="text-sm">OpenMobile</code></td>
+                                <td class="p-3 text-sm">bool?</td>
+                                <td class="p-3 text-sm">null</td>
+                                <td class="p-3 text-sm">Mobile drawer state, for controlled usage with <code class="text-sm">@@bind-OpenMobile</code>. Independent of <code class="text-sm">Open</code>.</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3"><code class="text-sm">OpenMobileChanged</code></td>
+                                <td class="p-3 text-sm">EventCallback&lt;bool&gt;</td>
+                                <td class="p-3 text-sm">—</td>
+                                <td class="p-3 text-sm">Raised when the mobile drawer state changes</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3"><code class="text-sm">Variant</code></td>
+                                <td class="p-3 text-sm">SidebarVariant</td>
+                                <td class="p-3 text-sm">Sidebar</td>
+                                <td class="p-3 text-sm">Visual variant (Sidebar, Floating, Inset)</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3"><code class="text-sm">Side</code></td>
+                                <td class="p-3 text-sm">SidebarSide</td>
+                                <td class="p-3 text-sm">Left</td>
+                                <td class="p-3 text-sm">Side to render (Left, Right)</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3"><code class="text-sm">CookieKey</code></td>
+                                <td class="p-3 text-sm">string</td>
+                                <td class="p-3 text-sm">"sidebar:state"</td>
+                                <td class="p-3 text-sm">Cookie key for persistence. Set null to disable. Ignored while <code class="text-sm">Open</code> is bound.</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3"><code class="text-sm">EnableToggleShortcut</code></td>
+                                <td class="p-3 text-sm">bool</td>
+                                <td class="p-3 text-sm">true</td>
+                                <td class="p-3 text-sm">Whether Ctrl/Cmd + B toggles the sidebar</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3"><code class="text-sm">HeightClass</code></td>
+                                <td class="p-3 text-sm">string</td>
+                                <td class="p-3 text-sm">"min-h-screen"</td>
+                                <td class="p-3 text-sm">CSS class controlling container height</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold mb-2">Sidebar</h3>
+                <p class="text-sm text-muted-foreground mb-3">The sidebar panel itself. Open state lives on the provider, not here — see SidebarContext below.</p>
+                <div class="rounded-lg border overflow-hidden">
+                    <table class="w-full">
+                        <thead class="border-b bg-muted/50">
+                            <tr>
+                                <th class="p-3 text-left font-medium">Prop</th>
+                                <th class="p-3 text-left font-medium">Type</th>
+                                <th class="p-3 text-left font-medium">Default</th>
+                                <th class="p-3 text-left font-medium">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b">
+                                <td class="p-3"><code class="text-sm">Collapsible</code></td>
+                                <td class="p-3 text-sm">bool</td>
+                                <td class="p-3 text-sm">true</td>
+                                <td class="p-3 text-sm">Whether the sidebar can collapse. Set false to pin it open.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3"><code class="text-sm">Class</code></td>
+                                <td class="p-3 text-sm">string?</td>
+                                <td class="p-3 text-sm">null</td>
+                                <td class="p-3 text-sm">Additional CSS classes</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold mb-2">SidebarTrigger</h3>
+                <p class="text-sm text-muted-foreground mb-3">Toggles the sidebar. This is the supported way to open and close it from markup.</p>
+                <div class="rounded-lg border overflow-hidden">
+                    <table class="w-full">
+                        <thead class="border-b bg-muted/50">
+                            <tr>
+                                <th class="p-3 text-left font-medium">Prop</th>
+                                <th class="p-3 text-left font-medium">Type</th>
+                                <th class="p-3 text-left font-medium">Default</th>
+                                <th class="p-3 text-left font-medium">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b">
+                                <td class="p-3"><code class="text-sm">OnClick</code></td>
+                                <td class="p-3 text-sm">EventCallback&lt;MouseEventArgs&gt;</td>
+                                <td class="p-3 text-sm">—</td>
+                                <td class="p-3 text-sm">Invoked in addition to toggling, for observing the toggle</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3"><code class="text-sm">ChildContent</code></td>
+                                <td class="p-3 text-sm">RenderFragment?</td>
+                                <td class="p-3 text-sm">null</td>
+                                <td class="p-3 text-sm">Replaces the default toggle icon</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3"><code class="text-sm">Class</code></td>
+                                <td class="p-3 text-sm">string?</td>
+                                <td class="p-3 text-sm">null</td>
+                                <td class="p-3 text-sm">Additional CSS classes</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold mb-2">SidebarContext</h3>
+                <p class="text-sm text-muted-foreground mb-3">
+                    Cascaded by <code class="text-sm">SidebarProvider</code>. Take it with a
+                    <code class="text-sm">[CascadingParameter]</code> to read or change the open state from your own code.
+                    There is no <code class="text-sm">Open</code>/<code class="text-sm">OpenChanged</code> parameter pair on
+                    <code class="text-sm">Sidebar</code> — state is owned by the provider and reached through this context.
+                </p>
+                <div class="rounded-lg border overflow-hidden">
+                    <table class="w-full">
+                        <thead class="border-b bg-muted/50">
+                            <tr>
+                                <th class="p-3 text-left font-medium">Member</th>
+                                <th class="p-3 text-left font-medium">Type</th>
+                                <th class="p-3 text-left font-medium">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b">
+                                <td class="p-3"><code class="text-sm">IsOpen</code></td>
+                                <td class="p-3 text-sm">bool</td>
+                                <td class="p-3 text-sm">Effective open state — resolves to the mobile or desktop value for the current viewport. Read this one unless you specifically need the other two.</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3"><code class="text-sm">Open</code></td>
+                                <td class="p-3 text-sm">bool</td>
+                                <td class="p-3 text-sm">Desktop open state (read-only)</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3"><code class="text-sm">OpenMobile</code></td>
+                                <td class="p-3 text-sm">bool</td>
+                                <td class="p-3 text-sm">Mobile drawer open state (read-only)</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3"><code class="text-sm">IsMobile</code></td>
+                                <td class="p-3 text-sm">bool</td>
+                                <td class="p-3 text-sm">Whether the viewport is currently below the mobile breakpoint</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3"><code class="text-sm">Side</code></td>
+                                <td class="p-3 text-sm">SidebarSide</td>
+                                <td class="p-3 text-sm">Side the sidebar renders on</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3"><code class="text-sm">ToggleSidebar()</code></td>
+                                <td class="p-3 text-sm">void</td>
+                                <td class="p-3 text-sm">Toggles whichever state applies to the current viewport</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3"><code class="text-sm">SetOpen(bool)</code></td>
+                                <td class="p-3 text-sm">void</td>
+                                <td class="p-3 text-sm">Sets the desktop open state</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3"><code class="text-sm">SetOpenMobile(bool)</code></td>
+                                <td class="p-3 text-sm">void</td>
+                                <td class="p-3 text-sm">Sets the mobile drawer open state</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3"><code class="text-sm">StateChanged</code></td>
+                                <td class="p-3 text-sm">event EventHandler?</td>
+                                <td class="p-3 text-sm">Raised whenever any of the above changes — subscribe to re-render on toggle, and unsubscribe on dispose</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold mb-2">SidebarMenuButton</h3>
+                <p class="text-sm text-muted-foreground mb-3">Clickable menu item with tooltip support.</p>
+                <div class="rounded-lg border overflow-hidden">
+                    <table class="w-full">
+                        <thead class="border-b bg-muted/50">
+                            <tr>
+                                <th class="p-3 text-left font-medium">Prop</th>
+                                <th class="p-3 text-left font-medium">Type</th>
+                                <th class="p-3 text-left font-medium">Default</th>
+                                <th class="p-3 text-left font-medium">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b">
+                                <td class="p-3"><code class="text-sm">Tooltip</code></td>
+                                <td class="p-3 text-sm">string?</td>
+                                <td class="p-3 text-sm">null</td>
+                                <td class="p-3 text-sm">Tooltip shown in collapsed state</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3"><code class="text-sm">Size</code></td>
+                                <td class="p-3 text-sm">SidebarMenuButtonSize</td>
+                                <td class="p-3 text-sm">Default</td>
+                                <td class="p-3 text-sm">Size variant (Small, Default, Large)</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3"><code class="text-sm">Variant</code></td>
+                                <td class="p-3 text-sm">SidebarMenuButtonVariant</td>
+                                <td class="p-3 text-sm">Default</td>
+                                <td class="p-3 text-sm">Style variant (Default, Outline)</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3"><code class="text-sm">IsActive</code></td>
+                                <td class="p-3 text-sm">bool?</td>
+                                <td class="p-3 text-sm">null</td>
+                                <td class="p-3 text-sm">Active/selected state. Leave unset to derive it from <code class="text-sm">Href</code> and <code class="text-sm">Match</code>.</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3"><code class="text-sm">AsChild</code></td>
+                                <td class="p-3 text-sm">SidebarMenuButtonElement</td>
+                                <td class="p-3 text-sm">Button</td>
+                                <td class="p-3 text-sm">Element to render (Button, Anchor)</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3"><code class="text-sm">Href</code></td>
+                                <td class="p-3 text-sm">string?</td>
+                                <td class="p-3 text-sm">null</td>
+                                <td class="p-3 text-sm">Navigation target. Setting it renders an anchor and drives <code class="text-sm">IsActive</code> from the current route.</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3"><code class="text-sm">Match</code></td>
+                                <td class="p-3 text-sm">NavLinkMatch</td>
+                                <td class="p-3 text-sm">Prefix</td>
+                                <td class="p-3 text-sm">How <code class="text-sm">Href</code> is matched against the route for active state</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3"><code class="text-sm">OnClick</code></td>
+                                <td class="p-3 text-sm">EventCallback&lt;MouseEventArgs&gt;</td>
+                                <td class="p-3 text-sm">—</td>
+                                <td class="p-3 text-sm">Invoked when the button is clicked</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold mb-2">SidebarInset</h3>
+                <p class="text-sm text-muted-foreground mb-3">Main content area next to the sidebar.</p>
+                <div class="rounded-lg border overflow-hidden">
+                    <table class="w-full">
+                        <thead class="border-b bg-muted/50">
+                            <tr>
+                                <th class="p-3 text-left font-medium">Prop</th>
+                                <th class="p-3 text-left font-medium">Type</th>
+                                <th class="p-3 text-left font-medium">Default</th>
+                                <th class="p-3 text-left font-medium">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b">
+                                <td class="p-3"><code class="text-sm">ResetScrollOnNavigation</code></td>
+                                <td class="p-3 text-sm">bool</td>
+                                <td class="p-3 text-sm">true</td>
+                                <td class="p-3 text-sm">Automatically scrolls to the top when the route changes</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3"><code class="text-sm">Class</code></td>
+                                <td class="p-3 text-sm">string?</td>
+                                <td class="p-3 text-sm">null</td>
+                                <td class="p-3 text-sm">Additional CSS classes</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        <ApiReference Since="v4" ComponentName="Sidebar pill navigation">
+            <ApiParameter Name="SidebarProvider.CollapsedMode" Type="SidebarCollapsedMode" Default="Icon">Pill completely hides the collapsed sidebar. Place BbSidebarPillNav alongside it. Existing desktop/mobile open bindings and shortcut behavior are retained.</ApiParameter>
+            <ApiParameter Name="PillNav.ChildContent / TrailingContent" Type="RenderFragment?">Navigation items and optional trailing actions.</ApiParameter>
+            <ApiParameter Name="PillNav.Fixed / AnimatedIndicator / AriaLabel" Type="bool / bool / string?" Default="true / true / Primary navigation">Viewport placement, moving active indicator and landmark name. Fixed=false requires a positioned ancestor.</ApiParameter>
+            <ApiParameter Name="PillNavItem.Label / ChildContent / Href / Match" Type="string / RenderFragment / string? / NavLinkMatch" Default="Prefix">Accessible name, icon and optional native link. Active state follows the URL unless IsActive is supplied.</ApiParameter>
+            <ApiParameter Name="PillNavItem.IsActive / Disabled / OnClick / Class" Type="bool? / bool / EventCallback&lt;MouseEventArgs&gt; / string?">Explicit active state, disabled state, activation callback and classes.</ApiParameter>
+            <ApiParameter Name="PillInset.ChildContent / ExpandedClass / CollapsedClass / Class" Type="RenderFragment / string?">Reserves top space while pill navigation is active; customization for each state. PillNav and PillInset also accept AdditionalAttributes.</ApiParameter>
+        </ApiReference>
+
+        <ApiReference Since="v4" ComponentName="SidebarSelectionIndicator">
+            <ApiParameter Name="SidebarSelectionIndicator.FollowHover / Duration / Class" Type="bool / int / string?" Default="false / 200 / null">Reusable selection indicator for normal sidebar menus. Place before the menu in a relative wrapper and position foreground items relative. Honors reduced motion.</ApiParameter>
+        </ApiReference>
+        </div>
+    </div>
+
+    <LocalizationSection
+        Description="The sidebar toggle button aria label is configurable."
+        Labels="@(new LocalizationSection.LabelInfo[]
+        {
+            new("ToggleSidebar", "Toggle Sidebar", "Aria label for the sidebar trigger/rail button"),
+        })"
+        CodeExample="@(@"builder.Services.AddBlazorBlueprintComponents(localizer =>
+{
+    localizer.Set(""Sidebar.ToggleSidebar"", ""Seitenleiste umschalten"");
+});")" />
+</div>
+
+@code {
+    private string indicatorPage = "Overview";
+    private bool pillOpen = true;
+    private string pillPage = "Overview";
+    private bool isBasicCollapsible = true;
+    private bool _controlledOpen = true;
+    private bool shortcutEnabled = true;
+    private string selectedVersion = "v1.0.1";
+
+    private string GetRandomIcon(int index)
+    {
+        var icons = new[] {
+            "house", "file", "folder", "users", "settings", "search",
+            "bell", "calendar", "mail", "star", "bookmark", "tag",
+            "database", "server", "cloud", "package", "square", "table",
+            "list", "inbox", "archive", "trash", "download", "upload",
+            "share", "copy", "pencil", "filter", "arrow-up-down", "rotate-cw"
+        };
+        return icons[index % icons.Length];
+    }
+}

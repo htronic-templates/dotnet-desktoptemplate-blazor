@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/App/">
+    <Project Path="DesktopTemplate1.App/DesktopTemplate1.App.csproj" />
+  </Folder>
+  <Folder Name="/FrontEnd/">
+    <Project Path="DesktopTemplate1.GUI.PhotinoX/DesktopTemplate1.GUI.PhotinoX.csproj" />
+    <Project Path="DesktopTemplate1.GUI.WebAuto/DesktopTemplate1.GUI.WebAuto.Client/DesktopTemplate1.GUI.WebAuto.Client.csproj" />
+    <Project Path="DesktopTemplate1.GUI.WebAuto/DesktopTemplate1.GUI.WebAuto.csproj" />
+    <Project Path="DesktopTemplate1.GUI.WebServer/DesktopTemplate1.GUI.WebServer.csproj" />
+    <Project Path="DesktopTemplate1.GUI.WebWasm/DesktopTemplate1.GUI.WebWasm.csproj" />
+  </Folder>
+</Solution>

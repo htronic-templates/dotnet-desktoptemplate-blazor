@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "DesktopTemplate1.GUI.WebAuto.Client": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:61531;http://localhost:61532"
+    }
+  }
+}
