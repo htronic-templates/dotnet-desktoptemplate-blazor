@@ -1,0 +1,9 @@
+/* TODO 
+    1. Can we move the test1.css to obj
+    2. Altering this file doesn't cause a rebuild?
+    3. hot reload on test1.css doesn't work
+*/
+
+@import "tailwindcss";
+@import "../bin/Debug/net11.0/test1.css";
+@source "../";

@@ -1,6 +1,7 @@
 <Solution>
   <Folder Name="/App/">
     <Project Path="DesktopTemplate2.App/DesktopTemplate2.App.csproj" />
+    <Project Path="Test1Lib/Test1Lib.csproj" Id="cbe22890-33d0-43b6-bc57-3502a039da75" />
   </Folder>
   <Folder Name="/FrontEnd/">
     <Project Path="DesktopTemplate2.GUI.PhotinoX/DesktopTemplate2.GUI.PhotinoX.csproj" />

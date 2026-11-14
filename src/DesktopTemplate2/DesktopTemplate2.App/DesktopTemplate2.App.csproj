@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>net11.0</TargetFramework>
@@ -20,10 +20,31 @@
     <PackageReference Include="BlazorBlueprint.PdfViewer" Version="1.0.0" />
     <PackageReference Include="BlazorBlueprint.Primitives" Version="4.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="11.0.0" />
+    <PackageReference Include="Tailwind.MSBuild" Version="2.1.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Test1Lib\Test1Lib.csproj" />
+  </ItemGroup>
+
+  <Target Name="PrepareTailwindDependencies"
+		  BeforeTargets="BuildTailwind"
+		  DependsOnTargets="ResolveReferences;_CopySourceItemsToOutputDirectory">
+
+	<Message Text="BUILDING Test1Lib BEFORE TAILWIND"
+             Importance="high" />
+
+	<!-- Ensure the referenced project has been built -->
+	<MSBuild Projects="..\Test1Lib\Test1Lib.csproj"
+             Targets="CopyFilesToOutputDirectory"
+             Properties="Configuration=$(Configuration)" />
+  </Target>
+  
 </Project>
