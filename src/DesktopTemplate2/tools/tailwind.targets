@@ -1,0 +1,36 @@
+<Project>
+  <PropertyGroup>
+    <TailwindInput Condition="'$(TailwindInput)' == ''">wwwroot/css/blazorblueprint-input.css</TailwindInput>
+    <TailwindOutput Condition="'$(TailwindOutput)' == ''">wwwroot/blazorblueprint.css</TailwindOutput>
+    <TailwindToolPath Condition="'$(TailwindToolPath)' == ''">$(MSBuildProjectDirectory)/../tools</TailwindToolPath>
+  </PropertyGroup>
+
+  <!-- Generate CSS before the SDK fingerprints/compresses static assets. BeforeTargets="Build"
+       runs after those dependency targets, leaving manifests and gzip payloads one build behind. -->
+  <Target Name="BuildTailwind" BeforeTargets="ResolveProjectStaticWebAssets">
+    <PropertyGroup>
+      <TailwindBinary Condition="$([MSBuild]::IsOSPlatform('Windows'))">$(TailwindToolPath)/tailwindcss.exe</TailwindBinary>
+      <TailwindBinary Condition="$([MSBuild]::IsOSPlatform('Linux'))">$(TailwindToolPath)/tailwindcss-linux</TailwindBinary>
+      <TailwindBinary Condition="$([MSBuild]::IsOSPlatform('OSX'))">$(TailwindToolPath)/tailwindcss-macos</TailwindBinary>
+    </PropertyGroup>
+
+    <Message Text="Building Tailwind CSS ($(TailwindInput))..." Importance="high" />
+
+    <Exec Command="chmod +x $(TailwindBinary)"
+          Condition="!$([MSBuild]::IsOSPlatform('Windows')) And Exists('$(TailwindBinary)')"
+          ContinueOnError="true" />
+
+    <Exec Command="$(TailwindBinary) -i $(TailwindInput) -o $(TailwindOutput) --minify"
+          Condition="Exists('$(TailwindBinary)')"
+          WorkingDirectory="$(MSBuildProjectDirectory)" />
+
+    <!-- A clean checkout may not have this generated file when the SDK evaluates its
+         default Content glob. Include it before static-asset discovery without duplicating it. -->
+    <ItemGroup>
+      <Content Include="$(TailwindOutput)" Exclude="@(Content)" />
+    </ItemGroup>
+
+    <Error Text="Tailwind binary not found at $(TailwindBinary). Please ensure the binary is in the /tools directory."
+           Condition="!Exists('$(TailwindBinary)')" />
+  </Target>
+</Project>
