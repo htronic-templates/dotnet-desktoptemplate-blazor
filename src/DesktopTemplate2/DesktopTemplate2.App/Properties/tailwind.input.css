@@ -1,7 +1,5 @@
-/* TODO 
-    1. Can we move the test1.css to obj
-    2. Altering this file doesn't cause a rebuild?
-    3. hot reload on test1.css doesn't work
+/* TODO
+    1. Altering this file doesn't cause a rebuild?
 */
 
 @import "tailwindcss";

@@ -9,6 +9,7 @@ this picks up project references and nuget packages
 make sure css is under something other than wwwroot
 such as styles\
 
+Also this won't work with hotreload
 
 ```xml
 <Project>
