@@ -77,5 +77,9 @@ we can pack the css into the nuget package bundle
 
 ## TODO
 
-when debugging Tailwind.MSBuild doesn't run without cleaning first?
+when debugging Tailwind.MSBuild doesn't always run without cleaning first?
 I don't think it's any of the custom xml I'm using
+
+seems to build twice but not a third time?
+
+Test the above setup works when a consumed library is packed via nuget
