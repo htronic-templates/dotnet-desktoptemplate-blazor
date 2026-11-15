@@ -1,5 +1,5 @@
 <Project>
-
+  
   <!-- Run before tailwind is called -->
   <Target Name="PrepareTailwindDependencies"
 		  BeforeTargets="BuildTailwind">
@@ -21,9 +21,13 @@
 
 	<!-- Files from NuGet contentFiles -->
 	<ItemGroup>
+	  <_NuGetCss Include="@(None)"
+				 Condition="'%(None.Extension)' == '.css'
+                          and $([System.String]::Copy('%(None.Identity)').Contains('contentFiles'))" />
+
 	  <_NuGetCss Include="@(Content)"
 				 Condition="'%(Content.Extension)' == '.css'
-                              and '%(Content.NuGetPackageId)' != ''" />
+                          and $([System.String]::Copy('%(Content.Identity)').Contains('contentFiles'))" />
 	</ItemGroup>
 
 	<!-- Combine both sources -->
@@ -33,7 +37,7 @@
 	  <_AllCss Include="@(_NuGetCss)" />
 	</ItemGroup>
 
-	<Message Text="CSS files: @(_AllCss)"
+	<Message Text="Tailwind External CSS files: @(_AllCss)"
              Importance="high" />
 
 	<!-- Ensure destination directory exists -->

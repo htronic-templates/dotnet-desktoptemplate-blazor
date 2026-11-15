@@ -4,14 +4,16 @@
     <TargetFramework>net11.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+	<PackageVersion>1.0.1</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
-	<None Include="wwwroot\**\*.css"
-          Pack="true"
-          PackagePath="contentFiles/any/any/wwwroot/%(RecursiveDir)"
-          PackageCopyToOutput="true"
-          CopyToOutputDirectory="PreserveNewest" />
+	<None Include="styles\**\*.css"
+		  Pack="true"
+		  PackagePath="contentFiles/any/any/styles/%(RecursiveDir)"
+		  PackageCopyToOutput="true"
+		  PackageFlatten="false"
+		  CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,6 +22,10 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="11.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>

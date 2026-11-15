@@ -5,5 +5,5 @@
 */
 
 @import "tailwindcss";
-@import "../obj/tailwind-importedlibs/wwwroot/test1.css";
+@import "../obj/tailwind-importedlibs/styles/test1.css";
 @source "../";
