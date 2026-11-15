@@ -408,8 +408,8 @@
     }
   }
 }
-testclass1 {
-  color: green;
+.testclass1 {
+  color: red;
   font-size: 16px;
 }
 @property --tw-space-y-reverse {

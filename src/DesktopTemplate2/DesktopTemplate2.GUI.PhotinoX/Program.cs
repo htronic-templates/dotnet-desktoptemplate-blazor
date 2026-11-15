@@ -1,6 +1,7 @@
+using BlazorBlueprint.Components;
+using Microsoft.AspNetCore.Components.Web;
 using Microsoft.Extensions.DependencyInjection;
 using Photino.Blazor;
-using BlazorBlueprint.Components;
 
 namespace DesktopTemplate2.GUI.PhotinoX;
 
@@ -17,6 +18,7 @@ internal static class Program {
 
         // Register the root component for the main window.
         appBuilder.RootComponents.Add<App>("app");
+        appBuilder.RootComponents.Add<HeadOutlet>("head::after");
 
         var app = appBuilder.Build();
 

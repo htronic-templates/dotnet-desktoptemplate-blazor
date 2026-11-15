@@ -74,3 +74,8 @@ we can pack the css into the nuget package bundle
              PackageCopyToOutput="true"
              CopyToOutputDirectory="PreserveNewest" />
 </ItemGroup>
+
+## TODO
+
+when debugging Tailwind.MSBuild doesn't run without cleaning first?
+I don't think it's any of the custom xml I'm using
