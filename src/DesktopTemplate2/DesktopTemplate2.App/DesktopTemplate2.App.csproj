@@ -34,17 +34,4 @@
     <ProjectReference Include="..\Test1Lib\Test1Lib.csproj" />
   </ItemGroup>
 
-  <Target Name="PrepareTailwindDependencies"
-		  BeforeTargets="BuildTailwind"
-		  DependsOnTargets="ResolveReferences;_CopySourceItemsToOutputDirectory">
-
-	<Message Text="BUILDING Test1Lib BEFORE TAILWIND"
-             Importance="high" />
-
-	<!-- Ensure the referenced project has been built -->
-	<MSBuild Projects="..\Test1Lib\Test1Lib.csproj"
-             Targets="CopyFilesToOutputDirectory"
-             Properties="Configuration=$(Configuration)" />
-  </Target>
-  
 </Project>

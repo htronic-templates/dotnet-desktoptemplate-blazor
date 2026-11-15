@@ -1,0 +1,50 @@
+<Project>
+
+  <!-- Run before tailwind is called -->
+  <Target Name="PrepareTailwindDependencies"
+		  BeforeTargets="BuildTailwind">
+
+	<!-- Destination directory for exported css files (obj/tw-css) -->
+	<PropertyGroup>
+	  <_TailwindCssDir>$(BaseIntermediateOutputPath)tailwind-importedlibs\</_TailwindCssDir>
+	</PropertyGroup>
+	
+	<!-- Files from referenced source projects -->
+	<MSBuild Projects="@(ProjectReference)"
+             Targets="GetCopyToOutputDirectoryItems"
+             BuildInParallel="false"
+             SkipNonexistentTargets="true"
+             Condition="'@(ProjectReference)' != ''">
+	  <Output TaskParameter="TargetOutputs"
+			  ItemName="_ReferencedContent" />
+	</MSBuild>
+
+	<!-- Files from NuGet contentFiles -->
+	<ItemGroup>
+	  <_NuGetCss Include="@(Content)"
+				 Condition="'%(Content.Extension)' == '.css'
+                              and '%(Content.NuGetPackageId)' != ''" />
+	</ItemGroup>
+
+	<!-- Combine both sources -->
+	<ItemGroup>
+	  <_AllCss Include="@(_ReferencedContent)"
+			   Condition="'%(Extension)' == '.css'" />
+	  <_AllCss Include="@(_NuGetCss)" />
+	</ItemGroup>
+
+	<Message Text="CSS files: @(_AllCss)"
+             Importance="high" />
+
+	<!-- Ensure destination directory exists -->
+	<MakeDir Directories="$(_TailwindCssDir)" />
+	
+	<!-- Copy CSS files into obj/tailwind-importedlibs/ -->
+	<Copy SourceFiles="@(_AllCss)"
+          DestinationFiles="@(_AllCss->'$(_TailwindCssDir)%(TargetPath)')"
+          SkipUnchangedFiles="true"
+          Condition="'@(_AllCss)' != ''" />
+	
+  </Target>
+
+</Project>

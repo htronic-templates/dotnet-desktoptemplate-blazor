@@ -5,5 +5,5 @@
 */
 
 @import "tailwindcss";
-@import "../bin/Debug/net11.0/test1.css";
+@import "../obj/tailwind-importedlibs/wwwroot/test1.css";
 @source "../";
