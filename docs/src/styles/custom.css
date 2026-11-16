@@ -1,0 +1,106 @@
+header.header {
+  background-color: var(--accent);
+}
+
+/* Category SideBar */
+
+/* Top level links */
+div.sidebar-content > :is(sl-sidebar-state-persist, sl-sidebar-state-restore)
+  > ul > li
+  > a:not([aria-current="page"]) {
+  color: var(--sidebar-foreground);
+  font-weight: 400;
+  &:hover {
+    color: var(--sidebar-accent-foreground);
+    background-color: var(--sidebar-accent);
+  }
+}
+div.sidebar-content > :is(sl-sidebar-state-persist, sl-sidebar-state-restore)
+  > ul > li
+  > a[aria-current="page"] {
+  background-color: var(--sidebar-accent);
+  color: var(--sidebar-accent-foreground);
+  font-weight: 400;
+}
+
+/* Menu drop down heading */
+div.sidebar-content > :is(sl-sidebar-state-persist, sl-sidebar-state-restore)
+  > ul
+  li > details > summary > span > span {
+  font-weight: 400;
+  color: var(--accent-foreground);
+}
+
+/* Menu down arrow */
+div.sidebar-content svg.caret {
+  color: var(--sidebar-foreground);
+}
+
+/* Menu Link */
+div.sidebar-content > :is(sl-sidebar-state-persist, sl-sidebar-state-restore)
+  > ul > li > details
+  > ul > li a {
+  > span {
+    color: var(--sidebar-foreground);
+    font-weight: 400;
+  }
+  &:hover {
+    background-color: var(--sidebar-accent);
+	> span {
+	  color: var(--sidebar-accent-foreground);
+	}
+  }
+}
+
+div.sidebar-content > :is(sl-sidebar-state-persist, sl-sidebar-state-restore)
+  > ul > li > details
+  > ul > li 
+  a[aria-current="page"] {
+  background-color: var(--sidebar-accent);
+  font-weight: 400;
+  
+  > span {
+    color: var(--sidebar-accent-foreground);
+  }
+}
+
+/* Topic Menu */
+
+/* Topic Links General */
+ul.starlight-sidebar-topics > li > a {
+  > div {
+    color: var(--sidebar-foreground);
+  }
+  &:hover {
+    background-color: var(--sidebar-accent);
+	> div {
+	  color: var(--sidebar-accent-foreground);
+	}
+  }
+}
+
+/* Topic Links Active */
+a.starlight-sidebar-topics-current {
+  background-color: var(--sidebar-accent);
+  border-radius: 4px;
+
+  > div:nth-of-type(2) {
+    color: var(--sidebar-accent-foreground);
+  }
+}
+
+/* Topic General */
+ul.starlight-sidebar-topics {
+  padding-top: 10px;
+}
+ul.starlight-sidebar-topics::after {
+  border-top: none;
+}
+
+/* Page width */
+div.main-pane {
+  max-width: calc(var(--spacing) * 300);
+}
+div.sl-container {
+  max-width: none;
+}
