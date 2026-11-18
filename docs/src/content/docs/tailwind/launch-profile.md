@@ -1,4 +1,4 @@
-# Launching in Watch Mode
+# Tailwind Launch Profile
 
 For Tailwind.MSBuild the tailwind executable doesn't always launch / run
 when the app is being debugged, normally it just runs during a build if there have been file changes.
