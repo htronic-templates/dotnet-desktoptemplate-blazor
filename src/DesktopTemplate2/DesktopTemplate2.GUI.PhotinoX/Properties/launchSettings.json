@@ -2,6 +2,12 @@
   "profiles": {
     "DesktopTemplate2.GUI.PhotinoX": {
       "commandName": "Project"
+    },
+    "Tailwind Watch": {
+      "commandName": "Executable",
+      "executablePath": "dotnet",
+      "commandLineArgs": "msbuild ../DesktopTemplate2.App -target:BuildTailwind -property:Configuration=Debug -property:TailwindWatch=true",
+      "workingDirectory": "$(ProjectDir)"
     }
   }
 }
