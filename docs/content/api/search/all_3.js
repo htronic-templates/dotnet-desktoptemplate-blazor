@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['datagridhierarchydemo_0',['DataGridHierarchyDemo',['../class_desktop_template1_1_1_app_1_1_pages_1_1_components_1_1_data_grid_hierarchy_demo.html',1,'DesktopTemplate1::App::Pages::Components']]],
+  ['datagridhierarchydemo_2erazor_2ecs_1',['DataGridHierarchyDemo.razor.cs',['../_data_grid_hierarchy_demo_8razor_8cs.html',1,'']]],
+  ['demopager_2',['DemoPager',['../class_desktop_template1_1_1_app_1_1_shared_1_1_demo_pager.html',1,'DesktopTemplate1::App::Shared']]],
+  ['demopager_2erazor_2ecs_3',['DemoPager.razor.cs',['../_demo_pager_8razor_8cs.html',1,'']]],
+  ['demosidebar_4',['DemoSidebar',['../class_desktop_template1_1_1_app_1_1_shared_1_1_demo_sidebar.html',1,'DesktopTemplate1::App::Shared']]],
+  ['demosidebar_2erazor_2ecs_5',['DemoSidebar.razor.cs',['../_demo_sidebar_8razor_8cs.html',1,'']]],
+  ['department_6',['Department',['../class_desktop_template1_1_1_app_1_1_services_1_1_person.html#a503a140429712758e78e43f9577270ba',1,'DesktopTemplate1::App::Services::Person']]],
+  ['description_7',['Description',['../class_desktop_template1_1_1_app_1_1_services_1_1_product.html#a0d03637bf3837e5d56c20969d6e7c16b',1,'DesktopTemplate1::App::Services::Product']]],
+  ['desktoptemplate1_8',['DesktopTemplate1',['../namespace_desktop_template1.html',1,'']]],
+  ['desktoptemplate1_3a_3aapp_9',['App',['../namespace_desktop_template1_1_1_app.html',1,'DesktopTemplate1']]],
+  ['desktoptemplate1_3a_3aapp_3a_3aextensions_10',['Extensions',['../namespace_desktop_template1_1_1_app_1_1_extensions.html',1,'DesktopTemplate1::App']]],
+  ['desktoptemplate1_3a_3aapp_3a_3apages_11',['Pages',['../namespace_desktop_template1_1_1_app_1_1_pages.html',1,'DesktopTemplate1::App']]],
+  ['desktoptemplate1_3a_3aapp_3a_3apages_3a_3acomponents_12',['Components',['../namespace_desktop_template1_1_1_app_1_1_pages_1_1_components.html',1,'DesktopTemplate1::App::Pages']]],
+  ['desktoptemplate1_3a_3aapp_3a_3aservices_13',['Services',['../namespace_desktop_template1_1_1_app_1_1_services.html',1,'DesktopTemplate1::App']]],
+  ['desktoptemplate1_3a_3aapp_3a_3ashared_14',['Shared',['../namespace_desktop_template1_1_1_app_1_1_shared.html',1,'DesktopTemplate1::App']]],
+  ['desktoptemplate1_3a_3agui_15',['GUI',['../namespace_desktop_template1_1_1_g_u_i.html',1,'DesktopTemplate1']]],
+  ['desktoptemplate1_3a_3agui_3a_3aphotinox_16',['PhotinoX',['../namespace_desktop_template1_1_1_g_u_i_1_1_photino_x.html',1,'DesktopTemplate1::GUI']]],
+  ['desktoptemplate2_17',['DesktopTemplate2',['../namespace_desktop_template2.html',1,'']]],
+  ['desktoptemplate2_3a_3agui_18',['GUI',['../namespace_desktop_template2_1_1_g_u_i.html',1,'DesktopTemplate2']]],
+  ['desktoptemplate2_3a_3agui_3a_3aphotinox_19',['PhotinoX',['../namespace_desktop_template2_1_1_g_u_i_1_1_photino_x.html',1,'DesktopTemplate2::GUI']]],
+  ['dispose_20',['Dispose',['../class_desktop_template1_1_1_app_1_1_shared_1_1_demo_pager.html#abbbf6b390bac325ab467c4169c2280bd',1,'DesktopTemplate1::App::Shared::DemoPager']]],
+  ['disposeasync_21',['DisposeAsync',['../class_desktop_template1_1_1_app_1_1_services_1_1_collapsible_state_service.html#a8e123207299a9dc02f2a15812651091e',1,'DesktopTemplate1.App.Services.CollapsibleStateService.DisposeAsync()'],['../class_desktop_template1_1_1_app_1_1_shared_1_1_main_layout.html#ac95640ea1e59036924ffa15e6d77113b',1,'DesktopTemplate1.App.Shared.MainLayout.DisposeAsync()']]]
+];

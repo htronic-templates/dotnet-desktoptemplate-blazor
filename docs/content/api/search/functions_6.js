@@ -1,0 +1,5 @@
+var searchData=
+[
+  ['maprazorcomponents_3c_20app_20_3e_0',['MapRazorComponents&lt; App &gt;',['../_desktop_template1_2_desktop_template1_8_g_u_i_8_web_auto_2_program_8cs.html#a46cd5bf03952b21860b797da1f248c1b',1,'MapRazorComponents&lt; App &gt;() .AddInteractiveServerRenderMode() .AddInteractiveWebAssemblyRenderMode() .AddAdditionalAssemblies(typeof(DesktopTemplate1.App.Routes).Assembly:&#160;Program.cs'],['../_desktop_template1_2_desktop_template1_8_g_u_i_8_web_server_2_program_8cs.html#ad4fcbd053cb7a5a5e431996713e459d7',1,'MapRazorComponents&lt; App &gt;() .AddInteractiveServerRenderMode() .AddAdditionalAssemblies(typeof(DesktopTemplate1.App.Routes).Assembly):&#160;Program.cs']]],
+  ['mapstaticassets_1',['MapStaticAssets',['../_desktop_template1_2_desktop_template1_8_g_u_i_8_web_auto_2_program_8cs.html#a5b61dd913fae20d4e29183213681d877',1,'MapStaticAssets():&#160;Program.cs'],['../_desktop_template1_2_desktop_template1_8_g_u_i_8_web_server_2_program_8cs.html#a5b61dd913fae20d4e29183213681d877',1,'MapStaticAssets():&#160;Program.cs']]]
+];
