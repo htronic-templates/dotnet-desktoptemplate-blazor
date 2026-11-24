@@ -1,0 +1,1 @@
+<BbTimePicker AriaLabel="Choose a time" @bind-Value="_time12" />

@@ -1,0 +1,3 @@
+<BbFormFieldTimePicker AriaLabel="Meeting time" @bind-Value="meetingTime"
+                      Label="Meeting time"
+                      HelperText="Select a time for the meeting." />

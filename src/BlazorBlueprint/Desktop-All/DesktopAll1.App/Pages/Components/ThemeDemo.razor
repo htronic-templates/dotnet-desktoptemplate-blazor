@@ -1,0 +1,360 @@
+@page "/components/theme"
+@inject ThemeService Themes
+
+<PageTitle>Theme System - Blazor Blueprint</PageTitle>
+
+<div class="space-y-8 max-w-4xl">
+    <div class="space-y-3">
+        <h1 class="text-4xl font-bold tracking-tight">Theme System</h1>
+        <p class="text-xl text-muted-foreground">
+            Built-in theme management with dark mode, color palettes, border radius, and localStorage persistence.
+        </p>
+    </div>
+
+    <div class="space-y-6">
+
+        <!-- ── Quick Start ── -->
+        <section class="space-y-4">
+            <div class="space-y-2">
+                <h2 class="text-2xl font-semibold">Quick Start</h2>
+                <p class="text-muted-foreground">
+                    Two steps to add theming to your app. No manual initialization needed — the components
+                    handle everything on first render.
+                </p>
+            </div>
+
+            <div class="rounded-lg border bg-card p-6 space-y-4">
+                <div class="space-y-2">
+                    <h3 class="text-sm font-semibold">1. Add the theme CSS to your App.razor</h3>
+                    <pre class="rounded-md bg-muted p-3 text-xs font-mono overflow-x-auto"><code>&lt;link href="_content/BlazorBlueprint.Components/css/themes.css" rel="stylesheet" /&gt;</code></pre>
+                </div>
+                <div class="space-y-2">
+                    <h3 class="text-sm font-semibold">2. Drop in the component</h3>
+                    <pre class="rounded-md bg-muted p-3 text-xs font-mono overflow-x-auto"><code>&lt;BbThemeSwitcher /&gt;
+@* or just dark mode: *@
+&lt;BbDarkModeToggle /&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── BbThemeSwitcher ── -->
+        <section class="space-y-4">
+            <div class="space-y-2">
+                <h2 class="text-2xl font-semibold">Theme Switcher</h2>
+                <p class="text-muted-foreground">
+                    A popover panel with color selection (base grays + primary accents), border radius
+                    presets, and a light/dark mode toggle. Click the paintbrush icon to open.
+                    By default, base and primary colors are shown as separate sections, each with its
+                    own selection indicator — selecting one never resets the other.
+                </p>
+            </div>
+
+            <div class="rounded-lg border bg-card p-6 space-y-4">
+                <div class="flex items-center gap-4">
+                    <BbThemeSwitcher />
+                    <span class="text-sm text-muted-foreground">Click the icon to open the theme panel</span>
+                </div>
+
+                <div class="space-y-2">
+                    <p class="text-sm font-medium">Color layout</p>
+                    <p class="text-xs text-muted-foreground">
+                        <code class="text-xs bg-muted px-1 py-0.5 rounded">ColorLayout</code> controls how
+                        colors are presented. The default,
+                        <code class="text-xs bg-muted px-1 py-0.5 rounded">ThemeSwitcherColorLayout.Split</code>,
+                        shows independent Base color and Primary color sections.
+                        <code class="text-xs bg-muted px-1 py-0.5 rounded">Combined</code> restores the legacy
+                        single grid, where picking a base color resets the primary color to its default.
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <BbThemeSwitcher ColorLayout="ThemeSwitcherColorLayout.Combined" />
+                        <span class="text-sm text-muted-foreground">Combined (legacy) layout</span>
+                    </div>
+                    <pre class="rounded-md bg-muted p-3 text-xs font-mono overflow-x-auto"><code>&lt;!-- Split layout (default) --&gt;
+&lt;BbThemeSwitcher /&gt;
+
+&lt;!-- Combined (legacy) layout --&gt;
+&lt;BbThemeSwitcher ColorLayout="ThemeSwitcherColorLayout.Combined" /&gt;</code></pre>
+                </div>
+
+                <div class="space-y-2">
+                    <p class="text-sm font-medium">Trigger variants</p>
+                    <p class="text-xs text-muted-foreground">
+                        The trigger button defaults to <code class="text-xs bg-muted px-1 py-0.5 rounded">Outline</code>.
+                        Set <code class="text-xs bg-muted px-1 py-0.5 rounded">Variant</code> to match it to the
+                        surrounding UI.
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <BbThemeSwitcher Variant="ButtonVariant.Default" />
+                        <BbThemeSwitcher Variant="ButtonVariant.Secondary" />
+                        <BbThemeSwitcher Variant="ButtonVariant.Ghost" />
+                        <BbThemeSwitcher Variant="ButtonVariant.Outline" />
+                    </div>
+                    <pre class="rounded-md bg-muted p-3 text-xs font-mono overflow-x-auto"><code>&lt;BbThemeSwitcher Variant="ButtonVariant.Ghost" /&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── BbDarkModeToggle ── -->
+        <section class="space-y-4">
+            <div class="space-y-2">
+                <h2 class="text-2xl font-semibold">Dark Mode Toggle</h2>
+                <p class="text-muted-foreground">
+                    A standalone button that toggles dark mode. Shows a sun icon in light mode and
+                    a moon icon in dark mode. Works without <code class="text-xs bg-muted px-1 py-0.5 rounded">themes.css</code>
+                    — it only toggles the <code class="text-xs bg-muted px-1 py-0.5 rounded">.dark</code> class.
+                </p>
+            </div>
+
+            <div class="rounded-lg border bg-card p-6 space-y-4">
+                <div class="space-y-2">
+                    <p class="text-sm font-medium">Default (icon only)</p>
+                    <BbDarkModeToggle />
+                </div>
+
+                <div class="space-y-2">
+                    <p class="text-sm font-medium">With label</p>
+                    <BbDarkModeToggle ShowLabel="true" Size="ButtonSize.Default" />
+                </div>
+
+                <div class="space-y-2">
+                    <p class="text-sm font-medium">Label only, no icon</p>
+                    <BbDarkModeToggle ShowIcon="false" ShowLabel="true" Size="ButtonSize.Default" />
+                </div>
+
+                <div class="space-y-2">
+                    <p class="text-sm font-medium">Custom icons</p>
+                    <BbDarkModeToggle>
+                        <LightIcon>
+                            <LucideIcon Name="sun-medium" Class="h-[1.2rem] w-[1.2rem]" />
+                        </LightIcon>
+                        <DarkIcon>
+                            <LucideIcon Name="moon-star" Class="h-[1.2rem] w-[1.2rem]" />
+                        </DarkIcon>
+                    </BbDarkModeToggle>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── ThemeService Configuration ── -->
+        <section class="space-y-4">
+            <div class="space-y-2">
+                <h2 class="text-2xl font-semibold">Configuration</h2>
+                <p class="text-muted-foreground">
+                    Configure defaults in <code class="text-xs bg-muted px-1 py-0.5 rounded">Program.cs</code>
+                    via the <code class="text-xs bg-muted px-1 py-0.5 rounded">configureTheme</code> parameter.
+                </p>
+            </div>
+
+            <div class="rounded-lg border bg-card p-6">
+                <pre class="rounded-md bg-muted p-3 text-xs font-mono overflow-x-auto"><code>builder.Services.AddBlazorBlueprintComponents(
+    configureTheme: options =>
+    {
+        options.DefaultBaseColor = BaseColor.Slate;
+        options.DefaultPrimaryColor = PrimaryColor.Blue;
+        options.DefaultRadius = 0.75;
+        options.DefaultDarkMode = false;
+        options.DetectSystemPreference = true;
+        options.PersistToLocalStorage = true;
+    });</code></pre>
+            </div>
+        </section>
+
+        <!-- ── Programmatic Access ── -->
+        <section class="space-y-4">
+            <div class="space-y-2">
+                <h2 class="text-2xl font-semibold">Programmatic Access</h2>
+                <p class="text-muted-foreground">
+                    Inject <code class="text-xs bg-muted px-1 py-0.5 rounded">ThemeService</code> to read
+                    or change the theme from code.
+                </p>
+            </div>
+
+            <div class="rounded-lg border bg-card p-6">
+                <pre class="rounded-md bg-muted p-3 text-xs font-mono overflow-x-auto"><code>@@inject ThemeService ThemeService
+
+// Read current state
+var isDark = ThemeService.IsDarkMode;
+var baseColor = ThemeService.BaseColor;
+var primaryColor = ThemeService.PrimaryColor;
+var radius = ThemeService.Radius;
+
+// Change programmatically
+await ThemeService.SetDarkModeAsync(true);
+await ThemeService.SetBaseColorAsync(BaseColor.Slate);
+await ThemeService.SetPrimaryColorAsync(PrimaryColor.Blue);
+await ThemeService.SetRadiusAsync(0.75);
+await ThemeService.ToggleDarkModeAsync();</code></pre>
+            </div>
+        </section>
+
+        <!-- ── API Reference ── -->
+
+
+        <LocalizationSection
+            Description="Theme switcher and dark mode toggle strings are configurable via IBbLocalizer."
+            Labels="@(new LocalizationSection.LabelInfo[]
+            {
+                new("Switcher.Label", "Customize theme", "Aria-label on the theme switcher trigger button"),
+                new("Switcher.Title", "Customize", "Heading of the theme switcher popover"),
+                new("Switcher.Description", "Pick a color and radius for your components.", "Description text under the popover heading"),
+                new("Color", "Color", "Section label for the combined color grid (Combined layout)"),
+                new("BaseColor", "Base color", "Section label for the base color grid (Split layout)"),
+                new("PrimaryColor", "Primary color", "Section label for the primary color grid (Split layout)"),
+                new("Default", "Default", "Label of the primary color chip that inherits the base palette's accent"),
+                new("Radius", "Radius", "Section label for the border radius presets"),
+                new("Mode", "Mode", "Section label for the light/dark mode toggle"),
+                new("Light", "Light", "Light mode button label"),
+                new("Dark", "Dark", "Dark mode button label"),
+                new("SwitchToLight", "Switch to light mode", "Aria-label on the dark mode toggle when dark mode is active"),
+                new("SwitchToDark", "Switch to dark mode", "Aria-label on the dark mode toggle when light mode is active"),
+            })"
+            CodeExample="@(@"builder.Services.AddBlazorBlueprintComponents(localizer =>
+{
+    localizer.Set(""Theme.BaseColor"", ""Grundfarbe"");
+    localizer.Set(""Theme.PrimaryColor"", ""Primärfarbe"");
+    localizer.Set(""Theme.Default"", ""Standard"");
+});")" />
+        <section class="space-y-4">
+            <h2 class="text-2xl font-semibold">Design presets and local scopes</h2>
+            <p class="text-sm text-muted-foreground">These seven starting points combine radius, density, font and surface settings. Applying a profile here preserves your current colors and dark mode. Named fonts use system fallbacks until your application supplies the font files.</p>
+            <div class="flex flex-wrap items-center gap-2">
+                @foreach (var profile in profiles)
+                {
+                    <BbButton Variant="ButtonVariant.Outline" OnClick="@(() => ApplyProfile(profile.Value))">@profile.Key</BbButton>
+                }
+                <BbThemeSwitcher ShowDesignOptions="true" />
+            </div>
+            <p class="text-sm text-muted-foreground">The scope below keeps its own design and radius while inheriting document colors and dark mode. Its portaled menu follows the scope, and explicit utility classes still override control defaults.</p>
+<BbThemeScope Design="scopeDesign" Radius="0.25">
+    <BbCard Class="p-4 space-y-3">
+        <BbInput Placeholder="Compact scoped input" />
+        <BbDropdownMenu>
+            <BbDropdownMenuTrigger><BbButton Variant="ButtonVariant.Outline">Scoped menu</BbButton></BbDropdownMenuTrigger>
+            <BbDropdownMenuContent>
+                <BbDropdownMenuItem>Open</BbDropdownMenuItem>
+                <BbDropdownMenuItem>Save</BbDropdownMenuItem>
+            </BbDropdownMenuContent>
+        </BbDropdownMenu>
+        <BbButton Class="h-14 px-8">Consumer size override</BbButton>
+    </BbCard>
+</BbThemeScope>
+            <CodeBlock Source="Components/Theme/presets.txt" />
+            <CodeBlock Source="Components/Theme/scope.txt" />
+
+        </section>
+    </div>
+
+        <AccessibilityList>
+        <AriaAttributes>
+            <AccessibilityItem>The theme switcher and dark-mode toggle have localized accessible names. Color, radius and mode buttons announce their selected state.</AccessibilityItem>
+            <AccessibilityItem>ThemeScope changes appearance without adding interactive semantics. Keep sufficient contrast when supplying custom theme values and fonts.</AccessibilityItem>
+        </AriaAttributes>
+        <KeyboardNavigation>
+            <KeyboardShortcutItem Description="Move between theme controls"><BbKbd>Tab</BbKbd> / <BbKbd>Shift + Tab</BbKbd></KeyboardShortcutItem>
+            <KeyboardShortcutItem Description="Activate a focused button or open a select"><BbKbd>Enter</BbKbd> / <BbKbd>Space</BbKbd></KeyboardShortcutItem>
+            <KeyboardShortcutItem Description="Navigate options in a theme select"><BbKbd>ArrowUp</BbKbd> / <BbKbd>ArrowDown</BbKbd></KeyboardShortcutItem>
+            <KeyboardShortcutItem Description="Close the active popup"><BbKbd>Escape</BbKbd></KeyboardShortcutItem>
+        </KeyboardNavigation>
+    </AccessibilityList>
+
+    <section class="space-y-4">
+            <div class="space-y-2">
+                <h2 class="text-2xl font-semibold">API Reference</h2>
+                <p class="text-muted-foreground">Component parameters.</p>
+            </div>
+            <div class="space-y-4">
+                <ApiReference ComponentName="BbThemeSwitcher">
+                    <ApiParameter Name="Variant" Type="ButtonVariant" Default="ButtonVariant.Outline">
+                        Visual variant of the trigger button.
+                    </ApiParameter>
+                    <ApiParameter Name="TriggerClass" Type="string?" Default="null">
+                        Additional CSS classes for the trigger button.
+                    </ApiParameter>
+                    <ApiParameter Name="PopoverContentClass" Type="string?" Default="null">
+                        Additional CSS classes for the popover content panel.
+                    </ApiParameter>
+                    <ApiParameter Name="Align" Type="PopoverAlign" Default="PopoverAlign.End">
+                        Horizontal alignment of the popover relative to the trigger.
+                    </ApiParameter>
+                    <ApiParameter Name="Strategy" Type="PositioningStrategy" Default="PositioningStrategy.Absolute">
+                        Positioning strategy for the popover.
+                    </ApiParameter>
+                    <ApiParameter Name="ColorLayout" Type="ThemeSwitcherColorLayout" Default="ThemeSwitcherColorLayout.Split">
+                        Layout of the color selection area. <code>Split</code> shows separate base and primary
+                        color sections with independent selection indicators; <code>Combined</code> shows the
+                        legacy single grid where selecting a base color resets the primary color.
+                    </ApiParameter>
+                    <ApiParameter Name="AdditionalAttributes" Type="Dictionary&lt;string, object&gt;?">
+                        Additional HTML attributes applied to the component's root element (e.g. <code>data-testid</code>, <code>aria-label</code>).
+                    </ApiParameter>
+                </ApiReference>
+
+                <ApiReference ComponentName="BbDarkModeToggle">
+                    <ApiParameter Name="LightIcon" Type="RenderFragment?" Default="Sun icon">
+                        Custom icon to show when light mode is active.
+                    </ApiParameter>
+                    <ApiParameter Name="DarkIcon" Type="RenderFragment?" Default="Moon icon">
+                        Custom icon to show when dark mode is active.
+                    </ApiParameter>
+                    <ApiParameter Name="ShowIcon" Type="bool" Default="true">
+                        Whether to show the mode icon.
+                    </ApiParameter>
+                    <ApiParameter Name="ShowLabel" Type="bool" Default="false">
+                        Whether to show a text label indicating the current mode.
+                    </ApiParameter>
+                    <ApiParameter Name="LightLabel" Type="string?" Default="null">
+                        Custom label text for light mode.
+                    </ApiParameter>
+                    <ApiParameter Name="DarkLabel" Type="string?" Default="null">
+                        Custom label text for dark mode.
+                    </ApiParameter>
+                    <ApiParameter Name="Variant" Type="ButtonVariant" Default="ButtonVariant.Outline">
+                        Button styling variant.
+                    </ApiParameter>
+                    <ApiParameter Name="Size" Type="ButtonSize" Default="ButtonSize.Icon">
+                        Button size.
+                    </ApiParameter>
+                    <ApiParameter Name="AdditionalAttributes" Type="Dictionary&lt;string, object&gt;?">
+                        Additional HTML attributes applied to the component's root element (e.g. <code>data-testid</code>, <code>aria-label</code>).
+                    </ApiParameter>
+                </ApiReference>
+            </div>
+
+<ApiReference Since="v4" ComponentName="ThemePreset / ThemeDesign">
+                <ApiParameter Name="DarkMode / BaseColor / PrimaryColor / Radius" Type="bool / BaseColor / PrimaryColor / double">Complete document theme; radius accepts 0–4 rem.</ApiParameter>
+                <ApiParameter Name="Design" Type="ThemeDesign">Immutable Density, Font, Surface, MenuColor and MenuAccent settings. Density scales Bb spacing utilities; it does not scale consumer utilities.</ApiParameter>
+            </ApiReference>
+
+<ApiReference ComponentName="ThemeOptions / ThemeService">
+                <ApiParameter Since="v4" Name="DefaultPreset" Type="ThemePreset?" Default="null">Overrides the individual Default options when supplied. Persistence and system preference options still apply.</ApiParameter>
+                <ApiParameter Since="v4" Name="Preset" Type="ThemePreset">The current complete configuration.</ApiParameter>
+                <ApiParameter Since="v4" Name="SetPresetAsync / SetDesignAsync" Type="Task">Apply and persist a full preset or only its design settings. Existing saved themes use configured defaults for new fields.</ApiParameter>
+            </ApiReference>
+
+            <span id="theme-scope" class="block scroll-mt-20" aria-hidden="true"></span>
+            <ApiReference Since="v4" ComponentName="ThemeScope">
+                <ApiParameter Name="Design" Type="ThemeDesign">Local appearance settings; does not change document palettes, dark mode or storage.</ApiParameter>
+                <ApiParameter Name="Radius" Type="double?" Default="null">Optional local radius; null inherits.</ApiParameter>
+                <ApiParameter Name="ChildContent / Class / AdditionalAttributes" Type="RenderFragment / string / Dictionary&lt;string, object&gt;">The themed subtree, wrapper classes and HTML attributes.</ApiParameter>
+            </ApiReference>
+
+<ApiReference ComponentName="ThemeSwitcher">
+                <ApiParameter Since="v4" Name="ShowDesignOptions" Type="bool" Default="false">Shows selectors for density, font, surfaces, menu color and menu accent.</ApiParameter>
+            </ApiReference>
+    </section>
+
+</div>
+
+@code {
+    private readonly ThemeDesign scopeDesign = new() { Density = ThemeDensity.Compact, Font = ThemeFont.Mono, MenuColor = ThemeMenuColor.Inverse };
+    private static readonly Dictionary<string, ThemePreset> profiles = new()
+    {
+        ["Standard"] = ThemePresets.Standard, ["Balanced"] = ThemePresets.Balanced,
+        ["Compact"] = ThemePresets.Compact, ["Spacious"] = ThemePresets.Spacious,
+        ["Sharp"] = ThemePresets.Sharp, ["Dense"] = ThemePresets.Dense, ["Glass"] = ThemePresets.Glass
+    };
+    private Task ApplyProfile(ThemePreset profile) => Themes.SetPresetAsync(profile with
+    {
+        DarkMode = Themes.IsDarkMode, BaseColor = Themes.BaseColor, PrimaryColor = Themes.PrimaryColor
+    });
+}

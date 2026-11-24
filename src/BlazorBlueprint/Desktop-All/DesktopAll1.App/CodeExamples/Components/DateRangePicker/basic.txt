@@ -1,0 +1,1 @@
+<BbDateRangePicker AriaLabel="Choose a date range" @bind-Value="_basicRange" />
