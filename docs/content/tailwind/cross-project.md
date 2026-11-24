@@ -1,6 +1,4 @@
----
-title: Tailwind Cross Project Use
----
+# Cross Project Use
 
 In some cases you might want to use css files from one razor control library to another.  
 Handling this via node packages is one approach which probably works better with hotreload.  
