@@ -1,4 +1,0 @@
-<BbFormFieldDateInput Value="DateTime.Today"
-                      Label="Created"
-                      HelperText="Set when the record was created."
-                      Disabled="true" />

@@ -1,4 +1,0 @@
-<BbRoseChart Data="@data" Height="250px">
-    <BbChartTooltip />
-    <BbRose DataKey="visitors" NameKey="browser" Mode="RoseMode.Area" />
-</BbRoseChart>

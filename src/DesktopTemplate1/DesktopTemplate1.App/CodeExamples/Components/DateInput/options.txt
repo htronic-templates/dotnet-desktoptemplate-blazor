@@ -1,3 +1,0 @@
-<BbDateInput @bind-Value="value" Culture="@CultureInfo.GetCultureInfo("en-GB")" ShowCalendar="false" />
-<BbDateInput Value="value" Disabled="true" />
-<BbDateInput Value="value" ReadOnly="true" />

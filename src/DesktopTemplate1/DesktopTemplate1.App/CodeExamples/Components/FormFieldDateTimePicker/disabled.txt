@@ -1,4 +1,0 @@
-<BbFormFieldDateTimePicker Value="DateTime.Now"
-                          Label="Locked appointment"
-                          HelperText="This appointment cannot be changed."
-                          Disabled="true" />

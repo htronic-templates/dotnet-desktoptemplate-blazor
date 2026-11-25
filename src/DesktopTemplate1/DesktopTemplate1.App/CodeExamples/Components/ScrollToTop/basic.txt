@@ -1,2 +1,0 @@
-@* Watches the document and appears once it is scrolled past 300px. *@
-<BbScrollToTop />

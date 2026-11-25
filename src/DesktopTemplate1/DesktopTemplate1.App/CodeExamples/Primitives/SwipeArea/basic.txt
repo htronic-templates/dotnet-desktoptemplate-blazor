@@ -1,9 +1,0 @@
-<BbSwipeArea OnSwipe="HandleSwipe" class="...your-styles...">
-    Swipe me
-</BbSwipeArea>
-
-@code {
-    private SwipeDirection last;
-
-    private void HandleSwipe(SwipeEventArgs e) => last = e.Direction;
-}

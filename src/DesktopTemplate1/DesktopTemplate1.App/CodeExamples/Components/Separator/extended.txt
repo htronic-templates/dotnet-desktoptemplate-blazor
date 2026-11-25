@@ -1,5 +1,0 @@
-<div class="space-y-5">
-    <BbSeparator LineStyle="SeparatorLineStyle.Solid" />
-    <BbSeparator LineStyle="SeparatorLineStyle.Dashed" />
-    <BbSeparator LineStyle="SeparatorLineStyle.Dotted" />
-</div>
