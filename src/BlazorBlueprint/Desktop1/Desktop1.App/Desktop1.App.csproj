@@ -19,6 +19,10 @@
 	<PackageReference Include="BlazorBlueprint.PdfViewer" Version="1.0.0" />
 	<PackageReference Include="BlazorBlueprint.Primitives" Version="4.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="11.0.0" />
+    <PackageReference Include="Tailwind.MSBuild" Version="2.1.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>

@@ -1,0 +1,11 @@
+<Project>
+
+  <!-- Tailwind.MSBuild Options -->
+  <PropertyGroup Label="Tailwind Properties">
+	<!-- Custom input and output file paths -->
+	<TailwindConfigDir>$(MSBuildProjectDirectory)\styles\tailwind</TailwindConfigDir>
+	<!-- File names are relative to the TailwindConfigDir unless an absolute path is specified -->
+	<TailwindInputFile>input.css</TailwindInputFile>
+	<TailwindOutputFile>..\..\wwwroot\css\tailwind.css</TailwindOutputFile>
+  </PropertyGroup>
+</Project>
