@@ -3,5 +3,11 @@
           href="_content/Desktop1.App/css/tailwind.css" />
 </HeadContent>
 
-@using Desktop1.App.Forms
-<TopForm></TopForm>
+<div class="h-screen flex flex-col">
+    <div class="shrink-0">
+        <MenuBar />
+    </div>
+    <div class="flex-1 overflow-auto">
+        <MainForm />
+    </div>
+</div>
