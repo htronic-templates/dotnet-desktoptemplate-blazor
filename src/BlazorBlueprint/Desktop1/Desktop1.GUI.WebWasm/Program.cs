@@ -1,9 +1,22 @@
-using Desktop1.GUI.WebWasm;
+using BlazorBlueprint.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
-var builder = WebAssemblyHostBuilder.CreateDefault(args);
-builder.RootComponents.Add<App>("#app");
-builder.RootComponents.Add<HeadOutlet>("head::after");
+namespace Desktop1.GUI.WebWasm;
 
-await builder.Build().RunAsync();
+internal static class Program {
+    [STAThread]
+    private static async Task Main(string[] args) {
+        var builder = WebAssemblyHostBuilder.CreateDefault(args);
+
+        // Add BlazorBlueprint services to the DI container.
+        builder.Services
+            .AddBlazorBlueprintComponents();
+
+        // Register the root component for the main window.
+        builder.RootComponents.Add<App>("#app");
+        builder.RootComponents.Add<HeadOutlet>("head::after");
+
+        await builder.Build().RunAsync();
+    }
+}

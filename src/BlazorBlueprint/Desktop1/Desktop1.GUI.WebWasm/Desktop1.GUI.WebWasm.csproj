@@ -12,10 +12,13 @@
 	<PublishTrimmed>true</PublishTrimmed>
 	<TrimMode>partial</TrimMode>
   </PropertyGroup>
+  
   <ItemGroup>
+    <PackageReference Include="BlazorBlueprint.Components" Version="4.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="11.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="11.0.0" />
   </ItemGroup>
+  
   <ItemGroup>
     <ProjectReference Include="..\Desktop1.App\Desktop1.App.csproj" />
   </ItemGroup>

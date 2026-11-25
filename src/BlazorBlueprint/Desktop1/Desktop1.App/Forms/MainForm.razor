@@ -1,3 +1,11 @@
 <div class="text-blue-600">
     tailwind test
 </div>
+
+<BbCalendar @bind-Selected="selectedDate" class="w-fit rounded-md border" />
+
+<p>Selected: @(selectedDate?.ToString("MMMM d, yyyy") ?? "None")</p>
+
+@code {
+    private DateTime? selectedDate;
+}
