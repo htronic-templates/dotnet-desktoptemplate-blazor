@@ -6,8 +6,12 @@
     <Platforms>AnyCPU</Platforms>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-	<ApplicationIcon>favicon.ico</ApplicationIcon>
+	<ApplicationIcon>wwwroot/favicon.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="favicon.png" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="BlazorBlueprint.Components" Version="4.2.0" />
@@ -24,12 +28,6 @@
     <Content Update="wwwroot\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="favicon.ico">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>

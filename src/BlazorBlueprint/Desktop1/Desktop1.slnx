@@ -2,7 +2,11 @@
   <Folder Name="/App/">
     <Project Path="Desktop1.App/Desktop1.App.csproj" Id="4fe3be9c-8b1a-4288-8527-bf8d26829c0a" />
   </Folder>
-  <Folder Name="/FrontEnd/">
+  <Folder Name="/Desktop/">
     <Project Path="Desktop1.GUI.PhotinoX/Desktop1.GUI.PhotinoX.csproj" />
+  </Folder>
+  <Folder Name="/Web/">
+    <Project Path="Desktop1.GUI.WebServer/Desktop1.GUI.WebServer.csproj" />
+    <Project Path="Desktop1.GUI.WebWasm/Desktop1.GUI.WebWasm.csproj" />
   </Folder>
 </Solution>

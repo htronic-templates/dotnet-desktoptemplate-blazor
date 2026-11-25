@@ -25,7 +25,6 @@ internal static class Program {
         // Customize the native Photino window.
         app.MainBlazorWindow.Window
             // These need to be done differently for a desktop app
-            .SetIconFile("favicon.ico")
             .SetTitle("Blazor Blueprint Demo (PhotinoX)");
 
         AppDomain.CurrentDomain.UnhandledException += (_, error) => app.MainBlazorWindow.Window.ShowMessage("Fatal exception", error.ExceptionObject?.ToString() ?? "Unknown fatal exception.");
