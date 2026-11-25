@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <!-- Exclude nested client project from compilation -->
-    <DefaultItemExcludes>$(DefaultItemExcludes);DesktopAll1.GUI.WebAuto.Client\**</DefaultItemExcludes>
+    <DefaultItemExcludes>$(DefaultItemExcludes);Desktop1.GUI.WebAuto.Client\**</DefaultItemExcludes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,8 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DesktopAll1.App\DesktopAll1.App.csproj" />
-    <ProjectReference Include="..\DesktopAll1.GUI.WebAuto.Client\DesktopAll1.GUI.WebAuto.Client.csproj" />
+    <ProjectReference Include="..\Desktop1.App\Desktop1.App.csproj" />
+    <ProjectReference Include="..\Desktop1.GUI.WebAuto.Client\Desktop1.GUI.WebAuto.Client.csproj" />
   </ItemGroup>
 
 </Project>

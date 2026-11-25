@@ -1,5 +1,5 @@
-using DesktopAll1.App.Extensions;
-using DesktopAll1.GUI.WebAuto;
+using Desktop1.App.Extensions;
+using Desktop1.GUI.WebAuto;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,7 +32,7 @@ app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode()
     .AddInteractiveWebAssemblyRenderMode()
     .AddAdditionalAssemblies(
-        typeof(DesktopAll1.App.Routes).Assembly,
-        typeof(DesktopAll1.GUI.WebAuto.Client._Imports).Assembly);
+        typeof(Desktop1.App.Routes).Assembly,
+        typeof(Desktop1.GUI.WebAuto.Client._Imports).Assembly);
 
 app.Run();

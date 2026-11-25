@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "DesktopAll1.GUI.WebAuto.Client": {
+    "Desktop1.GUI.WebAuto.Client": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

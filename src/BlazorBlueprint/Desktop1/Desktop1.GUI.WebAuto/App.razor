@@ -6,11 +6,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <base href="/" />
-    <link href="_content/DesktopAll1.App/css/app.css" rel="stylesheet" />
+    <link href="_content/Desktop1.App/css/app.css" rel="stylesheet" />
     <link href="_content/BlazorBlueprint.Components/blazorblueprint.css" rel="stylesheet" />
     <link href="_content/BlazorBlueprint.PdfViewer/blazorblueprint-pdfviewer.css" rel="stylesheet" />
     <link href="_content/BlazorBlueprint.Components/css/themes.css" rel="stylesheet" />
-    <link rel="icon" type="image/png" href="_content/DesktopAll1.App/favicon.png" />
+    <link rel="icon" type="image/png" href="_content/Desktop1.App/favicon.png" />
     <HeadOutlet @rendermode="InteractiveAuto" />
     @* #477: applies the saved theme before the first paint, so a dark-mode user never sees
        a flash of light. Must stay a classic blocking script in <head>; a module would be
@@ -18,7 +18,7 @@
     <script src="_content/BlazorBlueprint.Components/js/theme-init.js"></script>
 </head>
 <body>
-    <DesktopAll1.App.Routes @rendermode="InteractiveAuto" />
+    <Desktop1.App.Routes @rendermode="InteractiveAuto" />
 
     @* Blazor drives this from the host page, because a dropped circuit cannot render a component.
        The styling ships in blazorblueprint.css and reads the theme variables, so it follows the
