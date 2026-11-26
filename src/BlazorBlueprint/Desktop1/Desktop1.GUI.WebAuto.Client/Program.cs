@@ -1,9 +1,17 @@
+using BlazorBlueprint.Components;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Desktop1.App.Extensions;
 
-var builder = WebAssemblyHostBuilder.CreateDefault(args);
+namespace Desktop1.GUI.WebAuto.Client;
 
-// Add all demo services via shared extension method
-builder.Services.AddBlazorBlueprintDemo();
+internal static class Program {
+    [STAThread]
+    private static async Task Main(string[] args) {
+        var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
-await builder.Build().RunAsync();
+        // Add BlazorBlueprint services to the DI container.
+        builder.Services
+            .AddBlazorBlueprintComponents();
+
+        await builder.Build().RunAsync();
+    }
+}

@@ -1,38 +1,40 @@
-using Desktop1.App.Extensions;
-using Desktop1.GUI.WebAuto;
+using BlazorBlueprint.Components;
 
-var builder = WebApplication.CreateBuilder(args);
+namespace Desktop1.GUI.WebAuto;
 
-// Add services to the container.
-builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents()
-    .AddInteractiveWebAssemblyComponents();
+internal static class Program {
+    [STAThread]
+    private static void Main(string[] args) {
+        var builder = WebApplication.CreateBuilder(args);
 
-// Add all demo services via shared extension method
-builder.Services.AddBlazorBlueprintDemo();
+        // Add services to the container.
+        builder.Services.AddRazorComponents()
+            .AddInteractiveServerComponents()
+            .AddInteractiveWebAssemblyComponents();
 
-var app = builder.Build();
+        // Add BlazorBlueprint services to the DI container.
+        builder.Services
+            .AddBlazorBlueprintComponents();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Error");
-    app.UseHsts();
+        var app = builder.Build();
+
+        // Configure the HTTP request pipeline.
+        if (!app.Environment.IsDevelopment()) {
+            app.UseExceptionHandler("/Error");
+            app.UseHsts();
+        }
+
+        app.UseHttpsRedirection();
+        app.UseStaticFiles();
+        app.UseAntiforgery();
+        app.MapStaticAssets();
+        app.MapRazorComponents<LocalRoot>()
+            .AddInteractiveServerRenderMode()
+            .AddInteractiveWebAssemblyRenderMode()
+            .AddAdditionalAssemblies(
+                typeof(Desktop1.App.Root).Assembly,
+                typeof(Desktop1.GUI.WebAuto.Client._Imports).Assembly);
+
+        app.Run();
+    }
 }
-
-app.UseHttpsRedirection();
-
-app.UseStaticFiles();
-
-app.UseAntiforgery();
-
-app.MapStaticAssets();
-
-app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode()
-    .AddInteractiveWebAssemblyRenderMode()
-    .AddAdditionalAssemblies(
-        typeof(Desktop1.App.Routes).Assembly,
-        typeof(Desktop1.GUI.WebAuto.Client._Imports).Assembly);
-
-app.Run();
