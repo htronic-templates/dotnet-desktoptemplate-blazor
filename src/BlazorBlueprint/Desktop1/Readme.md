@@ -9,8 +9,20 @@ An example cross platform desktop / web application using PhotinoX / PhotinoX.Bl
 
 ## Frontends
 
-  * Desktop1.GUI.PhotinoX - This is a desktop app based frontend that uses PhotinoX to host via webview
-  * Desktop1.GUI.WebWasm - This is a web based frontend that uses a WebAssembly blazor project
+This example is a desktop app with a webview that uses PhotinoX
+
+  * Desktop1.GUI.PhotinoX
+
+These examples use WebAssembly / WebServer
+
+  * Desktop1.GUI.WebWasm
+  * Desktop1.GUI.WebServer
+
+This example uses the WebAuto template.
+This initially loads a page to preview the page before the web assembly is fully loaded
+
+  * Desktop1.GUI.WebAuto
+  * Desktop1.GUI.WebAuto.Client
 
 ## Libs
 
@@ -25,8 +37,4 @@ This template uses BlazorBlueprint UI for the components
 
 ## TODO
 
-  * Desktop1.GUI.WebServer
-  * Desktop1.GUI.WebAuto
-  * Desktop1.GUI.WebAuto.Client
-
-Check the template rendering via dotnet new renames everything
+  * Check the template rendering via dotnet new renames everything

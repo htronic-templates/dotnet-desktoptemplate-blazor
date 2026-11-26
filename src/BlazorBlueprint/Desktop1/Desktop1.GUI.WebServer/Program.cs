@@ -27,7 +27,7 @@ internal static class Program {
         app.UseStaticFiles();
         app.UseAntiforgery();
         app.MapStaticAssets();
-        app.MapRazorComponents<LocalRoot>()
+        app.MapRazorComponents<RootPage>()
             .AddInteractiveServerRenderMode()
             .AddAdditionalAssemblies(typeof(Desktop1.App.Root).Assembly);
         app.Run();
