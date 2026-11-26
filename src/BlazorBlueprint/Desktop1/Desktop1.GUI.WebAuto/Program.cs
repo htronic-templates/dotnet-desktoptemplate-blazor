@@ -3,7 +3,6 @@ using BlazorBlueprint.Components;
 namespace Desktop1.GUI.WebAuto;
 
 internal static class Program {
-    [STAThread]
     private static void Main(string[] args) {
         var builder = WebApplication.CreateBuilder(args);
 
