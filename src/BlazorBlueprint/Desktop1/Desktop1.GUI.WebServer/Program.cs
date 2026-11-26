@@ -1,3 +1,5 @@
+using BlazorBlueprint.Components;
+
 namespace Desktop1.GUI.WebServer;
 
 internal static class Program {
@@ -8,6 +10,10 @@ internal static class Program {
         // Add services to the container.
         builder.Services.AddRazorComponents()
             .AddInteractiveServerComponents();
+
+        // Add BlazorBlueprint services to the DI container.
+        builder.Services
+            .AddBlazorBlueprintComponents();
 
         var app = builder.Build();
 
