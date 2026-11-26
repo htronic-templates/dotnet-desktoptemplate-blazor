@@ -28,3 +28,5 @@ This template uses BlazorBlueprint UI for the components
   * Desktop1.GUI.WebServer
   * Desktop1.GUI.WebAuto
   * Desktop1.GUI.WebAuto.Client
+
+Check the template rendering via dotnet new renames everything
