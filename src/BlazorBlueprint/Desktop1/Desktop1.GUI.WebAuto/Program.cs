@@ -24,16 +24,17 @@ internal static class Program {
             app.UseHsts();
         }
 
+        app.UseStatusCodePagesWithReExecute("/not-found", createScopeForStatusCodePages: true);
         app.UseHttpsRedirection();
         app.UseStaticFiles();
         app.UseAntiforgery();
         app.MapStaticAssets();
-        app.MapRazorComponents<LocalRoot>()
+        app.MapRazorComponents<App>()
             .AddInteractiveServerRenderMode()
             .AddInteractiveWebAssemblyRenderMode()
             .AddAdditionalAssemblies(
                 typeof(Desktop1.App.Root).Assembly,
-                typeof(Desktop1.GUI.WebAuto.Client._Imports).Assembly);
+                typeof(Client._Imports).Assembly);
 
         app.Run();
     }
