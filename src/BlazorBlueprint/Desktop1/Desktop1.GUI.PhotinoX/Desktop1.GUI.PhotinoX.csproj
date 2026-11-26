@@ -14,7 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BlazorBlueprint.Components" Version="4.2.0" />
     <PackageReference Include="PhotinoX" Version="5.5.0" />
     <PackageReference Include="PhotinoX.Blazor" Version="5.5.0" />
   </ItemGroup>

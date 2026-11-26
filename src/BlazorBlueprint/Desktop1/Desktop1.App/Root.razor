@@ -1,4 +1,5 @@
-﻿<HeadContent>
+﻿@using BlazorBlueprint.Primitives
+<HeadContent>
     <link rel="stylesheet" href="_content/Desktop1.App/css/tailwind.css" />
     <link rel="stylesheet" href="_content/Desktop1.App/css/theme.css" />
     <link rel="stylesheet" href="_content/Desktop1.App/css/custom.css" />
@@ -12,3 +13,10 @@
         <MainForm />
     </div>
 </div>
+
+<!-- Required if you use ToastService to show toasts -->
+<BbToastProvider Position="ToastPosition.BottomRight" />
+<!-- Required if you use DialogService for programmatic confirm dialogs -->
+<BbDialogProvider />
+<!-- Required for portal-based components (Popover, Dialog, Select, etc.) -->
+<BbPortalHost />
