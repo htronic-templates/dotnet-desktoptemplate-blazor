@@ -8,27 +8,16 @@ icon: lucide/rocket
 
     ```bash
     # 1. Clone the repo that contains the template
-    git clone https://github.com/htronic-templates/dotnet-desktoptemplate-blazor.git
+    git clone https://github.com/htronic-templates/dotnet-tpl-desktop.git
     # 2. Install the template from the local folder
-    dotnet new install ./dotnet-desktoptemplate-blazor/src/Libs
+    dotnet new install ./dotnet-tpl-desktop/src
     ```
 
 !!! abstract "Create a new project"
 
     ```bash
     # 1. To list installed templates
-    dotnet new list Htronic.DBTemplate
+    dotnet new list Htronic
     # 2. To create a new instance from the template
-    dotnet new htronic.data.mssql -n Myplatform.DB
-    ```
-
-!!! tip "Quick Example"
-
-    ```cs
-    // Get a connection 
-    var db = DBId.Example_Remote_SQL.GetConnection();
-    // Run a query that returns a datatable
-    var dt = conn.QueryDataTable("SELECT * FROM TestTable1");
-    // Do something with the datatable
-    dataGridView1.DataSource = dt;  
+    dotnet new htronic.blazorblueprint.desktop1 -n MyDesktopApp
     ```
