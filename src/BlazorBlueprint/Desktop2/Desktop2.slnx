@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/App/">
+    <Project Path="Desktop2.App/Desktop2.App.csproj" Id="4fe3be9c-8b1a-4288-8527-bf8d26829c0a" />
+  </Folder>
+  <Folder Name="/Desktop/">
+    <Project Path="Desktop2.GUI.PhotinoX/Desktop2.GUI.PhotinoX.csproj" />
+  </Folder>
+  <Folder Name="/Web/">
+    <Project Path="Desktop2.GUI.WebAuto.Client/Desktop2.GUI.WebAuto.Client.csproj" />
+    <Project Path="Desktop2.GUI.WebAuto/Desktop2.GUI.WebAuto.csproj" />
+    <Project Path="Desktop2.GUI.WebServer/Desktop2.GUI.WebServer.csproj" />
+    <Project Path="Desktop2.GUI.WebWasm/Desktop2.GUI.WebWasm.csproj" />
+  </Folder>
+</Solution>

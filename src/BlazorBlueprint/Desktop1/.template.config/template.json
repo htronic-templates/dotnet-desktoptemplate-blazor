@@ -19,5 +19,18 @@
   "tags": {
     "language": "C#",
     "type": "project"
-  }
+  },
+
+  // Ignore paths
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "exclude": [
+            "**/.vs/**"
+          ]
+        }
+      ]
+    }
+  ]
 }

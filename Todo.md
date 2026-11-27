@@ -11,5 +11,4 @@ check the references to _content get switched across
 
 ## docs
 
-create Readme.md
 create docs
