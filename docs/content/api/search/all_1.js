@@ -1,5 +1,9 @@
 var searchData=
 [
-  ['build_0',['Build',['../_desktop_template1_2_desktop_template1_8_g_u_i_8_web_auto_2_desktop_template1_8_g_u_i_8_web_auto_8_client_2_program_8cs.html#a103eab9352a5901779f62f6c98b53f7b',1,'Build().RunAsync():&#160;Program.cs'],['../_desktop_template1_2_desktop_template1_8_g_u_i_8_web_wasm_2_program_8cs.html#a103eab9352a5901779f62f6c98b53f7b',1,'Build().RunAsync():&#160;Program.cs']]],
-  ['builder_1',['builder',['../_desktop_template1_2_desktop_template1_8_g_u_i_8_web_auto_2_desktop_template1_8_g_u_i_8_web_auto_8_client_2_program_8cs.html#a2f78352277081c620fd4cf92a5ce15e5',1,'builder:&#160;Program.cs'],['../_desktop_template1_2_desktop_template1_8_g_u_i_8_web_auto_2_program_8cs.html#a2f78352277081c620fd4cf92a5ce15e5',1,'builder:&#160;Program.cs'],['../_desktop_template1_2_desktop_template1_8_g_u_i_8_web_server_2_program_8cs.html#a2f78352277081c620fd4cf92a5ce15e5',1,'builder:&#160;Program.cs'],['../_desktop_template1_2_desktop_template1_8_g_u_i_8_web_wasm_2_program_8cs.html#a2f78352277081c620fd4cf92a5ce15e5',1,'builder:&#160;Program.cs']]]
+  ['category_0',['Category',['../class_desktop2_1_1_app_1_1_services_1_1_product.html#abb6a5d7fa73a8dd75869401bf06930f0',1,'Desktop2::App::Services::Product']]],
+  ['clearallstatesasync_1',['ClearAllStatesAsync',['../class_desktop2_1_1_app_1_1_services_1_1_collapsible_state_service.html#a6cac2eb026aaaa2c4b51aff30054c545',1,'Desktop2::App::Services::CollapsibleStateService']]],
+  ['clearstateasync_2',['ClearStateAsync',['../class_desktop2_1_1_app_1_1_services_1_1_collapsible_state_service.html#a847993e9eaae9329d916ed1f9af35662',1,'Desktop2::App::Services::CollapsibleStateService']]],
+  ['collapsiblestateservice_3',['CollapsibleStateService',['../class_desktop2_1_1_app_1_1_services_1_1_collapsible_state_service.html',1,'Desktop2.App.Services.CollapsibleStateService'],['../class_desktop2_1_1_app_1_1_services_1_1_collapsible_state_service.html#a9e88529f8029a273b120200c343847a9',1,'Desktop2.App.Services.CollapsibleStateService.CollapsibleStateService()']]],
+  ['collapsiblestateservice_2ecs_4',['CollapsibleStateService.cs',['../_collapsible_state_service_8cs.html',1,'']]],
+  ['componentcatalog_2ecs_5',['ComponentCatalog.cs',['../_component_catalog_8cs.html',1,'']]]
 ];

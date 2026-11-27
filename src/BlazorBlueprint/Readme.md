@@ -7,6 +7,7 @@ That can ether be hosted as a desktop or web application
 
   * Desktop1 - Simple Desktop App as a starting point
   * Desktop2 - This is a copy of the BlazorBlueprint UI Demo
+  * Desktop3 - Example of pulling in css files from an external library
 
 Desktop1 uses Tailwind.MSBuild.  
 Dekstop2 uses instead a locally run copy of Tailwind in the same way as the original demo code.

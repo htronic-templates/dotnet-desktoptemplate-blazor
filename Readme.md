@@ -27,6 +27,4 @@ dotnet new htronic.blazorblueprint.desktop1 -n MyDesktopApp
 
 ## TODO
 
-  * Tailwind.MSBuild example (Desktop3)
   * Theme selector template (Desktop4)
-  * rerun doxygen

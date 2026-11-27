@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['dispose_0',['Dispose',['../class_desktop_template1_1_1_app_1_1_shared_1_1_demo_pager.html#abbbf6b390bac325ab467c4169c2280bd',1,'DesktopTemplate1::App::Shared::DemoPager']]],
-  ['disposeasync_1',['DisposeAsync',['../class_desktop_template1_1_1_app_1_1_services_1_1_collapsible_state_service.html#a8e123207299a9dc02f2a15812651091e',1,'DesktopTemplate1.App.Services.CollapsibleStateService.DisposeAsync()'],['../class_desktop_template1_1_1_app_1_1_shared_1_1_main_layout.html#ac95640ea1e59036924ffa15e6d77113b',1,'DesktopTemplate1.App.Shared.MainLayout.DisposeAsync()']]]
+  ['generatepersons_0',['GeneratePersons',['../class_desktop2_1_1_app_1_1_services_1_1_mock_data_service.html#a2f47971bab7f4fe14d8738b98d719d5f',1,'Desktop2::App::Services::MockDataService']]],
+  ['generateproducts_1',['GenerateProducts',['../class_desktop2_1_1_app_1_1_services_1_1_mock_data_service.html#ad81436b0f7c07855b0ba6c3b9287af0b',1,'Desktop2::App::Services::MockDataService']]],
+  ['getstateasync_2',['GetStateAsync',['../class_desktop2_1_1_app_1_1_services_1_1_collapsible_state_service.html#a315c53d5d9ee91e55c5cada24db9cb8c',1,'Desktop2::App::Services::CollapsibleStateService']]]
 ];

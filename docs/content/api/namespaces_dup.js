@@ -1,5 +1,6 @@
 var namespaces_dup =
 [
-    [ "DesktopTemplate1", "namespace_desktop_template1.html", "namespace_desktop_template1" ],
-    [ "DesktopTemplate2", "namespace_desktop_template2.html", "namespace_desktop_template2" ]
+    [ "Desktop1", "namespace_desktop1.html", "namespace_desktop1" ],
+    [ "Desktop2", "namespace_desktop2.html", "namespace_desktop2" ],
+    [ "Desktop3", "namespace_desktop3.html", "namespace_desktop3" ]
 ];

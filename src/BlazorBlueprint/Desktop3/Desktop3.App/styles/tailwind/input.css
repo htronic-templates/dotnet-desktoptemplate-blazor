@@ -1,0 +1,5 @@
+@import "tailwindcss";
+@source "../../";
+
+@import "../../obj/tailwind-importedlibs/styles/test1.css";
+@import "../../obj/tailwind-importedlibs/styles/testdir1/test2.css";

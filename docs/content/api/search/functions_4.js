@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['generatepersons_0',['GeneratePersons',['../class_desktop_template1_1_1_app_1_1_services_1_1_mock_data_service.html#a74df1bf8b61b275e56f907d8d45210b4',1,'DesktopTemplate1::App::Services::MockDataService']]],
-  ['generateproducts_1',['GenerateProducts',['../class_desktop_template1_1_1_app_1_1_services_1_1_mock_data_service.html#a89a2bab04f585416fea5dcbc1367baea',1,'DesktopTemplate1::App::Services::MockDataService']]],
-  ['getstateasync_2',['GetStateAsync',['../class_desktop_template1_1_1_app_1_1_services_1_1_collapsible_state_service.html#aa27de98362d09269a6b9ec2a8d8c9ea6',1,'DesktopTemplate1::App::Services::CollapsibleStateService']]]
+  ['onafterrenderasync_0',['OnAfterRenderAsync',['../class_desktop2_1_1_app_1_1_shared_1_1_demo_sidebar.html#ab0a08e2f793fa05bd9ac8bb8e3fefa15',1,'Desktop2.App.Shared.DemoSidebar.OnAfterRenderAsync()'],['../class_desktop2_1_1_app_1_1_shared_1_1_main_layout.html#a992332265ac6ab4ac52f6e87706e5bff',1,'Desktop2.App.Shared.MainLayout.OnAfterRenderAsync()']]],
+  ['oninitialized_1',['OnInitialized',['../class_desktop2_1_1_app_1_1_pages_1_1_components_1_1_data_grid_hierarchy_demo.html#a0499f63d27168250ffa9c71003ee347b',1,'Desktop2.App.Pages.Components.DataGridHierarchyDemo.OnInitialized()'],['../class_desktop2_1_1_app_1_1_shared_1_1_demo_pager.html#a475a208f1080ac62b8d18dd74866bd58',1,'Desktop2.App.Shared.DemoPager.OnInitialized()'],['../class_desktop2_1_1_app_1_1_shared_1_1_main_layout.html#a47f40c1dd17b92b2dc933b1850580424',1,'Desktop2.App.Shared.MainLayout.OnInitialized()']]]
 ];

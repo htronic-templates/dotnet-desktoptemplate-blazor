@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['clearallstatesasync_0',['ClearAllStatesAsync',['../class_desktop_template1_1_1_app_1_1_services_1_1_collapsible_state_service.html#aff6ed051aed6325b10251cde1881513a',1,'DesktopTemplate1::App::Services::CollapsibleStateService']]],
-  ['clearstateasync_1',['ClearStateAsync',['../class_desktop_template1_1_1_app_1_1_services_1_1_collapsible_state_service.html#a27869bd54bd1d44909e16ff6373659d9',1,'DesktopTemplate1::App::Services::CollapsibleStateService']]],
-  ['collapsiblestateservice_2',['CollapsibleStateService',['../class_desktop_template1_1_1_app_1_1_services_1_1_collapsible_state_service.html#a321fe21f87037ab81d30bd49833ae70c',1,'DesktopTemplate1::App::Services::CollapsibleStateService']]]
+  ['dispose_0',['Dispose',['../class_desktop2_1_1_app_1_1_shared_1_1_demo_pager.html#a8d1c7f9c5175e04d8f486a5c54fa1933',1,'Desktop2::App::Shared::DemoPager']]],
+  ['disposeasync_1',['DisposeAsync',['../class_desktop2_1_1_app_1_1_services_1_1_collapsible_state_service.html#a0286cc093b41c03cff61e163bcd6cde0',1,'Desktop2.App.Services.CollapsibleStateService.DisposeAsync()'],['../class_desktop2_1_1_app_1_1_shared_1_1_main_layout.html#a9ebf3e1cb03b2b4c67cc8b95c2c49eef',1,'Desktop2.App.Shared.MainLayout.DisposeAsync()']]]
 ];

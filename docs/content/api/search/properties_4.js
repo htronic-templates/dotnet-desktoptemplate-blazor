@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['id_0',['Id',['../class_desktop_template1_1_1_app_1_1_services_1_1_person.html#af125c31036d07542bfa0eeaa15e4158c',1,'DesktopTemplate1.App.Services.Person.Id'],['../class_desktop_template1_1_1_app_1_1_services_1_1_product.html#a392e1b0324e1038cd8f5b87138ff3a6b',1,'DesktopTemplate1.App.Services.Product.Id']]],
-  ['imageurl_1',['ImageUrl',['../class_desktop_template1_1_1_app_1_1_services_1_1_product.html#a00fc5ab1650d929d4970abba228c5525',1,'DesktopTemplate1::App::Services::Product']]],
-  ['isactive_2',['IsActive',['../class_desktop_template1_1_1_app_1_1_services_1_1_person.html#a931ea5ef39697688e32e0347248a9ef8',1,'DesktopTemplate1::App::Services::Person']]]
+  ['id_0',['Id',['../class_desktop2_1_1_app_1_1_services_1_1_person.html#a4c64c742adad4f5e37b1dbbbef11de1a',1,'Desktop2.App.Services.Person.Id'],['../class_desktop2_1_1_app_1_1_services_1_1_product.html#a47f9770523384c3178a11840ee4cfdb7',1,'Desktop2.App.Services.Product.Id']]],
+  ['imageurl_1',['ImageUrl',['../class_desktop2_1_1_app_1_1_services_1_1_product.html#a0caf0007ff98e117e7a41941f7c33413',1,'Desktop2::App::Services::Product']]],
+  ['isactive_2',['IsActive',['../class_desktop2_1_1_app_1_1_services_1_1_person.html#a645c3786b27d3569d88da79e76b2bae1',1,'Desktop2::App::Services::Person']]]
 ];

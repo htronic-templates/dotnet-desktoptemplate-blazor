@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['build_0',['Build',['../_desktop_template1_2_desktop_template1_8_g_u_i_8_web_auto_2_desktop_template1_8_g_u_i_8_web_auto_8_client_2_program_8cs.html#a103eab9352a5901779f62f6c98b53f7b',1,'Build().RunAsync():&#160;Program.cs'],['../_desktop_template1_2_desktop_template1_8_g_u_i_8_web_wasm_2_program_8cs.html#a103eab9352a5901779f62f6c98b53f7b',1,'Build().RunAsync():&#160;Program.cs']]]
+  ['clearallstatesasync_0',['ClearAllStatesAsync',['../class_desktop2_1_1_app_1_1_services_1_1_collapsible_state_service.html#a6cac2eb026aaaa2c4b51aff30054c545',1,'Desktop2::App::Services::CollapsibleStateService']]],
+  ['clearstateasync_1',['ClearStateAsync',['../class_desktop2_1_1_app_1_1_services_1_1_collapsible_state_service.html#a847993e9eaae9329d916ed1f9af35662',1,'Desktop2::App::Services::CollapsibleStateService']]],
+  ['collapsiblestateservice_2',['CollapsibleStateService',['../class_desktop2_1_1_app_1_1_services_1_1_collapsible_state_service.html#a9e88529f8029a273b120200c343847a9',1,'Desktop2::App::Services::CollapsibleStateService']]]
 ];

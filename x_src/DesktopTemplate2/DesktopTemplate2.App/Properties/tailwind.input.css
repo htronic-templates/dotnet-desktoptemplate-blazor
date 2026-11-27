@@ -1,8 +1,0 @@
-/* TODO
-    1. Altering this file doesn't cause a rebuild?
-    2. limit contentfiles in directory props to specific libs
-*/
-
-@import "tailwindcss";
-@import "../obj/tailwind-importedlibs/styles/test1.css";
-@source "../";

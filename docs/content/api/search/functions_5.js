@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['if_0',['if',['../_desktop_template1_2_desktop_template1_8_g_u_i_8_web_auto_2_program_8cs.html#af2d0c02efe3fbc2d94e5b6e316777c4d',1,'if(!app.Environment.IsDevelopment()):&#160;Program.cs'],['../_desktop_template1_2_desktop_template1_8_g_u_i_8_web_server_2_program_8cs.html#af2d0c02efe3fbc2d94e5b6e316777c4d',1,'if(!app.Environment.IsDevelopment()):&#160;Program.cs']]]
+  ['setstate_0',['SetState',['../class_desktop2_1_1_app_1_1_services_1_1_collapsible_state_service.html#a8bf1b8fbdb02ddd400f00aba5bda63dd',1,'Desktop2::App::Services::CollapsibleStateService']]]
 ];
